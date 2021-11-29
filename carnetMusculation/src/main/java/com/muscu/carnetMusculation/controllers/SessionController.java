@@ -34,6 +34,7 @@ public class SessionController {
 	@Autowired
 	private SessionService sessionService;
 
+	@Autowired
 	private MapperAPI mapperApi;
 
 	@GetMapping("")

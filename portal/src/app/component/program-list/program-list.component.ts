@@ -9,7 +9,7 @@ import { Program } from 'src/app/class/program';
   styleUrls: ['./program-list.component.css']
 })
 export class ProgramListComponent implements OnInit {
-  displayedColumns: string[] = ['creationDate', 'name', 'exercices', 'deletion'];
+  displayedColumns: string[] = ['creationDate', 'name', 'sessions', 'deletion'];
   programs: Program[] = [];
   dataSource: MatTableDataSource<Program> = new MatTableDataSource();
 

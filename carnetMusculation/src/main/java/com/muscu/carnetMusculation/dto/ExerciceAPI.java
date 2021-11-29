@@ -1,11 +1,13 @@
 package com.muscu.carnetMusculation.dto;
 
+import java.util.List;
 
 public class ExerciceAPI {
 	private Long id;
 	private String name;
 	private String creationDate;
 	private String bodyPart;
+	private List<Long> detailsIds;
 
 	public Long getId() {
 		return id;
@@ -30,6 +32,12 @@ public class ExerciceAPI {
 	}
 	public void setBodyPart(String bodyPart) {
 		this.bodyPart = bodyPart;
+	}
+	public List<Long> getDetailsIds() {
+		return detailsIds;
+	}
+	public void setDetailsIds(List<Long> detailsIds) {
+		this.detailsIds = detailsIds;
 	}
 
 }

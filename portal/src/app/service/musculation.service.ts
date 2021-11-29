@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { Program } from '../class/program';
 import { catchError,  } from 'rxjs/operators';
 import { Exercice } from '../class/exerice';
+import { Session } from '../class/session';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,18 @@ export class MusculationService implements ErrorHandler {
     )
   }
 
+  /**
+   * 
+   * @returns Session's
+   */
+   getSessions(): Observable<Session[]> {
+    return this.http.get<Session[]>(this.url+"sessions").pipe(
+      catchError(err => {
+        console.log('Error while retrieving the list of exercices');
+        return throwError(err);
+      })
+    )
+  }
 
   /**
    * Program's
@@ -49,6 +62,7 @@ export class MusculationService implements ErrorHandler {
   }
 
   setProgram(program: Program): Observable<Program>{
+    console.log("program sessions id : ", program.sessionIds)
     return this.http.post<Program>(this.url+"programs", program)
       .pipe(
         catchError(err => {

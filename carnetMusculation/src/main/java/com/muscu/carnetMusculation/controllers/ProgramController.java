@@ -1,9 +1,7 @@
 package com.muscu.carnetMusculation.controllers;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -22,12 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.muscu.carnetMusculation.dto.MapperAPI;
-import com.muscu.carnetMusculation.dto.ExerciceAPI;
 import com.muscu.carnetMusculation.dto.ProgramAPI;
-import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Program;
-import com.muscu.carnetMusculation.services.ExerciceService;
 import com.muscu.carnetMusculation.services.ProgramService;
+import com.muscu.carnetMusculation.services.SessionService;
 
 
 @RestController
@@ -38,9 +34,6 @@ public class ProgramController {
 
 	@Autowired
 	private ProgramService programService;
-
-	@Autowired
-	private ExerciceService exerciceService;
 
 	@Autowired
 	private MapperAPI mapperApi;
@@ -64,14 +57,7 @@ public class ProgramController {
 	@PostMapping("")
 	public @ResponseBody ResponseEntity<ProgramAPI> save(@RequestBody ProgramAPI programApi) {
 		logger.trace("Saving programApi {}", programApi);
-		Set<Exercice> exercices = new HashSet<Exercice>();
 		Program program = mapperApi.convertToEntity(programApi);
-		if(!programApi.getExercices().isEmpty()) {
-			for (ExerciceAPI exerciceApi : programApi.getExercices()) {
-				exercices.add(exerciceService.findById(exerciceApi.getId()));
-			}
-			program.setExercices(exercices);
-		}
 		programService.save(program);
 		return new ResponseEntity<ProgramAPI>(programApi , HttpStatus.OK);
 	}

@@ -5,5 +5,5 @@ export class Program {
     id: number = 0;
     name: string = "";
     creationDate: string = '';
-    exercices: Exercice[] = [];
+    sessionIds: number[] = [];
 }

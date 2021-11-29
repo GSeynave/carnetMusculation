@@ -8,9 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -31,18 +29,11 @@ public class Exercice {
 	@Temporal(TemporalType.DATE)
 	private Date creationDate;
 
-	@Column(name="body_part")
-	private String bodyPart;
+	@Column(name="muscles")
+	private String muscles;
 
-	@ManyToMany(mappedBy = "exercices")
-	private Set<Program> programs;
-
-	@ManyToMany
-	@JoinTable(
-			name = "session_exercice",
-			joinColumns = @JoinColumn(name = "exercice_id"), 
-			inverseJoinColumns = @JoinColumn(name = "session_id"))
-	private Set<Session> sessions;
+	@OneToMany(mappedBy = "exerciceDetails")
+	private Set<ExerciceDetails> details;
 
 	public Long getId() {
 		return id;
@@ -68,27 +59,20 @@ public class Exercice {
 		this.creationDate = creationDate;
 	}
 
-	public String getBodyPart() {
-		return bodyPart;
+	public String getMuscles() {
+		return muscles;
 	}
 
-	public void setBodyPart(String bodyPart) {
-		this.bodyPart = bodyPart;
+	public void setMuscles(String muscles) {
+		this.muscles = muscles;
 	}
 
-	public Set<Program> getPrograms() {
-		return programs;
+	public Set<ExerciceDetails> getDetails() {
+		return details;
 	}
 
-	public void setPrograms(Set<Program> programs) {
-		this.programs = programs;
+	public void setDetails(Set<ExerciceDetails> details) {
+		this.details = details;
 	}
-
-	public Set<Session> getSessions() {
-		return sessions;
-	}
-
-	public void setSessions(Set<Session> sessions) {
-		this.sessions = sessions;
-	}
+	
 }

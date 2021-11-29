@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,8 +34,12 @@ public class Session {
 	@Column(name="body_part")
 	private String bodyPart;
 
-	@ManyToMany(mappedBy = "sessions")
-	private Set<Exercice> exercices;
+	@ManyToOne
+	@JoinColumn(name="program_id", nullable=false)
+	private Program program;
+	
+	@OneToMany(mappedBy = "sessionDetails")
+	private Set<ExerciceDetails> details;
 
 	public Long getId() {
 		return id;
@@ -67,11 +73,20 @@ public class Session {
 		this.bodyPart = bodyPart;
 	}
 
-	public Set<Exercice> getExercices() {
-		return exercices;
+	public Program getProgram() {
+		return program;
 	}
 
-	public void setExercices(Set<Exercice> exercices) {
-		this.exercices = exercices;
+	public void setProgram(Program program) {
+		this.program = program;
 	}
+
+	public Set<ExerciceDetails> getDetails() {
+		return details;
+	}
+
+	public void setDetails(Set<ExerciceDetails> details) {
+		this.details = details;
+	}
+
 }

@@ -1,13 +1,13 @@
 package com.muscu.carnetMusculation.dto;
 
-import java.util.Set;
+import java.util.List;
 
 public class ProgramAPI {
 
 	private Long id;
 	private String name;
 	private String creationDate;
-	private Set<ExerciceAPI> exercices;
+	private List<Long> sessionIds;
 
 	public Long getId() {
 		return id;
@@ -27,11 +27,11 @@ public class ProgramAPI {
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
-	public Set<ExerciceAPI> getExercices() {
-		return exercices;
+	public List<Long> getSessionIds() {
+		return sessionIds;
 	}
-	public void setExercices(Set<ExerciceAPI> exercicesApi) {
-		this.exercices = exercicesApi;
+	public void setSessionIds(List<Long> sessionIds) {
+		this.sessionIds = sessionIds;
 	}
 
 }
