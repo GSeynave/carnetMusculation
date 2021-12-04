@@ -24,6 +24,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
+import { GeneralComponent } from './page/general/general.component';
+import { HeaderComponent } from './component/header/header.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { ExercicePanelComponent } from './component/exercice-panel/exercice-panel.component';
+import { StringListComponent } from './component/string-list/string-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +43,11 @@ import { MatSelectModule } from '@angular/material/select';
     SessionComponent,
     ExerciceComponent,
     ProgramComponent,
-    HomeComponent
+    HomeComponent,
+    GeneralComponent,
+    HeaderComponent,
+    ExercicePanelComponent,
+    StringListComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +61,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatTableModule,
     MatListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

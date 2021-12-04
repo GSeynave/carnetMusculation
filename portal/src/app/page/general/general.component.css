@@ -1,0 +1,21 @@
+.container{
+    width: auto;
+    margin: 2%;
+    display: flex;
+    background-color: RGB(51, 51, 51);
+}
+
+button{
+    width: 80%;
+}
+
+.exercice-details{
+    background-color: RGB(187, 187, 187);
+    margin-left: 150px;
+    width: 70%;
+}
+
+.menu-program{
+    
+    background-color: RGB(187, 187, 187);
+}

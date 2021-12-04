@@ -15,12 +15,11 @@ export class ProgramFormComponent implements OnInit {
   sessionsList: Session [] = [];
 
   programFormGroup: FormGroup = new FormGroup({
-    name: new FormControl('')
+    name: new FormControl(''),
+    sessions: new FormControl([])
   });
 
-  constructor(
-    private musculationService: MusculationService
-    ){ }
+  constructor(private musculationService: MusculationService){ }
 
   ngOnInit(): void {
     this.musculationService.getSessions().subscribe(response => {
@@ -37,6 +36,6 @@ export class ProgramFormComponent implements OnInit {
 
     this.musculationService.setProgram(program).subscribe();
       
-    // location.reload();
+    location.reload();
   }
 }

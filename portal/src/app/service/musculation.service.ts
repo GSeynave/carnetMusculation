@@ -72,6 +72,17 @@ export class MusculationService implements ErrorHandler {
       );
   }
 
+  
+  setSession(session: Session): Observable<Session>{
+    return this.http.post<Session>(this.url+"sessions", session)
+      .pipe(
+        catchError(err => {
+          console.log('Error while saving program', err);
+          return throwError(err);
+        })
+      );
+  }
+
   deleteProgram(idProgram: number): Observable<Program> {
     const headers = new HttpHeaders({
       'content-type' : 'application/json',
@@ -81,9 +92,25 @@ export class MusculationService implements ErrorHandler {
       headers: headers,
       responseType:'Program'
     };
-    console.log("DeleteProgram : ", idProgram);
-    console.log("url : " , this.url +"program/" +idProgram)
-    return this.http.delete<Program>(this.url +"program/" +idProgram, )
+    return this.http.delete<Program>(this.url +"programs/" +idProgram, )
+    .pipe(
+      catchError(err => {
+        console.log('Error while deleting program', err);
+        return throwError(err);
+      })
+    );
+  }
+  
+  deleteSession(idSession: number): Observable<Session> {
+    const headers = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Access-Control-Allow-Origin' : '*'
+    });
+    const options = {
+      headers: headers,
+      responseType:'Program'
+    };
+    return this.http.delete<Session>(this.url +"sessions/" +idSession, )
     .pipe(
       catchError(err => {
         console.log('Error while deleting program', err);

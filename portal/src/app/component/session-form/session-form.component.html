@@ -1,1 +1,37 @@
-<p>session-form works!</p>
+<mat-card>
+    <!--
+    
+        Program's creation
+    
+     -->
+    <mat-card-title>Create a session</mat-card-title>
+    <form [formGroup]="sessionFormGroup" (ngSubmit)="onSubmit()">
+        <div>
+            <mat-form-field appearance="fill">
+                <mat-label>Session name </mat-label>
+                <input matInput id="name" type="text" formControlName="name">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Body part</mat-label>
+                <mat-select formControlName="bodyPart">
+                    <mat-option *ngFor="let bodyPart of bodyPartList" [value]="bodyPart">{{bodyPart}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Programs</mat-label>
+                <mat-select formControlName="program">
+                    <mat-option *ngFor="let program of programsList" [value]="program">{{program.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-raised-button color="warn" type="submit"
+                [disabled]="!this.sessionFormGroup.valid">Create</button>
+        </div>
+    </form>
+
+</mat-card>
