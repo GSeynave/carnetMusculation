@@ -1,21 +1,26 @@
-.container{
+.container {
     width: auto;
     margin: 2%;
     display: flex;
-    background-color: RGB(51, 51, 51);
 }
 
-button{
+button {
     width: 80%;
 }
 
-.exercice-details{
-    background-color: RGB(187, 187, 187);
+.exercice-details {
+    color: rgb(180, 180, 180);
+    background-color: rgb(65, 65, 65);
     margin-left: 150px;
     width: 70%;
 }
 
-.menu-program{
-    
-    background-color: RGB(187, 187, 187);
+.menu-program {
+    color: rgb(221, 221, 221);
+    background-color: rgb(65, 65, 65);
+}
+
+mat-form-field {
+    background-color: rgb(180, 180, 180);
+    border-radius: 4px;
 }

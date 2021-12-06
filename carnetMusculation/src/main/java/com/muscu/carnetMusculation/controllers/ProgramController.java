@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.muscu.carnetMusculation.dto.MapperAPI;
-import com.muscu.carnetMusculation.dto.ProgramAPI;
-import com.muscu.carnetMusculation.entities.Program;
+import com.muscu.carnetMusculation.dto.ProgrammeAPI;
+import com.muscu.carnetMusculation.entities.Programme;
 import com.muscu.carnetMusculation.services.ProgramService;
-import com.muscu.carnetMusculation.services.SessionService;
+import com.muscu.carnetMusculation.services.SeanceService;
 
 
 @RestController
@@ -39,9 +39,9 @@ public class ProgramController {
 	private MapperAPI mapperApi;
 
 	@GetMapping("")
-	public @ResponseBody ResponseEntity<List<ProgramAPI>> getAll() {
-		List<Program> programs = programService.getAll();
-		return new ResponseEntity<List<ProgramAPI>>(
+	public @ResponseBody ResponseEntity<List<ProgrammeAPI>> getAll() {
+		List<Programme> programs = programService.getAll();
+		return new ResponseEntity<List<ProgrammeAPI>>(
 				programs.stream()
 				.map(mapperApi::convertToDto)
 				.collect(Collectors.toList()),
@@ -50,28 +50,28 @@ public class ProgramController {
 
 
 	@GetMapping("/{id}")
-	public @ResponseBody ResponseEntity<ProgramAPI> getById(@PathVariable Long id) {
-		return new ResponseEntity<ProgramAPI>(mapperApi.convertToDto(programService.findById(id)), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<ProgrammeAPI> getById(@PathVariable Long id) {
+		return new ResponseEntity<ProgrammeAPI>(mapperApi.convertToDto(programService.findById(id)), HttpStatus.OK);
 	}
 
 	@PostMapping("")
-	public @ResponseBody ResponseEntity<ProgramAPI> save(@RequestBody ProgramAPI programApi) {
+	public @ResponseBody ResponseEntity<ProgrammeAPI> save(@RequestBody ProgrammeAPI programApi) {
 		logger.trace("Saving programApi {}", programApi);
-		Program program = mapperApi.convertToEntity(programApi);
+		Programme program = mapperApi.convertToEntity(programApi);
 		programService.save(program);
-		return new ResponseEntity<ProgramAPI>(programApi , HttpStatus.OK);
+		return new ResponseEntity<ProgrammeAPI>(programApi , HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
-	public @ResponseBody ResponseEntity<ProgramAPI> delete(@PathVariable Long id) {
+	public @ResponseBody ResponseEntity<ProgrammeAPI> delete(@PathVariable Long id) {
 		System.out.println("delete id :" +id);
-		Program program = programService.findById(id);
+		Programme program = programService.findById(id);
 		if(!Objects.isNull(program)) {
 			programService.delete(program);
-			return new ResponseEntity<ProgramAPI>(mapperApi.convertToDto(program), HttpStatus.OK);
+			return new ResponseEntity<ProgrammeAPI>(mapperApi.convertToDto(program), HttpStatus.OK);
 		}
 		else {
-			return new ResponseEntity<ProgramAPI>(mapperApi.convertToDto(program), HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ProgrammeAPI>(mapperApi.convertToDto(program), HttpStatus.NOT_FOUND);
 		}
 	}
 

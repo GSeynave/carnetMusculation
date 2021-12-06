@@ -7,9 +7,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.muscu.carnetMusculation.entities.Entrainement;
 import com.muscu.carnetMusculation.entities.Exercice;
-import com.muscu.carnetMusculation.entities.Program;
-import com.muscu.carnetMusculation.entities.Session;
+import com.muscu.carnetMusculation.entities.Programme;
+import com.muscu.carnetMusculation.entities.Seance;
+import com.muscu.carnetMusculation.entities.Serie;
 
 @Component
 public class MapperAPI {
@@ -20,12 +22,12 @@ public class MapperAPI {
 	private  ModelMapper mapper;
 
 	//Program mapper
-	public ProgramAPI convertToDto(Program program) {
-		return mapper.map(program, ProgramAPI.class);
+	public ProgrammeAPI convertToDto(Programme program) {
+		return mapper.map(program, ProgrammeAPI.class);
 	}
 
-	public Program convertToEntity(ProgramAPI programApi) {
-		return mapper.map(programApi, Program.class);
+	public Programme convertToEntity(ProgrammeAPI programApi) {
+		return mapper.map(programApi, Programme.class);
 	}
 
 	//Exercice mapper
@@ -38,12 +40,30 @@ public class MapperAPI {
 	}
 
 	//Session mapper
-	public SessionAPI convertToDto(Session session) {
-		return mapper.map(session, SessionAPI.class);
+	public SeanceAPI convertToDto(Seance session) {
+		return mapper.map(session, SeanceAPI.class);
 	}
 
-	public Session convertToEntity(SessionAPI sessionApi) {
-		return mapper.map(sessionApi, Session.class);
+	public Seance convertToEntity(SeanceAPI sessionApi) {
+		return mapper.map(sessionApi, Seance.class);
+	}
+
+	//Serie mapper
+	public SerieAPI convertToDto(Serie serie) {
+		return mapper.map(serie, SerieAPI.class);
+	}
+
+	public Serie convertToEntity(SerieAPI serieApi) {
+		return mapper.map(serieApi, Serie.class);
+	}
+
+	//Entrainement mapper
+	public EntrainementAPI convertToDto(Entrainement entrainement) {
+		return mapper.map(entrainement, EntrainementAPI.class);
+	}
+
+	public Entrainement convertToEntity(EntrainementAPI entrainementApi) {
+		return mapper.map(entrainementApi, Entrainement.class);
 	}
 }
 

@@ -1,4 +1,24 @@
-.container{
-    display:flex;
-    justify-content: space-evenly;
+.container {
+    display: flex;
+    justify-content: flex-start;
+    background-color: rgb(65, 65, 65);
+    box-shadow: 0 0 15px 10px rgb(65, 65, 65);
+}
+
+button {
+    background-color: rgb(180, 180, 180);
+}
+
+button.home {
+    background-color: rgb(19, 107, 165);
+}
+
+a {
+    font-size: 20px;
+    color: rgb(19, 107, 165);
+}
+
+a.home {
+    font-size: 20px;
+    color: rgb(221, 221, 221);
 }

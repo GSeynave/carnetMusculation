@@ -1,3 +1,21 @@
-table{
-    width: 100%;
-}
+ container {
+     background-color: RGB(187, 187, 187);
+ }
+ 
+ mat-expansion-panel {
+     background-color: rgb(180, 180, 180);
+ }
+ 
+ mat-panel-title {
+     color: rgb(19, 107, 165);
+ }
+ 
+ mat-panel-description {
+     color: rgb(26, 135, 207);
+     font-style: italic;
+ }
+ 
+ button {
+     background-color: rgb(19, 107, 165);
+     color: rgb(221, 221, 221);
+ }

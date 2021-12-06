@@ -5,9 +5,11 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,18 +24,22 @@ public class Exercice {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	@Column(name="name", length=50, nullable=false, unique=false)
-	private String name;
+	@Column(name="nom", length=50, nullable=false, unique=false)
+	private String nom;
 
-	@Column(name="create_date")
+	@Column(name="date_creation")
 	@Temporal(TemporalType.DATE)
-	private Date creationDate;
+	private Date dateCreation;
 
-	@Column(name="muscles")
-	private String muscles;
+	@Column(name="muscle_cible")
+	private String muscleCible;
 
-	@OneToMany(mappedBy = "exerciceDetails")
-	private Set<ExerciceDetails> details;
+	@ManyToMany(mappedBy = "exercices", fetch = FetchType.EAGER)
+	private Set<Seance> seances;
+	
+	@OneToMany(mappedBy = "exercice")
+	private Set<Serie> series;
+	
 
 	public Long getId() {
 		return id;
@@ -43,36 +49,44 @@ public class Exercice {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
-	public Date getCreationDate() {
-		return creationDate;
+	public Date getDateCreation() {
+		return dateCreation;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 
-	public String getMuscles() {
-		return muscles;
+	public String getMuscleCible() {
+		return muscleCible;
 	}
 
-	public void setMuscles(String muscles) {
-		this.muscles = muscles;
+	public void setMuscleCible(String muscleCible) {
+		this.muscleCible = muscleCible;
 	}
 
-	public Set<ExerciceDetails> getDetails() {
-		return details;
+	public Set<Seance> getSeances() {
+		return seances;
 	}
 
-	public void setDetails(Set<ExerciceDetails> details) {
-		this.details = details;
+	public void setSeances(Set<Seance> seances) {
+		this.seances = seances;
+	}
+
+	public Set<Serie> getSeries() {
+		return series;
+	}
+
+	public void setSeries(Set<Serie> series) {
+		this.series = series;
 	}
 	
 }

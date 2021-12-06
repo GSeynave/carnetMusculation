@@ -53,6 +53,16 @@ public class ExerciceController {
 	public @ResponseBody ResponseEntity<ExerciceAPI> getById(@PathVariable Long id) {
 		return new ResponseEntity<ExerciceAPI>(mapperApi.convertToDto(exerciceService.findById(id)), HttpStatus.OK);
 	}
+	
+	@GetMapping("/seance/{id}")
+	public @ResponseBody ResponseEntity<List<ExerciceAPI>> getBySeances(@PathVariable Long id) {
+		List<Exercice> exercices = exerciceService.findBySeances(id);
+		return new ResponseEntity<List<ExerciceAPI>>(
+				exercices.stream()
+				.map(mapperApi::convertToDto)
+				.collect(Collectors.toList()),
+				HttpStatus.OK);
+	}
 
 	@PostMapping("")
 	public @ResponseBody ResponseEntity<ExerciceAPI> save(@RequestBody ExerciceAPI exerciceApi) {

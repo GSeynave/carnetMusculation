@@ -8,9 +8,9 @@ import { ExerciceListComponent } from './component/exercice-list/exercice-list.c
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
 import { ProgramFormComponent } from './component/program-form/program-form.component';
 import { ProgramListComponent } from './component/program-list/program-list.component';
-import { SessionFormComponent } from './component/session-form/session-form.component';
-import { SessionListComponent } from './component/session-list/session-list.component';
-import { SessionComponent } from './page/session/session.component';
+import { SeanceFormComponent } from './component/seance-form/seance-form.component';
+import { SeanceListComponent } from './component/seance-list/seance-list.component';
+import { SeanceComponent } from './page/seance/seance.component';
 import { ExerciceComponent } from './page/exercice/exercice.component';
 import { ProgramComponent } from './page/program/program.component';
 import { HomeComponent } from './page/home/home.component';
@@ -29,6 +29,8 @@ import { HeaderComponent } from './component/header/header.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ExercicePanelComponent } from './component/exercice-panel/exercice-panel.component';
 import { StringListComponent } from './component/string-list/string-list.component';
+import { SeancesListFromProgrammeComponent } from './component/seances-list-from-programme/seances-list-from-programme.component';
+import { TableSerieComponent } from './component/table-serie/table-serie.component';
 
 @NgModule({
   declarations: [
@@ -38,16 +40,18 @@ import { StringListComponent } from './component/string-list/string-list.compone
     NavigationBarComponent,
     ProgramFormComponent,
     ProgramListComponent,
-    SessionFormComponent,
-    SessionListComponent,
-    SessionComponent,
+    SeanceFormComponent,
+    SeanceListComponent,
+    SeanceComponent,
     ExerciceComponent,
     ProgramComponent,
     HomeComponent,
     GeneralComponent,
     HeaderComponent,
     ExercicePanelComponent,
-    StringListComponent
+    StringListComponent,
+    SeancesListFromProgrammeComponent,
+    TableSerieComponent
   ],
   imports: [
     BrowserModule,

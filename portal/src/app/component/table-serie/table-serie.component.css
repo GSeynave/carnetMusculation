@@ -1,0 +1,19 @@
+table {
+    width: 100%;
+}
+
+th {
+    background-color: rgb(70, 70, 70);
+    ;
+    color: rgb(19, 107, 165);
+    font-size: medium;
+    font-weight: bolder;
+}
+
+tr:nth-of-type(odd).mat-row {
+    background: rgb(185, 185, 185);
+}
+
+tr:nth-of-type(even).mat-row {
+    background: rgb(65, 127, 168);
+}

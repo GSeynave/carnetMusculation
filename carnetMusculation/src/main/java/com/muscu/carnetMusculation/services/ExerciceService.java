@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.muscu.carnetMusculation.entities.Exercice;
+import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.repositories.ExerciceRepository;
 
 @Service
@@ -27,6 +28,11 @@ public class ExerciceService {
 	public Exercice findById(Long id) {
 		return exerciceRepository.findById(id).orElseThrow(() -> 
 		new EntityNotFoundException("Exercice not found with id :" +id));
+	}
+	
+	@Transactional
+	public List<Exercice> findBySeances(Long id) {
+		return exerciceRepository.findBySeancesId(id);
 	}
 
 	@Transactional

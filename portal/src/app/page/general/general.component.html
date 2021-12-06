@@ -1,27 +1,20 @@
 <div class="container">
     <mat-card class="menu-program">
-        <h4>Program</h4>
         <mat-form-field appearance="fill">
-            <mat-label>Program</mat-label>
+            <mat-label>Programme</mat-label>
             <mat-select [(value)]="programSelected">
                 <mat-option *ngFor="let program of programs" [value]="program">
-                    {{program.name}}
+                    {{program.nom}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
-        <div *ngIf="(programSelected)">
-            <div *ngFor="let session of sessions">
-                <mat-list *ngIf="session.programId === programSelected.id">
-                    <mat-list-item><button mat-raised-button>{{ session.name }}</button></mat-list-item>
-                </mat-list>
-            </div>
+        <div *ngIf="(programSelected.id != 0)">
+            <app-seances-list-from-programme [programme]="programSelected" (selectedSeanceId)="onSeanceSelect($event)"></app-seances-list-from-programme>
         </div>
     </mat-card>
 
     <mat-card class="exercice-details">
-        <app-exercice-panel></app-exercice-panel>
-        Choisi une seance d'un program pour voir le details
-
+        <app-exercice-panel [seanceId]="selectedSeanceId"></app-exercice-panel>
     </mat-card>
 </div>

@@ -4,40 +4,47 @@ import java.util.List;
 
 public class ExerciceAPI {
 	private Long id;
-	private String name;
-	private String creationDate;
-	private String bodyPart;
-	private List<Long> detailsIds;
-
+	private String nom;
+	private String dateCreation;
+	private String muscleCible;
+	private List<Long> seanceIds;
+	private List<Long> seriesId;
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getNom() {
+		return nom;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
-	public String getCreationDate() {
-		return creationDate;
+	public String getDateCreation() {
+		return dateCreation;
 	}
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
+	public void setDateCreation(String dateCreation) {
+		this.dateCreation = dateCreation;
 	}
-	public String getBodyPart() {
-		return bodyPart;
+	public String getMuscleCible() {
+		return muscleCible;
 	}
-	public void setBodyPart(String bodyPart) {
-		this.bodyPart = bodyPart;
+	public void setMuscleCible(String muscleCible) {
+		this.muscleCible = muscleCible;
 	}
-	public List<Long> getDetailsIds() {
-		return detailsIds;
+	public List<Long> getSeanceIds() {
+		return seanceIds;
 	}
-	public void setDetailsIds(List<Long> detailsIds) {
-		this.detailsIds = detailsIds;
+	public void setSeanceIds(List<Long> seanceIds) {
+		this.seanceIds = seanceIds;
+	}
+	public List<Long> getSeriesId() {
+		return seriesId;
+	}
+	public void setSeriesId(List<Long> seriesId) {
+		this.seriesId = seriesId;
 	}
 
 }

@@ -1,0 +1,5 @@
+<div *ngFor="let seance of seances">
+    <mat-list>
+        <mat-list-item><button mat-raised-button (click)="onSeanceSelect(seance.id)">{{ seance.nom }}</button></mat-list-item>
+    </mat-list>
+</div>

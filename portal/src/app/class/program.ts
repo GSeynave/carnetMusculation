@@ -1,9 +1,9 @@
-import { Exercice } from "./exerice";
+import { Exercice } from "./exercice";
 
 export class Program {
 
     id: number = 0;
-    name: string = "";
-    creationDate: string = '';
-    sessionIds: number[] = [];
+    nom: string = "";
+    dateCreation: string = "";
+    seanceIds: number[] = [];
 }

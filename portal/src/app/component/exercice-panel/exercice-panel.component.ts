@@ -1,26 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Exercice } from 'src/app/class/exercice';
+import { MusculationService } from 'src/app/service/musculation.service';
 
 
-export interface PeriodicElement {
-  date: string;
-  serie: number[];
-  rep: string[];
-  poids: number[];
-  recup: string[];
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {date: "2021-12-04", 
-  serie: [1,2,3,4,5],
-  rep: ['10','10','10','10','10'],
-  poids: [50, 50, 50, 50, 50],
-  recup: ['1"30', '1"30', '1"30', '1"30', '1"30']},
-  {date: "2021-12-15", 
-  serie: [1,2,3,4,5],
-  rep: ['8','8','8','8','8'],
-  poids: [55, 55, 55, 55, 55],
-  recup: ['1"30', '1"30', '1"30', '1"30', '1"30']}
-];
 
 @Component({
   selector: 'app-exercice-panel',
@@ -28,17 +10,38 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./exercice-panel.component.css']
 })
 
-export class ExercicePanelComponent implements OnInit {
+export class ExercicePanelComponent implements OnInit, OnChanges {
   
   panelOpenState = false;
+  exercices: Exercice[] = [];
+  @Input() seanceId: number = 0;
   
-  
-  displayedColumns: string[] = ['date', 'serie', 'rep', 'poids', 'recup'];
-  dataSource = ELEMENT_DATA;
-   constructor() { }
 
+   constructor(private musculationService: MusculationService) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes["seanceId"]){
+      console.log("seanceId", this.seanceId)
+      if(this.seanceId != 0){
+        console.log("init exercice", this.seanceId)
+        this.updateExercicesValues(this.seanceId);
+      }
+    }
+  }
+  
   ngOnInit(): void {
+  }
+
+  updateExercicesValues(seanceId: number){
+    this.musculationService.getExercicesBySeanceId(seanceId)
+    .subscribe(response => {
+      this.exercices = response
+      console.log("exercices !! : ", this.exercices);
+    });
 
   }
 
+  resetSeanceId(){
+    this.seanceId = 0;
+  }
 }

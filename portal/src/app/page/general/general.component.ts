@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Program } from 'src/app/class/program';
-import { Session } from 'src/app/class/session';
+import { Seance } from 'src/app/class/seance';
 import { MusculationService } from 'src/app/service/musculation.service';
 
 @Component({
@@ -8,21 +8,39 @@ import { MusculationService } from 'src/app/service/musculation.service';
   templateUrl: './general.component.html',
   styleUrls: ['./general.component.css']
 })
-export class GeneralComponent implements OnInit {
+export class GeneralComponent implements OnInit, OnChanges {
   programs: Program[] = [];
-  sessions: Session[] = [];
+  seances: Seance[] = [];
   programSelected: Program = new Program();
+  selectedSeanceId: number = 0;
+  @Output() seanceId: number = 0;
   constructor(private musculationService: MusculationService) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['programSelected']){
+      console.log("change on programselecte")
+      this.getSeanceByProgrammeId(this.programSelected.id);
+    }
+  }
 
   ngOnInit(): void {
     this.musculationService.getPrograms()
       .subscribe(response => {
         this.programs = response
+        console.log("programs", this.programs);
       });
-    this.musculationService.getSessions()
-      .subscribe(response => {
-        this.sessions = response
-      });
+  }
+
+  onSeanceSelect(seanceId: number) {
+    this.selectedSeanceId = seanceId;
+  }
+
+  getSeanceByProgrammeId(programmeId: number) : Seance[]{
+    this.musculationService.getSeancesByProgram(programmeId)
+    .subscribe(response => {
+      this.seances = response
+    });
+    return this.seances;
   }
 
 }

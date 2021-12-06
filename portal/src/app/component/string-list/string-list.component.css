@@ -1,8 +1,7 @@
-mat-list{
+mat-list {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 30px;
     width: 100%;
-    border-bottom: 1px dashed #414040;
 }
