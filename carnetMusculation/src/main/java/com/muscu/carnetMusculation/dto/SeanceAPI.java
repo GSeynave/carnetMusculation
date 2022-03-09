@@ -4,47 +4,31 @@ import java.util.List;
 
 public class SeanceAPI {
 	private Long id;
-	private String nom;
-	private String dateCreation;
-	private String muscleCible;
-	private Long programId;
-	private List<Long> exerciceIds;
-	
+	private String dateEntrainement;
+	private Long entrainementId;
+	private List<Long> series;
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNom() {
-		return nom;
+	public String getDateEntrainement() {
+		return dateEntrainement;
 	}
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setDateEntrainement(String dateEntrainement) {
+		this.dateEntrainement = dateEntrainement;
 	}
-	public String getDateCreation() {
-		return dateCreation;
+	public Long getEntrainementId() {
+		return entrainementId;
 	}
-	public void setDateCreation(String dateCreation) {
-		this.dateCreation = dateCreation;
+	public void setEntrainementId(Long entrainementId) {
+		this.entrainementId = entrainementId;
 	}
-	public String getMuscleCible() {
-		return muscleCible;
+	public List<Long> getSeries() {
+		return series;
 	}
-	public void setMuscleCible(String muscleCible) {
-		this.muscleCible = muscleCible;
+	public void setSeries(List<Long> series) {
+		this.series = series;
 	}
-	public Long getProgramId() {
-		return programId;
-	}
-	public void setProgramId(Long programId) {
-		this.programId = programId;
-	}
-	public List<Long> getExerciceIds() {
-		return exerciceIds;
-	}
-	public void setExerciceIds(List<Long> exerciceIds) {
-		this.exerciceIds = exerciceIds;
-	}
-	
 }

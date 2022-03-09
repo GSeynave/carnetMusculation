@@ -9,35 +9,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.muscu.carnetMusculation.entities.Programme;
-import com.muscu.carnetMusculation.repositories.ProgramRepository;
+import com.muscu.carnetMusculation.repositories.ProgrammeRepository;
+
 
 @Service
-public class ProgramService {
+public class ProgrammeService {
 
 	@Autowired
-	private ProgramRepository programRepository;
+	private ProgrammeRepository programmeRepository;
 
 
 	@Transactional
-	public Programme save(Programme program) {
+	public Programme save(Programme programme) {
 
-		return programRepository.save(program);
+		return programmeRepository.save(programme);
 	}
 
 	@Transactional
 	public Programme findById(Long id) {
-		return programRepository.findById(id).orElseThrow(() -> 
+		return programmeRepository.findById(id).orElseThrow(() -> 
 		new EntityNotFoundException("Exercice not found with id :" +id));
 	}
 
 	@Transactional
 	public List<Programme> getAll(){
-		return (List<Programme>) programRepository.findAll();
+		return (List<Programme>) programmeRepository.findAll();
 	}
 
 	@Transactional
-	public void delete(Programme program){
-		programRepository.delete(program);
+	public void delete(Programme programme){
+		programmeRepository.delete(programme);
 	}
 }
 

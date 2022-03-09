@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.muscu.carnetMusculation.entities.Programme;
 import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.repositories.SeanceRepository;
 
@@ -19,9 +18,8 @@ public class SeanceService {
 	private SeanceRepository seanceRepository;
 
 	@Transactional
-	public Seance save(Seance session) {
-		System.out.println("saving session with exercice : " +session.getExercices());
-		return seanceRepository.save(session);
+	public Seance save(Seance seance) {
+		return seanceRepository.save(seance);
 	}
 
 	@Transactional
@@ -38,9 +36,5 @@ public class SeanceService {
 	@Transactional
 	public void delete(Seance session){
 		seanceRepository.delete(session);
-	}
-
-	public List<Seance> findByProgrammeId(Long id) {
-		return seanceRepository.findByProgrammeId(id);
 	}
 }

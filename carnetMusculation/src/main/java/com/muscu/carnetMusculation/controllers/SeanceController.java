@@ -22,27 +22,28 @@ import org.springframework.web.bind.annotation.RestController;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.SeanceAPI;
 import com.muscu.carnetMusculation.entities.Seance;
+import com.muscu.carnetMusculation.services.ProgrammeService;
 import com.muscu.carnetMusculation.services.SeanceService;
 
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders={"*"})
-@RequestMapping("/seances")
+@RequestMapping(value = "/seances")
 public class SeanceController {
 	Logger logger = LoggerFactory.getLogger(SeanceController.class);
 
 	@Autowired
 	private SeanceService seanceService;
-
+	
 	@Autowired
 	private MapperAPI mapperApi;
 
 	@GetMapping("")
 	public @ResponseBody ResponseEntity<List<SeanceAPI>> getAll() {
 		System.out.println("controler sessions");
-		List<Seance> sessions = seanceService.getAll();
+		List<Seance> seances = seanceService.getAll();
 		return new ResponseEntity<List<SeanceAPI>>(
-				sessions.stream()
+				seances.stream()
 				.map(mapperApi::convertToDto)
 				.collect(Collectors.toList()),
 				HttpStatus.OK);
@@ -53,23 +54,14 @@ public class SeanceController {
 		return new ResponseEntity<SeanceAPI>(mapperApi.convertToDto(seanceService.findById(id)), HttpStatus.OK);
 	}
 
-	@GetMapping("/programme/{id}")
-	public @ResponseBody ResponseEntity<List<SeanceAPI>> getByProgrammeId(@PathVariable Long id) {
-
-		List<Seance> sessions = seanceService.findByProgrammeId(id);
-		return new ResponseEntity<List<SeanceAPI>>(
-				sessions.stream()
-				.map(mapperApi::convertToDto)
-				.collect(Collectors.toList()),
-				HttpStatus.OK);
-	}
-
-	@PostMapping("")
-	public @ResponseBody ResponseEntity<SeanceAPI> save(@RequestBody SeanceAPI seanceApi) {
-		logger.trace("Saving sessionApi {}", seanceApi);
-		seanceService.save(mapperApi.convertToEntity(seanceApi));
-		return new ResponseEntity<SeanceAPI>(seanceApi , HttpStatus.OK);
-	}
+//	@PostMapping("")
+//	public @ResponseBody ResponseEntity<SeanceAPI> save(@RequestBody SeanceAPI seanceApi) {
+//		logger.debug("Saving sessionApi {}", seanceApi);
+//		Seance seance = mapperApi.convertToEntity(seanceApi);
+//		seance.setProgramme(programService.findById(seanceApi.getProgramId()));
+//		seanceService.save(seance);
+//		return new ResponseEntity<SeanceAPI>(seanceApi , HttpStatus.OK);
+//	}
 
 	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<SeanceAPI> delete(@PathVariable Long id) {

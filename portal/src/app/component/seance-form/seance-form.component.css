@@ -1,0 +1,6 @@
+.formExercice{
+    display: flex;
+}
+.exerciceList{
+    flex-grow: 2;
+}

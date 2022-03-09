@@ -5,14 +5,12 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,26 +24,16 @@ public class Seance {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 
-	@Column(name="nom", length=50, nullable=false, unique=false)
-	private String nom;
-
-	@Column(name="date_creation")
+	@Column(name="date_entrainement")
 	@Temporal(TemporalType.DATE)
-	private Date creationDate;
-
-	@Column(name="muscle_cible")
-	private String muscleCible;
+	private Date dateEntrainement;
 
 	@ManyToOne
-	@JoinColumn(name="program_id", nullable=false)
-	private Programme programme;
-	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-			  name = "seance_exercice", 
-			  joinColumns = @JoinColumn(name = "seance_id"), 
-			  inverseJoinColumns = @JoinColumn(name = "exercice_id"))
-	private Set<Exercice> exercices;
+	@JoinColumn(name="entrainement_id", nullable=false)
+	private Entrainement entrainement;
+
+	@OneToMany(mappedBy = "seance")
+	private Set<Serie> series;
 
 	public Long getId() {
 		return id;
@@ -55,44 +43,27 @@ public class Seance {
 		this.id = id;
 	}
 
-	public String getNom() {
-		return nom;
+	public Date getDateEntrainement() {
+		return dateEntrainement;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setDateEntrainement(Date dateEntrainement) {
+		this.dateEntrainement = dateEntrainement;
 	}
 
-	public Date getCreationDate() {
-		return creationDate;
+	public Entrainement getEntrainement() {
+		return entrainement;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+	public void setEntrainement(Entrainement entrainement) {
+		this.entrainement = entrainement;
 	}
 
-	public String getMuscleCible() {
-		return muscleCible;
+	public Set<Serie> getSeries() {
+		return series;
 	}
 
-	public void setMuscleCible(String muscleCible) {
-		this.muscleCible = muscleCible;
+	public void setSeries(Set<Serie> series) {
+		this.series = series;
 	}
-
-	public Programme getProgramme() {
-		return programme;
-	}
-
-	public void setProgramme(Programme programme) {
-		this.programme = programme;
-	}
-
-	public Set<Exercice> getExercices() {
-		return exercices;
-	}
-
-	public void setExercices(Set<Exercice> exercices) {
-		this.exercices = exercices;
-	}
-
 }

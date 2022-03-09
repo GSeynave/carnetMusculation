@@ -22,25 +22,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.ProgrammeAPI;
 import com.muscu.carnetMusculation.entities.Programme;
-import com.muscu.carnetMusculation.services.ProgramService;
-import com.muscu.carnetMusculation.services.SeanceService;
+import com.muscu.carnetMusculation.services.ProgrammeService;
 
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders={"*"})
 @RequestMapping("/programs")
-public class ProgramController {
-	Logger logger = LoggerFactory.getLogger(ProgramController.class);
+public class ProgrammeController {
+	Logger logger = LoggerFactory.getLogger(ProgrammeController.class);
 
 	@Autowired
-	private ProgramService programService;
+	private ProgrammeService programmeService;
 
 	@Autowired
 	private MapperAPI mapperApi;
 
 	@GetMapping("")
 	public @ResponseBody ResponseEntity<List<ProgrammeAPI>> getAll() {
-		List<Programme> programs = programService.getAll();
+		List<Programme> programs = programmeService.getAll();
+		System.out.println("nb program returned : " + programs.size());
 		return new ResponseEntity<List<ProgrammeAPI>>(
 				programs.stream()
 				.map(mapperApi::convertToDto)
@@ -51,23 +51,23 @@ public class ProgramController {
 
 	@GetMapping("/{id}")
 	public @ResponseBody ResponseEntity<ProgrammeAPI> getById(@PathVariable Long id) {
-		return new ResponseEntity<ProgrammeAPI>(mapperApi.convertToDto(programService.findById(id)), HttpStatus.OK);
+		return new ResponseEntity<ProgrammeAPI>(mapperApi.convertToDto(programmeService.findById(id)), HttpStatus.OK);
 	}
 
 	@PostMapping("")
 	public @ResponseBody ResponseEntity<ProgrammeAPI> save(@RequestBody ProgrammeAPI programApi) {
 		logger.trace("Saving programApi {}", programApi);
 		Programme program = mapperApi.convertToEntity(programApi);
-		programService.save(program);
+		programmeService.save(program);
 		return new ResponseEntity<ProgrammeAPI>(programApi , HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<ProgrammeAPI> delete(@PathVariable Long id) {
 		System.out.println("delete id :" +id);
-		Programme program = programService.findById(id);
+		Programme program = programmeService.findById(id);
 		if(!Objects.isNull(program)) {
-			programService.delete(program);
+			programmeService.delete(program);
 			return new ResponseEntity<ProgrammeAPI>(mapperApi.convertToDto(program), HttpStatus.OK);
 		}
 		else {

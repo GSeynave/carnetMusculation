@@ -1,15 +1,14 @@
 package com.muscu.carnetMusculation.dto;
 
-import java.util.List;
+import com.muscu.carnetMusculation.utils.EntrainementType;
 
 public class EntrainementAPI {
 	
 	private Long id;
 	private String dateCreation;
-	private String muscleCible;
-	private Long programmeId;
-	private List<Long> exerciceIds;
-	
+	private Enum<EntrainementType> type;
+	private Long seanceIds;
+	private Long exerciceIds;
 	public Long getId() {
 		return id;
 	}
@@ -22,22 +21,22 @@ public class EntrainementAPI {
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-	public String getMuscleCible() {
-		return muscleCible;
+	public Enum<EntrainementType> getType() {
+		return type;
 	}
-	public void setMuscleCible(String muscleCible) {
-		this.muscleCible = muscleCible;
+	public void setType(Enum<EntrainementType> type) {
+		this.type = type;
 	}
-	public Long getProgrammeId() {
-		return programmeId;
+	public Long getSeanceIds() {
+		return seanceIds;
 	}
-	public void setProgrammeId(Long programmeId) {
-		this.programmeId = programmeId;
+	public void setSeanceIds(Long seanceIds) {
+		this.seanceIds = seanceIds;
 	}
-	public List<Long> getExerciceIds() {
+	public Long getExerciceIds() {
 		return exerciceIds;
 	}
-	public void setExerciceIds(List<Long> exerciceIds) {
+	public void setExerciceIds(Long exerciceIds) {
 		this.exerciceIds = exerciceIds;
 	}
 

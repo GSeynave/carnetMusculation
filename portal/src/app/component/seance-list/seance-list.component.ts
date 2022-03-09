@@ -9,9 +9,10 @@ import { MusculationService } from 'src/app/service/musculation.service';
   styleUrls: ['./seance-list.component.css']
 })
 export class SeanceListComponent implements OnInit {
-  displayedColumns: string[] = ['creationDate', 'name', 'deletion'];
+  displayedColumns: string[] = ['dateCreation', 'nom', 'muscleCible', 'deletion'];
   seances: Seance[] = [];
   dataSource: MatTableDataSource<Seance> = new MatTableDataSource();
+  panelOpenState: boolean = false;
 
   constructor(
     private musculationService: MusculationService
@@ -29,5 +30,4 @@ export class SeanceListComponent implements OnInit {
   onDelete(idSeance: number) {
     this.musculationService.deleteSeance(idSeance).subscribe(() =>  location.reload());
   }
-
 }

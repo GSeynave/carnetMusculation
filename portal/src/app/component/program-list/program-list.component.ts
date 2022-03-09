@@ -9,7 +9,7 @@ import { Program } from 'src/app/class/program';
   styleUrls: ['./program-list.component.css']
 })
 export class ProgramListComponent implements OnInit {
-  displayedColumns: string[] = ['creationDate', 'name', 'deletion'];
+  displayedColumns: string[] = ['dateCreation', 'nom', 'deletion'];
   programs: Program[] = [];
   dataSource: MatTableDataSource<Program> = new MatTableDataSource();
 
@@ -22,8 +22,9 @@ export class ProgramListComponent implements OnInit {
       .subscribe(response => {
         this.programs = response
         this.dataSource = new MatTableDataSource(this.programs);
-        console.log(this.programs)
+        console.log(this.dataSource)
       });
+      console.log("programs", this.programs);
   }
 
   onDelete(idProgram: number) {

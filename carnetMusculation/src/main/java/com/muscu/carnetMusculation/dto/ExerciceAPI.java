@@ -5,11 +5,8 @@ import java.util.List;
 public class ExerciceAPI {
 	private Long id;
 	private String nom;
-	private String dateCreation;
-	private String muscleCible;
-	private List<Long> seanceIds;
-	private List<Long> seriesId;
-	
+	private String muscle;
+	private List<Long> programs;
 	public Long getId() {
 		return id;
 	}
@@ -22,29 +19,17 @@ public class ExerciceAPI {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getDateCreation() {
-		return dateCreation;
+	public String getMuscle() {
+		return muscle;
 	}
-	public void setDateCreation(String dateCreation) {
-		this.dateCreation = dateCreation;
+	public void setMuscle(String muscle) {
+		this.muscle = muscle;
 	}
-	public String getMuscleCible() {
-		return muscleCible;
+	public List<Long> getPrograms() {
+		return programs;
 	}
-	public void setMuscleCible(String muscleCible) {
-		this.muscleCible = muscleCible;
-	}
-	public List<Long> getSeanceIds() {
-		return seanceIds;
-	}
-	public void setSeanceIds(List<Long> seanceIds) {
-		this.seanceIds = seanceIds;
-	}
-	public List<Long> getSeriesId() {
-		return seriesId;
-	}
-	public void setSeriesId(List<Long> seriesId) {
-		this.seriesId = seriesId;
+	public void setPrograms(List<Long> programs) {
+		this.programs = programs;
 	}
 
 }

@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.muscu.carnetMusculation.entities.Entrainement;
 
-public interface EntrainementRepository extends CrudRepository<Entrainement, Long>{
-	
+public interface EntrainementRepository extends CrudRepository<Entrainement, Long> {
+
 }

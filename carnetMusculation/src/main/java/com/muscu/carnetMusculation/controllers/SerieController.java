@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.SerieAPI;
-import com.muscu.carnetMusculation.dto.SerieLineAPI;
 import com.muscu.carnetMusculation.entities.Serie;
 import com.muscu.carnetMusculation.services.SerieService;
 
@@ -53,10 +52,10 @@ public class SerieController {
 		return new ResponseEntity<SerieAPI>(mapperApi.convertToDto(serieService.findById(id)), HttpStatus.OK);
 	}
 
-	@GetMapping("/exercice/{id}")
-	public @ResponseBody ResponseEntity<List<SerieLineAPI>> getByExerciceId(@PathVariable Long id) {
-		return new ResponseEntity<List<SerieLineAPI>>(serieService.getSerieLineAPIByExerciceId(id), HttpStatus.OK);
-	}
+//	@GetMapping("/exercice/{id}")
+//	public @ResponseBody ResponseEntity<List<SerieLineAPI>> getByExerciceId(@PathVariable Long id) {
+//		return new ResponseEntity<List<SerieLineAPI>>(serieService.getSerieLineAPIByExerciceId(id), HttpStatus.OK);
+//	}
 
 	@PostMapping("")
 	public @ResponseBody ResponseEntity<SerieAPI> save(@RequestBody SerieAPI serieApi) {

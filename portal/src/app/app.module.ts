@@ -31,6 +31,7 @@ import { ExercicePanelComponent } from './component/exercice-panel/exercice-pane
 import { StringListComponent } from './component/string-list/string-list.component';
 import { SeancesListFromProgrammeComponent } from './component/seances-list-from-programme/seances-list-from-programme.component';
 import { TableSerieComponent } from './component/table-serie/table-serie.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { TableSerieComponent } from './component/table-serie/table-serie.compone
     MatTableModule,
     MatListModule,
     MatSelectModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

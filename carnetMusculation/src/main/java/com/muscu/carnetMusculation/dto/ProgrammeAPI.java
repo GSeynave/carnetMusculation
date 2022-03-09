@@ -8,6 +8,7 @@ public class ProgrammeAPI {
 	private String nom;
 	private String dateCreation;
 	private List<Long> seanceIds;
+	private List<Long> exerciceIds;
 	
 	public Long getId() {
 		return id;
@@ -33,5 +34,11 @@ public class ProgrammeAPI {
 	public void setSeanceIds(List<Long> seanceIds) {
 		this.seanceIds = seanceIds;
 	}
-
+	public List<Long> getExerciceIds() {
+		return exerciceIds;
+	}
+	public void setExerciceIds(List<Long> exerciceIds) {
+		this.exerciceIds = exerciceIds;
+	}
+	
 }

@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="program")
+@Table(name="programme")
 public class Programme {
 
 	@Id
@@ -27,10 +27,10 @@ public class Programme {
 	@Temporal(TemporalType.DATE)
 	@Column(name="date_creation")
 	private Date dateCreation;
-
+	
 	@OneToMany(mappedBy = "programme")
-	private Set<Seance> seances;
-
+	private Set<Entrainement> entrainements;
+	
 	public long getId() {
 		return id;
 	}
@@ -55,12 +55,12 @@ public class Programme {
 		this.dateCreation = dateCreation;
 	}
 
-	public Set<Seance> getSeances() {
-		return seances;
+	public Set<Entrainement> getEntrainements() {
+		return entrainements;
 	}
 
-	public void setSeances(Set<Seance> seances) {
-		this.seances = seances;
+	public void setEntrainements(Set<Entrainement> entrainements) {
+		this.entrainements = entrainements;
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.muscu.carnetMusculation.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -9,20 +8,14 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.muscu.carnetMusculation.dto.SerieLineAPI;
-import com.muscu.carnetMusculation.entities.Entrainement;
-import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.entities.Serie;
 import com.muscu.carnetMusculation.repositories.SerieRepository;
-import com.muscu.carnetMusculation.repositories.SeanceRepository;
 
 
 @Service
 public class SerieService {
 	@Autowired
 	private SerieRepository serieRepository;
-	@Autowired
-	private EntrainementService entrainementService;
 
 	@Transactional
 	public Serie save(Serie serie) {
@@ -49,49 +42,49 @@ public class SerieService {
 		return serieRepository.findByExerciceId(id);
 	}
 
-	public List<SerieLineAPI> getSerieLineAPIByExerciceId(long id){
-		return convertSerieToSerieLineAPI(findByExerciceId(id));
-	}
+//	public List<SerieLineAPI> getSerieLineAPIByExerciceId(long id){
+//		return convertSerieToSerieLineAPI(findByExerciceId(id));
+//	}
 	
-	private List<SerieLineAPI> convertSerieToSerieLineAPI(List<Serie> series) {
-		List<SerieLineAPI> serieLines = new ArrayList<SerieLineAPI>();
-		
-		//Creer autant de serieLineApi qu'il y a de 'entrainement différent dans series'
-		
-		
-		List<Entrainement> entrainements = new ArrayList<Entrainement>();
-
-		for(Serie serie : series) {
-			if(!entrainements.contains(serie.getEntrainement())) {
-				System.out.println("entrainement ajouté : " +serie.getEntrainement().getId());
-				entrainements.add(serie.getEntrainement());
-			}
-		}
-
-		List<String> poids = new ArrayList<String>();
-		List<String> rep = new ArrayList<String>();
-		List<String> recup = new ArrayList<String>();
-		
-		for(Entrainement entrainement : entrainements) {
-			poids.clear();
-			rep.clear();
-			recup.clear();
-			SerieLineAPI serieLineApi = new SerieLineAPI();
-			for(Serie serie : series) {
-				if(serie.getEntrainement().getId() == entrainement.getId()) {
-					System.out.println("in if");
-					poids.add(serie.getPoids());
-					rep.add(serie.getRep());
-					recup.add(serie.getRecup());
-				}
-			}
-			System.out.println("poids : " +poids.size());
-			serieLineApi.setDate(entrainement.getDate().toString());
-			serieLineApi.setPoids(poids);
-			serieLineApi.setRecup(recup);
-			serieLineApi.setRep(rep);
-			serieLines.add(serieLineApi);
-		}
-		return serieLines;
-	}
+//	private List<SerieLineAPI> convertSerieToSerieLineAPI(List<Serie> series) {
+//		List<SerieLineAPI> serieLines = new ArrayList<SerieLineAPI>();
+//		
+//		//Creer autant de serieLineApi qu'il y a de 'entrainement différent dans series'
+//		
+//		
+//		List<BilanSeance> entrainements = new ArrayList<BilanSeance>();
+//
+//		for(Serie serie : series) {
+//			if(!entrainements.contains(serie.getEntrainement())) {
+//				System.out.println("entrainement ajouté : " +serie.getEntrainement().getId());
+//				entrainements.add(serie.getEntrainement());
+//			}
+//		}
+//
+//		List<String> poids = new ArrayList<String>();
+//		List<String> rep = new ArrayList<String>();
+//		List<String> recup = new ArrayList<String>();
+//		
+//		for(BilanSeance entrainement : entrainements) {
+//			poids.clear();
+//			rep.clear();
+//			recup.clear();
+//			SerieLineAPI serieLineApi = new SerieLineAPI();
+//			for(Serie serie : series) {
+//				if(serie.getEntrainement().getId() == entrainement.getId()) {
+//					System.out.println("in if");
+//					poids.add(serie.getPoids());
+//					rep.add(serie.getRep());
+//					recup.add(serie.getRecup());
+//				}
+//			}
+//			System.out.println("poids : " +poids.size());
+//			serieLineApi.setDate(entrainement.getDate().toString());
+//			serieLineApi.setPoids(poids);
+//			serieLineApi.setRecup(recup);
+//			serieLineApi.setRep(rep);
+//			serieLines.add(serieLineApi);
+//		}
+//		return serieLines;
+//	}
 }

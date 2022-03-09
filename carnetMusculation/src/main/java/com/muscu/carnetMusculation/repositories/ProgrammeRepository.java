@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.muscu.carnetMusculation.entities.Programme;
 
-public interface ProgramRepository extends CrudRepository<Programme, Long> {
+public interface ProgrammeRepository extends CrudRepository<Programme, Long> {
 
 }

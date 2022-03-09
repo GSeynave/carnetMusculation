@@ -50,7 +50,8 @@ export class MusculationService implements ErrorHandler {
    */
    getSeances(): Observable<Seance[]> {
      console.log("getSeance")
-    return this.http.get<Seance[]>(this.url+"seances").pipe(
+    return this.http.get<Seance[]>(this.url+"seances")
+    .pipe(
       catchError(err => {
         console.log('Error while retrieving the list of seances');
         return throwError(err);
@@ -105,10 +106,10 @@ export class MusculationService implements ErrorHandler {
 
   
   setSeance(seance: Seance): Observable<Seance>{
-    return this.http.post<Seance>(this.url+"seances", Seance)
+    return this.http.post<Seance>(this.url+"seances", seance)
       .pipe(
         catchError(err => {
-          console.log('Error while saving program', err);
+          console.log('Error while saving seance', err);
           return throwError(err);
         })
       );
@@ -144,7 +145,7 @@ export class MusculationService implements ErrorHandler {
     return this.http.delete<Seance>(this.url +"seances/" +idSeance, )
     .pipe(
       catchError(err => {
-        console.log('Error while deleting program', err);
+        console.log('Error while deleting seance', err);
         return throwError(err);
       })
     );

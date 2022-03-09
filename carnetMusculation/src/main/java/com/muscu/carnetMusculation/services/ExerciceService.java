@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.muscu.carnetMusculation.entities.Exercice;
-import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.repositories.ExerciceRepository;
 
 @Service
