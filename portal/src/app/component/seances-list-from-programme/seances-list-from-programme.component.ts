@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Program } from 'src/app/class/program';
+import { Programme } from 'src/app/class/programme';
 import { Seance } from 'src/app/class/seance';
 import { MusculationService } from 'src/app/service/musculation.service';
 
@@ -12,7 +12,7 @@ export class SeancesListFromProgrammeComponent implements OnInit, OnChanges {
 
   previousProgrammeId: number = 0;
   seances: Seance[] = [];
-  @Input() programme: Program = new Program();
+  @Input() programme: Programme = new Programme();
   @Output() selectedSeanceId = new EventEmitter<number>();
 
   constructor(private musculationService: MusculationService) { }
@@ -26,10 +26,9 @@ export class SeancesListFromProgrammeComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
   fillSeances(programmeId: number){
-    this.musculationService.getSeancesByProgram(programmeId)
+    this.musculationService.getSeancesByProgramme(programmeId)
     .subscribe(response => {
-      this.seances = response
-      console.log("programs", this.seances);
+      this.seances = response;
     });
   }
 

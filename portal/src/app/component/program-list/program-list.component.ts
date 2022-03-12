@@ -1,34 +1,66 @@
 import { Component, OnInit } from '@angular/core';
 import { MusculationService } from 'src/app/service/musculation.service';
 import { MatTableDataSource } from '@angular/material/table';
-import { Program } from 'src/app/class/program';
+import { Programme } from 'src/app/class/programme';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-program-list',
   templateUrl: './program-list.component.html',
   styleUrls: ['./program-list.component.css']
 })
-export class ProgramListComponent implements OnInit {
+export class ProgramListComponent {
   displayedColumns: string[] = ['dateCreation', 'nom', 'deletion'];
-  programs: Program[] = [];
-  dataSource: MatTableDataSource<Program> = new MatTableDataSource();
+  dataSource: MatTableDataSource<Programme> = new MatTableDataSource();
+
+  // MatPaginator Inputs
+  programmeCount = 0;
+  pageSize = 10;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+
+  // MatPaginator Output
+  pageEvent: PageEvent = new PageEvent();
+
+  programmeSort: string = "nom";
+
 
   constructor(
     private musculationService: MusculationService
-    ){ }
-
-  ngOnInit(): void {
-    this.musculationService.getPrograms()
+  ) {
+    this.musculationService.getProgrammeCount()
       .subscribe(response => {
-        this.programs = response
-        this.dataSource = new MatTableDataSource(this.programs);
-        console.log(this.dataSource)
+        this.programmeCount = response;
       });
-      console.log("programs", this.programs);
+
+    this.musculationService.getProgrammes(0, 10, this.programmeSort)
+      .subscribe(response => {
+        this.dataSource = new MatTableDataSource(response);
+      });
+      this.pageEvent.pageIndex=0;
+      this.pageEvent.pageSize=10;
   }
 
-  onDelete(idProgram: number) {
-    console.log("delete: ", idProgram)
-    this.musculationService.deleteProgram(idProgram).subscribe(() =>  location.reload());
+  setPageSizeOptions(setPageSizeOptionsInput: string) {
+    if (setPageSizeOptionsInput) {
+      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+    }
+  }
+
+  onDelete(idProgramme: number) {
+    this.musculationService.deleteProgramme(idProgramme).subscribe(() => {
+      this.musculationService.getProgrammes(this.pageEvent.pageIndex, this.pageEvent.pageSize, this.programmeSort)
+      .subscribe(response => {
+        this.dataSource = new MatTableDataSource(response);
+        this.programmeCount = response.length;
+      });
+    });
+  }
+
+  getPage(event: PageEvent) {
+    this.pageEvent = event;
+    this.musculationService.getProgrammes(this.pageEvent.pageIndex, this.pageEvent.pageSize, this.programmeSort)
+      .subscribe(response => {
+        this.dataSource.data = response
+      });
   }
 }

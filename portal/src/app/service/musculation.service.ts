@@ -1,11 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { Program } from '../class/program';
+import { Programme } from '../class/programme';
 import { catchError,  } from 'rxjs/operators';
 import { Exercice } from '../class/exercice';
 import { Seance } from '../class/seance';
-import { Serie } from '../class/serie';
 import { SerieLine } from '../component/table-serie/table-serie.component';
 
 @Injectable({
@@ -58,7 +57,7 @@ export class MusculationService implements ErrorHandler {
       })
     )
   }
-  getSeancesByProgram(programmeId: number): Observable<Seance[]> {
+  getSeancesByProgramme(programmeId: number): Observable<Seance[]> {
     return this.http.get<Seance[]>(this.url+`seances/programme/${programmeId}`).pipe(
       catchError(err => {
         console.log('Error while retrieving the list of seances');
@@ -71,15 +70,53 @@ export class MusculationService implements ErrorHandler {
    * Program's
    * @returns 
    */
-  getPrograms(): Observable<Program[]> {
-    return this.http.get<Program[]>(this.url+"programs")
+  getProgrammes(page: number, pageSize: number, sort: string): Observable<Programme[]> {
+    return this.http.get<Programme[]>(this.url+`programmes?page=${page}&size=${pageSize}&sort=${sort}`,)
       .pipe(
         catchError(err => {
-          console.log('Error while retrieving the list of programs');
+          console.log('Error while retrieving the list of programmes');
+          return throwError(err);
+        })
+      )
+    }
+
+  setProgramme(program: Programme): Observable<Programme>{
+    return this.http.post<Programme>(this.url+"programmes", program)
+      .pipe(
+        catchError(err => {
+          console.log('Error while saving program', err);
+          return throwError(err);
+        })
+      );
+  }
+  
+  getProgrammeCount(): Observable<number> {
+    return this.http.get<number>(this.url+"programmes/count")
+      .pipe(
+        catchError(err => {
+          console.log('Error while retrieving the list of programmes');
           return throwError(err);
         })
       )
   }
+  
+  deleteProgramme(idProgram: number): Observable<number> {
+    const headers = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Access-Control-Allow-Origin' : '*'
+    });
+    const options = {
+      headers: headers,
+      responseType:'number'
+    };
+    return this.http.delete<number>(this.url +"programmes/" +idProgram, )
+    .pipe(
+      catchError(err => {
+        return throwError(err);
+      })
+    );
+  }
+
    /**
    * Serie's
    * @returns 
@@ -88,21 +125,12 @@ export class MusculationService implements ErrorHandler {
       return this.http.get<SerieLine[]>(this.url+`series/exercice/${exerciceId}`)
         .pipe(
           catchError(err => {
-            console.log('Error while retrieving the list of programs');
+            console.log('Error while retrieving the list of programmes');
             return throwError(err);
           })
         )
     }
 
-  setProgram(program: Program): Observable<Program>{
-    return this.http.post<Program>(this.url+"programs", program)
-      .pipe(
-        catchError(err => {
-          console.log('Error while saving program', err);
-          return throwError(err);
-        })
-      );
-  }
 
   
   setSeance(seance: Seance): Observable<Seance>{
@@ -113,24 +141,6 @@ export class MusculationService implements ErrorHandler {
           return throwError(err);
         })
       );
-  }
-
-  deleteProgram(idProgram: number): Observable<Program> {
-    const headers = new HttpHeaders({
-      'content-type' : 'application/json',
-      'Access-Control-Allow-Origin' : '*'
-    });
-    const options = {
-      headers: headers,
-      responseType:'Program'
-    };
-    return this.http.delete<Program>(this.url +"programs/" +idProgram, )
-    .pipe(
-      catchError(err => {
-        console.log('Error while deleting program', err);
-        return throwError(err);
-      })
-    );
   }
   
   deleteSeance(idSeance: number): Observable<Seance> {

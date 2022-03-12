@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Exercice } from 'src/app/class/exercice';
-import { Program } from 'src/app/class/program';
+import { Programme } from 'src/app/class/programme';
 import { Seance } from 'src/app/class/seance';
 import { MusculationService } from 'src/app/service/musculation.service';
 
@@ -14,9 +14,8 @@ export class ProgramFormComponent implements OnInit {
 
   seancesList: Seance [] = [];
 
-  programFormGroup: FormGroup = new FormGroup({
-    name: new FormControl(''),
-    seances: new FormControl([])
+  programmeFormGroup: FormGroup = new FormGroup({
+    name: new FormControl('')
   });
 
   constructor(private musculationService: MusculationService){ }
@@ -28,13 +27,13 @@ export class ProgramFormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.programFormGroup.value);
-    var program: Program = new Program();
-    program.nom = this.programFormGroup.value.name;
-    program.dateCreation = new Date().toISOString().substring(0,10);
-    console.log(program);
+    console.log(this.programmeFormGroup.value);
+    var programme: Programme = new Programme();
+    programme.nom = this.programmeFormGroup.value.name;
+    programme.dateCreation = new Date().toISOString().substring(0,10);
+    console.log(programme);
 
-    this.musculationService.setProgram(program).subscribe();
+    this.musculationService.setProgramme(programme).subscribe();
       
     location.reload();
   }

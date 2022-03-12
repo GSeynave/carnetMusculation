@@ -1,21 +1,15 @@
-<mat-card>
-    <!--
-    
-        Program's creation
-    
-     -->
-     <mat-card-title>Create a program</mat-card-title>
-    <form [formGroup]="programFormGroup" (ngSubmit)="onSubmit()">
+<mat-card class="cardForm">
+     <mat-card-title>Créer un programme</mat-card-title>
+    <form [formGroup]="programmeFormGroup" (ngSubmit)="onSubmit()">
         <div>
             <mat-form-field appearance="fill">
-                <mat-label>Program name </mat-label>
+                <mat-label>Nom </mat-label>
                 <input matInput id="name" type="text" formControlName="name">
             </mat-form-field>
         </div>
         <div>
             <button mat-raised-button color="warn" type="submit"
-                [disabled]="!this.programFormGroup.valid">Create</button>
+                [disabled]="!this.programmeFormGroup.valid" class="createButton">Create</button>
         </div>
     </form>
-
 </mat-card>

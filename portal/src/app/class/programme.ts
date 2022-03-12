@@ -1,9 +1,9 @@
 import { Exercice } from "./exercice";
 
-export class Program {
+export class Programme {
 
     id: number = 0;
     nom: string = "";
     dateCreation: string = "";
-    seanceIds: number[] = [];
+    entrainementIds: number[] = [];
 }

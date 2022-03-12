@@ -16,4 +16,8 @@ public interface IProgrammeService {
 	
 	boolean existsById(Long id);
 	
+	List<Programme> findPaginated(int page, int size, String sort);
+	
+	int countAll();
+	
 }
