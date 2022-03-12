@@ -3,6 +3,7 @@ package com.muscu.carnetMusculation.entities;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,11 +37,14 @@ public class Entrainement {
 	@JoinColumn(name="programme_id", nullable=false)
 	private Programme programme;
 	
-	@OneToMany(mappedBy = "entrainement")
+	@OneToMany(mappedBy = "entrainement", cascade = CascadeType.ALL)
 	private Set<Seance> seances;
-	
-	@ManyToMany
-	Set<Exercice> exercices;
+
+	@OneToMany(mappedBy = "entrainement", cascade = CascadeType.ALL)
+	private Set<Serie> series;
+
+	@OneToMany(mappedBy = "entrainement", cascade = CascadeType.ALL)
+	private Set<DetailsExercice> details;
 
 	public long getId() {
 		return id;
@@ -74,11 +78,27 @@ public class Entrainement {
 		this.seances = seances;
 	}
 
-	public Set<Exercice> getExercices() {
-		return exercices;
+	public Programme getProgramme() {
+		return programme;
 	}
 
-	public void setExercices(Set<Exercice> exercices) {
-		this.exercices = exercices;
+	public void setProgramme(Programme programme) {
+		this.programme = programme;
+	}
+
+	public Set<Serie> getSeries() {
+		return series;
+	}
+
+	public void setSeries(Set<Serie> series) {
+		this.series = series;
+	}
+
+	public Set<DetailsExercice> getDetails() {
+		return details;
+	}
+
+	public void setDetails(Set<DetailsExercice> details) {
+		this.details = details;
 	}
 }

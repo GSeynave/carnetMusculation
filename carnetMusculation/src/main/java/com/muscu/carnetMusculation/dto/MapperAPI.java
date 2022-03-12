@@ -20,13 +20,13 @@ public class MapperAPI {
 	@Autowired
 	private  ModelMapper mapper;
 
-	//Program mapper
-	public ProgrammeAPI convertToDto(Programme program) {
-		return mapper.map(program, ProgrammeAPI.class);
+	//Programme mapper
+	public ProgrammeAPI convertToDto(Programme programme) {
+		return mapper.map(programme, ProgrammeAPI.class);
 	}
 
-	public Programme convertToEntity(ProgrammeAPI programApi) {
-		return mapper.map(programApi, Programme.class);
+	public Programme convertToEntity(ProgrammeAPI programmeApi) {
+		return mapper.map(programmeApi, Programme.class);
 	}
 
 	//Exercice mapper

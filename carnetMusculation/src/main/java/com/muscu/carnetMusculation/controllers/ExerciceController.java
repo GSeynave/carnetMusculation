@@ -22,66 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.ExerciceAPI;
 import com.muscu.carnetMusculation.entities.Exercice;
-import com.muscu.carnetMusculation.services.ExerciceService;
+import com.muscu.carnetMusculation.services.impl.ExerciceServiceImpl;
 
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders={"*"})
 @RequestMapping("/exercices")
 public class ExerciceController {
-	Logger logger = LoggerFactory.getLogger(ExerciceController.class);
-
-	@Autowired
-	ExerciceService exerciceService;
-
-	@Autowired
-	private MapperAPI mapperApi;
-
-	@GetMapping("")
-	public @ResponseBody ResponseEntity<List<ExerciceAPI>> getAll() {
-		System.out.println("controler exercices");
-		List<Exercice> exercices = exerciceService.getAll();
-		return new ResponseEntity<List<ExerciceAPI>>(
-				exercices.stream()
-				.map(mapperApi::convertToDto)
-				.collect(Collectors.toList()),
-				HttpStatus.OK);
-	}
-
-
-	@GetMapping("/{id}")
-	public @ResponseBody ResponseEntity<ExerciceAPI> getById(@PathVariable Long id) {
-		return new ResponseEntity<ExerciceAPI>(mapperApi.convertToDto(exerciceService.findById(id)), HttpStatus.OK);
-	}
-	
-	@GetMapping("/seance/{id}")
-	public @ResponseBody ResponseEntity<List<ExerciceAPI>> getBySeances(@PathVariable Long id) {
-		List<Exercice> exercices = exerciceService.findBySeances(id);
-		return new ResponseEntity<List<ExerciceAPI>>(
-				exercices.stream()
-				.map(mapperApi::convertToDto)
-				.collect(Collectors.toList()),
-				HttpStatus.OK);
-	}
-
-	@PostMapping("")
-	public @ResponseBody ResponseEntity<ExerciceAPI> save(@RequestBody ExerciceAPI exerciceApi) {
-		logger.trace("Saving exerciceApi {}", exerciceApi);
-		exerciceService.save(mapperApi.convertToEntity(exerciceApi));
-		return new ResponseEntity<ExerciceAPI>(exerciceApi , HttpStatus.OK);
-	}
-
-	@DeleteMapping("/{id}")
-	public @ResponseBody ResponseEntity<ExerciceAPI> delete(@PathVariable Long id) {
-		System.out.println("delete id :" +id);
-		Exercice exercice = exerciceService.findById(id);
-		if(!Objects.isNull(exercice)) {
-			exerciceService.delete(exercice);
-			return new ResponseEntity<ExerciceAPI>(mapperApi.convertToDto(exercice), HttpStatus.OK);
-		}
-		else {
-			return new ResponseEntity<ExerciceAPI>(mapperApi.convertToDto(exercice), HttpStatus.NOT_FOUND);
-		}
-	}
 
 }

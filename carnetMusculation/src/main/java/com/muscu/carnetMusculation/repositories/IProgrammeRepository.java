@@ -1,9 +1,11 @@
 package com.muscu.carnetMusculation.repositories;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import com.muscu.carnetMusculation.entities.Programme;
 
-public interface ProgrammeRepository extends CrudRepository<Programme, Long> {
+@Repository
+public interface IProgrammeRepository extends CrudRepository<Programme, Long> {
 
 }

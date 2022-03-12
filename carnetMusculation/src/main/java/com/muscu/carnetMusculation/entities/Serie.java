@@ -18,6 +18,9 @@ public class Serie {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(name = "numero_serie", nullable = false)
+	private String numeroSérie;
+	
 	@Column(name="rep", length=5, nullable=false, unique=false)
 	private String rep;
 	
@@ -34,7 +37,10 @@ public class Serie {
 	@ManyToOne
 	@JoinColumn(name = "exercice_id")
 	Exercice exercice;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "entrainement_id")
+	Entrainement entrainement;
 
 	public Long getId() {
 		return id;
@@ -44,20 +50,12 @@ public class Serie {
 		this.id = id;
 	}
 
-	public Seance getSeance() {
-		return seance;
+	public String getNumeroSérie() {
+		return numeroSérie;
 	}
 
-	public void setSeance(Seance seance) {
-		this.seance = seance;
-	}
-
-	public Exercice getExercice() {
-		return exercice;
-	}
-
-	public void setExercice(Exercice exercice) {
-		this.exercice = exercice;
+	public void setNumeroSérie(String numeroSérie) {
+		this.numeroSérie = numeroSérie;
 	}
 
 	public String getRep() {
@@ -82,6 +80,30 @@ public class Serie {
 
 	public void setRecup(String recup) {
 		this.recup = recup;
+	}
+
+	public Seance getSeance() {
+		return seance;
+	}
+
+	public void setSeance(Seance seance) {
+		this.seance = seance;
+	}
+
+	public Exercice getExercice() {
+		return exercice;
+	}
+
+	public void setExercice(Exercice exercice) {
+		this.exercice = exercice;
+	}
+
+	public Entrainement getEntrainement() {
+		return entrainement;
+	}
+
+	public void setEntrainement(Entrainement entrainement) {
+		this.entrainement = entrainement;
 	}
 	
 }

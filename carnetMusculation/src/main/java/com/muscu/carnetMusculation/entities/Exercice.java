@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,8 +24,8 @@ public class Exercice {
 	@Column(name="muscle")
 	private String muscle;
 
-	@ManyToMany(mappedBy = "exercices")
-	Set<Entrainement> entrainements;
+	@OneToMany(mappedBy = "exercice")
+	private Set<DetailsExercice> details;
 	
 	@OneToMany(mappedBy = "exercice")
 	private Set<Serie> series;
@@ -63,11 +62,11 @@ public class Exercice {
 		this.series = series;
 	}
 
-	public Set<Entrainement> getEntrainements() {
-		return entrainements;
+	public Set<DetailsExercice> getDetails() {
+		return details;
 	}
 
-	public void setEntrainements(Set<Entrainement> entrainements) {
-		this.entrainements = entrainements;
+	public void setDetails(Set<DetailsExercice> details) {
+		this.details = details;
 	}
 }
