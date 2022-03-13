@@ -32,7 +32,7 @@ import { StringListComponent } from './component/string-list/string-list.compone
 import { SeancesListFromProgrammeComponent } from './component/seances-list-from-programme/seances-list-from-programme.component';
 import { TableSerieComponent } from './component/table-serie/table-serie.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatPaginatorModule } from '@angular/material/paginator'; 
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [

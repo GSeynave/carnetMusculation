@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Exercice } from 'src/app/class/exercice';
 import { Programme } from 'src/app/class/programme';
 import { Seance } from 'src/app/class/seance';
-import { MusculationService } from 'src/app/service/musculation.service';
 
 @Component({
   selector: 'app-program-form',
@@ -12,29 +10,42 @@ import { MusculationService } from 'src/app/service/musculation.service';
 })
 export class ProgramFormComponent implements OnInit {
 
-  seancesList: Seance [] = [];
+  @Output("programmeOnSubmit") programmeOnSubmit: EventEmitter<Programme> = new EventEmitter();
+
+  seancesList: Seance[] = [];
+  programme: Programme = new Programme();
 
   programmeFormGroup: FormGroup = new FormGroup({
-    name: new FormControl('')
+    id: new FormControl(this.programme.id),
+    nom: new FormControl(this.programme.nom),
+    dateCreation: new FormControl(this.programme.dateCreation),
+    dateModification: new FormControl(this.programme.dateModification)
   });
 
-  constructor(private musculationService: MusculationService){ }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.musculationService.getSeances().subscribe(response => {
-      this.seancesList = response;
-    });
+  ngOnInit(): void { }
+
+  onSubmit() {
+    var programme: Programme = new Programme();
+    if (this.programmeFormGroup.value.id) {
+      programme.id = this.programmeFormGroup.value.id;
+    }
+    programme.nom = this.programmeFormGroup.value.nom;
+    if (this.programmeFormGroup.value.dateCreation) {
+      programme.dateCreation = this.programmeFormGroup.value.dateCreation;
+    }
+    else {
+      programme.dateCreation = new Date().toISOString().substring(0, 10);
+    }
+    programme.dateModification = new Date().toISOString().substring(0, 10);
+    this.programmeOnSubmit.emit(programme);
   }
 
-  onSubmit(){
-    console.log(this.programmeFormGroup.value);
-    var programme: Programme = new Programme();
-    programme.nom = this.programmeFormGroup.value.name;
-    programme.dateCreation = new Date().toISOString().substring(0,10);
-    console.log(programme);
-
-    this.musculationService.setProgramme(programme).subscribe();
-      
-    location.reload();
+  onUpdate(programme: Programme) {
+    this.programme.id = programme.id;
+    this.programme.nom = programme.nom;
+    this.programme.dateCreation = programme.dateCreation;
+    this.programme.dateModification = new Date().toISOString().substring(0, 10);
   }
 }

@@ -1,5 +1,6 @@
 package com.muscu.carnetMusculation.entities;
 
+import java.util.Date;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
@@ -13,6 +14,8 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="programme")
@@ -31,7 +34,12 @@ public class Programme {
 	private String nom;
 	
 	@Column(name="date_creation")
-	private OffsetDateTime dateCreation;
+	@Temporal(TemporalType.DATE)
+	private Date dateCreation;
+
+	@Column(name="date_modification")
+	@Temporal(TemporalType.DATE)
+	private Date dateModification;
 	
 	@OneToMany(mappedBy = "programme", cascade = CascadeType.ALL)
 	private Set<Entrainement> entrainements;
@@ -52,12 +60,20 @@ public class Programme {
 		this.nom = nom;
 	}
 
-	public OffsetDateTime getDateCreation() {
+	public Date getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(OffsetDateTime dateCreation) {
+	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	public Date getDateModification() {
+		return dateModification;
+	}
+
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
 	}
 
 	public Set<Entrainement> getEntrainements() {

@@ -1,4 +1,4 @@
-<mat-card class="container">
+<mat-card class="container" *ngIf="programmes.length > 0">
 
     <mat-card-title>Liste des programmes</mat-card-title>
 
@@ -7,33 +7,41 @@
         <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- Creation date Column -->
+        <!-- Date de création -->
         <ng-container matColumnDef="dateCreation">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date création</th>
             <td mat-cell *matCellDef="let program"> {{program.dateCreation | date}} </td>
         </ng-container>
 
-        <!-- Name Column -->
+        <!-- Nom -->
         <ng-container matColumnDef="nom">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Programme </th>
             <td mat-cell *matCellDef="let program"> {{program.nom}} </td>
         </ng-container>
 
-        <!-- Deletion Column -->
+        <!-- Mettre a jour -->
+        <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let program">
+                <button mat-raised-button color="warn" type="button" class="updateProgramme"
+                    (click)="onUpdate(program)">Mettre à jour</button>
+            </td>
+        </ng-container>
+
+        <!-- Supprimer -->
         <ng-container matColumnDef="deletion">
             <th mat-header-cell *matHeaderCellDef> </th>
             <td mat-cell *matCellDef="let program">
                 <button mat-raised-button color="warn" type="button" class="deleteProgram"
                     (click)="onDelete(program.id)">Delete</button>
             </td>
-
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </mat-table>
 
-    <mat-paginator [length]="programmeCount" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
-        (page)="getPage($event)" aria-label="Select page">
+    <mat-paginator [length]="pagination.itemCount" [pageSize]="pagination.pageSize"
+        [pageSizeOptions]="pagination.pageSizeOptions" (page)="getPage($event)" aria-label="Select page">
     </mat-paginator>
 </mat-card>
