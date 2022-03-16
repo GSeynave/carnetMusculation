@@ -10,30 +10,53 @@
         <!-- Date de création -->
         <ng-container matColumnDef="dateCreation">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Date création</th>
-            <td mat-cell *matCellDef="let program"> {{program.dateCreation | date}} </td>
+            <td mat-cell *matCellDef="let programme"> {{programme.dateCreation | date}} </td>
         </ng-container>
 
         <!-- Nom -->
         <ng-container matColumnDef="nom">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Programme </th>
-            <td mat-cell *matCellDef="let program"> {{program.nom}} </td>
+            <td mat-cell *matCellDef="let programme">
+                <div *ngIf="programmeToUpdate.id != programme.id">
+                    {{programme.nom}}
+                    <button mat-button>
+
+                        <span class="material-icons">
+                            forward
+                        </span>
+                    </button>
+                </div>
+                <div *ngIf="programmeToUpdate.id === programme.id">
+                    <input id="nom" name="nom" value="nomUpdated" [(ngModel)]="nomUpdated" />
+                    <button mat-button>
+                        <span mat-icon class="material-icons" (click)="onUpdate()">check_circle_outline</span>
+                    </button>
+                    <button mat-button>
+                        <span mat-icon class="material-icons" (click)="cancelUpdate()">highlight_off</span>
+                    </button>
+                </div>
+            </td>
         </ng-container>
 
         <!-- Mettre a jour -->
         <ng-container matColumnDef="update">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let program">
-                <button mat-raised-button color="warn" type="button" class="updateProgramme"
-                    (click)="onUpdate(program)">Mettre à jour</button>
+            <th mat-header-cell *matHeaderCellDef>Mettre à jour</th>
+            <td mat-cell *matCellDef="let programme">
+                <button mat-button>
+                    <span mat-icon *ngIf="programmeToUpdate.id != programme.id" class="material-icons"
+                        (click)="setToUpdate(programme)">create</span>
+                </button>
+
             </td>
         </ng-container>
 
         <!-- Supprimer -->
         <ng-container matColumnDef="deletion">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let program">
-                <button mat-raised-button color="warn" type="button" class="deleteProgram"
-                    (click)="onDelete(program.id)">Delete</button>
+            <th mat-header-cell *matHeaderCellDef>Supprimer</th>
+            <td mat-cell *matCellDef="let programme">
+                <button mat-button>
+                    <span mat-icon type="button" class="material-icons" (click)="onDelete(programme.id)">delete</span>
+                </button>
             </td>
         </ng-container>
 

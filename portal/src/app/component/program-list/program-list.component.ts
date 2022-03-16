@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { MusculationService } from 'src/app/service/musculation.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { Programme } from 'src/app/class/programme';
@@ -8,32 +16,33 @@ import { Pagination } from 'src/app/class/pagination';
 @Component({
   selector: 'app-program-list',
   templateUrl: './program-list.component.html',
-  styleUrls: ['./program-list.component.css']
+  styleUrls: ['./program-list.component.css'],
 })
 export class ProgramListComponent implements OnChanges {
-
-  
   displayedColumns: string[] = ['dateCreation', 'nom', 'update', 'deletion'];
   dataSource: MatTableDataSource<Programme> = new MatTableDataSource();
-  
+  indexToUpdate: number = 0;
+  programmeToUpdate: Programme = new Programme();
+  nomUpdated: string = '';
+
   // MatPaginator Inputs
-  @Input() pagination: Pagination = new Pagination(0, 0, [], 0, "");
+  @Input() pagination: Pagination = new Pagination(0, 0, [], 0, '');
   @Input() programmes: Programme[] = [];
-  
+
   @Output() paginationChange = new EventEmitter<Pagination>();
-  
-  @Output("programmeGetPage") programmeGetPage: EventEmitter<Programme> = new EventEmitter();
-  @Output("programmeOnUpdate") programmeOnUpdate: EventEmitter<Programme> = new EventEmitter();
-  
+
+  @Output('programmeGetPage') programmeGetPage: EventEmitter<Pagination> =
+    new EventEmitter();
+  @Output('programmeOnUpdate') programmeOnUpdate: EventEmitter<Programme> =
+    new EventEmitter();
+
   // MatPaginator Output
   pageEvent: PageEvent = new PageEvent();
 
-
-
-  constructor(private musculationService: MusculationService) { }
+  constructor(private musculationService: MusculationService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changeees', changes)
+    console.log('changeees', changes);
     if (changes['programmeCount']) {
       this.pagination.itemCount = changes['programmeCount'].currentValue;
     }
@@ -63,19 +72,40 @@ export class ProgramListComponent implements OnChanges {
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     if (setPageSizeOptionsInput) {
-      this.pagination.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+      this.pagination.pageSizeOptions = setPageSizeOptionsInput
+        .split(',')
+        .map((str) => +str);
       this.paginationChange.emit(this.pagination);
     }
   }
 
-  onUpdate(programme: Programme) {
-    this.programmeOnUpdate.emit(programme);
+  setToUpdate(programme: Programme) {
+    this.programmeToUpdate = programme;
+    this.nomUpdated = programme.nom;
+  }
+
+  onUpdate() {
+    console.log('child update event', this.nomUpdated);
+    this.programmeToUpdate.nom = this.nomUpdated;
+    this.programmeOnUpdate.emit(this.programmeToUpdate);
+    this.programmeToUpdate = new Programme();
+    this.nomUpdated = '';
+  }
+
+  cancelUpdate() {
+    this.programmeToUpdate = new Programme();
+    this.nomUpdated = '';
   }
 
   onDelete(idProgramme: number) {
     this.musculationService.deleteProgramme(idProgramme).subscribe(() => {
-      this.musculationService.getProgrammes(this.pageEvent.pageIndex, this.pageEvent.pageSize, this.pagination.sort)
-        .subscribe(response => {
+      this.musculationService
+        .getProgrammes(
+          this.pageEvent.pageIndex,
+          this.pageEvent.pageSize,
+          this.pagination.sort
+        )
+        .subscribe((response) => {
           this.dataSource = new MatTableDataSource(response);
           this.pagination.itemCount = response.length;
         });
@@ -84,11 +114,14 @@ export class ProgramListComponent implements OnChanges {
 
   getPage(event: PageEvent) {
     // Creer une class page pour emit les infos plus
-  
-    this.pagination.currentPage = this.pageEvent.pageIndex;
-    this.pagination.pageSize = this.pageEvent.pageSize;
-    this.paginationChange.emit(this.pagination);
-
-    this.programmeGetPage.emit();
+    let pagination: Pagination = new Pagination(
+      event.length,
+      event.pageSize,
+      this.pagination.pageSizeOptions,
+      event.pageIndex,
+      this.pagination.sort
+    );
+    this.pagination = pagination;
+    this.programmeGetPage.emit(pagination);
   }
 }

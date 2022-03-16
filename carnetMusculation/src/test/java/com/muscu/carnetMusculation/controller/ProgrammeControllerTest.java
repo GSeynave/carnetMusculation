@@ -2,6 +2,7 @@ package com.muscu.carnetMusculation.controller;
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -89,7 +90,7 @@ public class ProgrammeControllerTest {
 	public Programme programmeBuilder() {
 		Programme programme = new Programme();
 		programme.setNom("programme"+(int)Math.floor(Math.random()*(100-1+1)+1));
-		programme.setDateCreation(OffsetDateTime.now());
+		programme.setDateCreation(new Date(System.currentTimeMillis()));
 		return programme;
 	}
 }

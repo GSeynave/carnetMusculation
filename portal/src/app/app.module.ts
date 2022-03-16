@@ -33,6 +33,7 @@ import { SeancesListFromProgrammeComponent } from './component/seances-list-from
 import { TableSerieComponent } from './component/table-serie/table-serie.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatSelectModule,
     MatExpansionModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

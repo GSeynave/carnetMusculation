@@ -1,6 +1,6 @@
 <h1>Programmes</h1>
 <div class="programs">
     <app-program-form (programmeOnSubmit)="onSubmit($event)"></app-program-form>
-    <app-program-list (programmeOnUpdate)="onUpdate($event)" (programmeGetPage)="getPage()" [(pagination)]="pagination"
+    <app-program-list (programmeOnUpdate)="onSubmit($event)" (programmeGetPage)="getPage($event)" [(pagination)]="pagination"
         [programmes]="programmes"></app-program-list>
 </div>
