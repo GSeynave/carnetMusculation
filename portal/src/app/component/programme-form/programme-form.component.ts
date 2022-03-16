@@ -4,11 +4,11 @@ import { Programme } from 'src/app/class/programme';
 import { Seance } from 'src/app/class/seance';
 
 @Component({
-  selector: 'app-program-form',
-  templateUrl: './program-form.component.html',
-  styleUrls: ['./program-form.component.css']
+  selector: 'app-programme-form',
+  templateUrl: './programme-form.component.html',
+  styleUrls: ['./programme-form.component.css']
 })
-export class ProgramFormComponent implements OnInit {
+export class ProgrammeFormComponent implements OnInit {
 
   @Output("programmeOnSubmit") programmeOnSubmit: EventEmitter<Programme> = new EventEmitter();
 

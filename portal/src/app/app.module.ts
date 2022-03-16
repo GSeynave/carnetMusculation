@@ -6,13 +6,13 @@ import { AppComponent } from './app.component';
 import { ExerciceFormComponent } from './component/exercice-form/exercice-form.component';
 import { ExerciceListComponent } from './component/exercice-list/exercice-list.component';
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
-import { ProgramFormComponent } from './component/program-form/program-form.component';
-import { ProgramListComponent } from './component/program-list/program-list.component';
+import { ProgrammeFormComponent } from './component/programme-form/programme-form.component';
+import { ProgrammeListComponent } from './component/programme-list/programme-list.component';
 import { SeanceFormComponent } from './component/seance-form/seance-form.component';
 import { SeanceListComponent } from './component/seance-list/seance-list.component';
 import { SeanceComponent } from './page/seance/seance.component';
 import { ExerciceComponent } from './page/exercice/exercice.component';
-import { ProgramComponent } from './page/program/program.component';
+import { ProgrammeComponent } from './page/programme/programme.component';
 import { HomeComponent } from './page/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -41,13 +41,13 @@ import { FormsModule } from '@angular/forms';
     ExerciceFormComponent,
     ExerciceListComponent,
     NavigationBarComponent,
-    ProgramFormComponent,
-    ProgramListComponent,
+    ProgrammeFormComponent,
+    ProgrammeListComponent,
     SeanceFormComponent,
     SeanceListComponent,
     SeanceComponent,
     ExerciceComponent,
-    ProgramComponent,
+    ProgrammeComponent,
     HomeComponent,
     GeneralComponent,
     HeaderComponent,

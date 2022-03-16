@@ -14,11 +14,11 @@ import { PageEvent } from '@angular/material/paginator';
 import { Pagination } from 'src/app/class/pagination';
 
 @Component({
-  selector: 'app-program-list',
-  templateUrl: './program-list.component.html',
-  styleUrls: ['./program-list.component.css'],
+  selector: 'app-programme-list',
+  templateUrl: './programme-list.component.html',
+  styleUrls: ['./programme-list.component.css'],
 })
-export class ProgramListComponent implements OnChanges {
+export class ProgrammeListComponent implements OnChanges {
   displayedColumns: string[] = ['dateCreation', 'nom', 'update', 'deletion'];
   dataSource: MatTableDataSource<Programme> = new MatTableDataSource();
   indexToUpdate: number = 0;

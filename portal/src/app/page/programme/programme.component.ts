@@ -1,20 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Pagination } from 'src/app/class/pagination';
 import { Programme } from 'src/app/class/programme';
-import { ProgramFormComponent } from 'src/app/component/program-form/program-form.component';
+import { ProgrammeFormComponent } from 'src/app/component/programme-form/programme-form.component';
 import { MusculationService } from 'src/app/service/musculation.service';
 
 @Component({
-  selector: 'app-program',
-  templateUrl: './program.component.html',
-  styleUrls: ['./program.component.css'],
+  selector: 'app-programme',
+  templateUrl: './programme.component.html',
+  styleUrls: ['./programme.component.css'],
 })
-export class ProgramComponent implements OnInit {
+export class ProgrammeComponent implements OnInit {
   programmes: Programme[] = [];
   pagination: Pagination = new Pagination(0, 10, [5, 10, 20], 0, 'nom');
 
-  @ViewChild(ProgramFormComponent) programmeForm: ProgramFormComponent =
-    new ProgramFormComponent();
+  @ViewChild(ProgrammeFormComponent) programmeForm: ProgrammeFormComponent =
+    new ProgrammeFormComponent();
 
   constructor(private musculationService: MusculationService) {
     this.pagination.sort = 'nom';
