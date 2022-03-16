@@ -33,6 +33,9 @@ public class Entrainement {
 	@Column(name = "type")
 	private Enum<EntrainementType> type;
 
+	@Column(name="nom", length=50, nullable=false, unique=false)
+	private String nom;
+	
 	@ManyToOne
 	@JoinColumn(name="programme_id", nullable=false)
 	private Programme programme;
@@ -70,12 +73,12 @@ public class Entrainement {
 		this.type = type;
 	}
 
-	public Set<Seance> getSeances() {
-		return seances;
+	public String getNom() {
+		return nom;
 	}
 
-	public void setSeances(Set<Seance> seances) {
-		this.seances = seances;
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 
 	public Programme getProgramme() {
@@ -84,6 +87,14 @@ public class Entrainement {
 
 	public void setProgramme(Programme programme) {
 		this.programme = programme;
+	}
+
+	public Set<Seance> getSeances() {
+		return seances;
+	}
+
+	public void setSeances(Set<Seance> seances) {
+		this.seances = seances;
 	}
 
 	public Set<Serie> getSeries() {
@@ -101,4 +112,6 @@ public class Entrainement {
 	public void setDetails(Set<DetailsExercice> details) {
 		this.details = details;
 	}
+
+
 }

@@ -1,0 +1,7 @@
+mat-table {
+  width: auto;
+}
+th {
+  width: 200px;
+  text-align: center;
+}

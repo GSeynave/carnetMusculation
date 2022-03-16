@@ -6,6 +6,7 @@ public class EntrainementAPI {
 	
 	private Long id;
 	private String dateCreation;
+	private String nom;
 	private Enum<EntrainementType> type;
 	private Long seanceIds;
 	private Long exerciceIds;
@@ -20,6 +21,12 @@ public class EntrainementAPI {
 	}
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 	public Enum<EntrainementType> getType() {
 		return type;

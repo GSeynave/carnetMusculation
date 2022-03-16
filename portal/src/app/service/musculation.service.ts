@@ -123,7 +123,7 @@ export class MusculationService implements ErrorHandler {
    * @returns
    */
   getEntrainements(programmeId: number): Observable<Entrainement[]> {
-    return this.http.get<Entrainement[]>(this.url + `entrainements/${programmeId}`)
+    return this.http.get<Entrainement[]>(this.url + `entrainements/programme/${programmeId}`)
       .pipe(
         catchError(err => {
           console.log('Error while retrieving the list of programmes');
