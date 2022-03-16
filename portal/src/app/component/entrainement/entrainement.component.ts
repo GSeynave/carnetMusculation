@@ -13,7 +13,7 @@ export class EntrainementComponent implements OnInit, OnChanges {
   entrainementListe: Entrainement[] = [];
   @Input() programmeId: number = -1;
 
-  displayedColumns: string[] = ['dateCreation', 'nom', "type"];
+  displayedColumns: string[] = ['dateCreation', 'nom', "type", "start"];
   dataSource: MatTableDataSource<Entrainement> = new MatTableDataSource();
 
   constructor(private musculationService: MusculationService) { }
