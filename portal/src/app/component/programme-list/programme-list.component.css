@@ -1,21 +1,15 @@
-mat-card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
 mat-table {
-    width: auto;
+  width: auto;
 }
-th{
-    width: 200px;
-    text-align: center;
+th {
+  width: 200px;
+  text-align: center;
 }
 
-.pagination{
-    display: flex;
-    width: 6em;
-    justify-content: space-between;
-    margin-left: auto;
-    margin-right: auto;
+.pagination {
+  display: flex;
+  width: 6em;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
 }

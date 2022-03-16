@@ -1,6 +1,31 @@
 <h1>Programmes</h1>
 <div class="programs">
-    <app-programme-form (programmeOnSubmit)="onSubmit($event)"></app-programme-form>
-    <app-programme-list (programmeOnUpdate)="onSubmit($event)" (programmeGetPage)="getPage($event)" [(pagination)]="pagination"
-        [programmes]="programmes"></app-programme-list>
+  <button mat-button *ngIf="createHidden" (click)="hideCreateForm()">
+    Créer un programme
+  </button>
+
+  <app-programme-form
+    *ngIf="!createHidden"
+    (programmeOnSubmit)="onSubmit($event)"
+    (hideCreateForm)="hideCreateForm()"
+  ></app-programme-form>
+
+  <mat-accordion>
+    <mat-expansion-panel [(expanded)]="panelOpenState"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title> Vos programmes </mat-panel-title>
+        <mat-panel-description>
+          La liste de vos programmes enregistrés
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-programme-list
+        (programmeOnUpdate)="onSubmit($event)"
+        (programmeGetPage)="getPage($event)"
+        [(pagination)]="pagination"
+        [programmes]="programmes"
+        (onProgrammeSelect)="onProgrammeSelect($event)"
+      ></app-programme-list>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

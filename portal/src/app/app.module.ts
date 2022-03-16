@@ -34,6 +34,7 @@ import { TableSerieComponent } from './component/table-serie/table-serie.compone
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
+import { EntrainementComponent } from './component/entrainement/entrainement.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { FormsModule } from '@angular/forms';
     ExercicePanelComponent,
     StringListComponent,
     SeancesListFromProgrammeComponent,
-    TableSerieComponent
+    TableSerieComponent,
+    EntrainementComponent
   ],
   imports: [
     BrowserModule,

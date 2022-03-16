@@ -3,7 +3,6 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnInit,
   Output,
   SimpleChanges,
 } from '@angular/core';
@@ -35,11 +34,13 @@ export class ProgrammeListComponent implements OnChanges {
     new EventEmitter();
   @Output('programmeOnUpdate') programmeOnUpdate: EventEmitter<Programme> =
     new EventEmitter();
+  @Output('onProgrammeSelect') programmeSelect: EventEmitter<number> =
+    new EventEmitter();
 
   // MatPaginator Output
   pageEvent: PageEvent = new PageEvent();
 
-  constructor(private musculationService: MusculationService) {}
+  constructor(private musculationService: MusculationService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log('changeees', changes);
@@ -123,5 +124,9 @@ export class ProgrammeListComponent implements OnChanges {
     );
     this.pagination = pagination;
     this.programmeGetPage.emit(pagination);
+  }
+
+  onProgrammeSelect(programmeId: number): void {
+    this.programmeSelect.emit(programmeId);
   }
 }

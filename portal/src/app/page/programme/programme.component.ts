@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { Pagination } from 'src/app/class/pagination';
 import { Programme } from 'src/app/class/programme';
 import { ProgrammeFormComponent } from 'src/app/component/programme-form/programme-form.component';
@@ -12,7 +12,11 @@ import { MusculationService } from 'src/app/service/musculation.service';
 export class ProgrammeComponent implements OnInit {
   programmes: Programme[] = [];
   pagination: Pagination = new Pagination(0, 10, [5, 10, 20], 0, 'nom');
+  createHidden: boolean = true;
+  panelOpenState: boolean = true;
 
+  @Output('onProgrammeSelect') programmeSelect: EventEmitter<number> =
+    new EventEmitter();
   @ViewChild(ProgrammeFormComponent) programmeForm: ProgrammeFormComponent =
     new ProgrammeFormComponent();
 
@@ -32,6 +36,22 @@ export class ProgrammeComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+
+  hideCreateForm() {
+    console.log(this.createHidden);
+    if (this.createHidden) {
+      this.createHidden = false;
+    }
+    else {
+      this.createHidden = true;
+    }
+  }
+
+  onProgrammeSelect(programmeId: number): void {
+    this.programmeSelect.emit(programmeId);
+    this.panelOpenState = false;
+  }
 
   onSubmit(programme: Programme) {
     console.log('on submit', programme);
