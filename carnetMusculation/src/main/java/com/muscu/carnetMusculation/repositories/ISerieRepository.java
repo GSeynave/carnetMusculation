@@ -9,5 +9,5 @@ import com.muscu.carnetMusculation.entities.Serie;
 public interface ISerieRepository extends CrudRepository<Serie, Long> {
 
 	List<Serie> findByExerciceId(Long id);
-
+	List<Serie> findBySeanceIdAndNumeroSerie(Long seanceId, String numeroSerie);
 }

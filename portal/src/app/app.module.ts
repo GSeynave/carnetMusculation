@@ -8,9 +8,6 @@ import { ExerciceListComponent } from './component/exercice-list/exercice-list.c
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
 import { ProgrammeFormComponent } from './component/programme-form/programme-form.component';
 import { ProgrammeListComponent } from './component/programme-list/programme-list.component';
-import { SeanceFormComponent } from './component/seance-form/seance-form.component';
-import { SeanceListComponent } from './component/seance-list/seance-list.component';
-import { SeanceComponent } from './page/seance/seance.component';
 import { ExerciceComponent } from './page/exercice/exercice.component';
 import { ProgrammeComponent } from './page/programme/programme.component';
 import { HomeComponent } from './page/home/home.component';
@@ -25,16 +22,19 @@ import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { GeneralComponent } from './page/general/general.component';
-import { HeaderComponent } from './component/header/header.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ExercicePanelComponent } from './component/exercice-panel/exercice-panel.component';
-import { StringListComponent } from './component/string-list/string-list.component';
-import { SeancesListFromProgrammeComponent } from './component/seances-list-from-programme/seances-list-from-programme.component';
-import { TableSerieComponent } from './component/table-serie/table-serie.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
-import { EntrainementComponent } from './component/entrainement/entrainement.component';
+import { EntrainementListeComponent } from './component/entrainement-liste/entrainement-liste.component';
+import { EntrainementStartComponent } from './component/entrainement-start/entrainement-start.component';
+import { CountPipe } from './pipe/count.pipe';
+import { SerieFormComponent } from './component/serie-form/serie-form.component';
+import { EntrainementFormComponent } from './component/entrainement-form/entrainement-form.component';
+import { SeanceComponent } from './component/seance/seance.component';
+import { EntrainementComponent } from './page/entrainement/entrainement.component';
+import { SeanceStartComponent } from './component/seance-start/seance-start.component';
+import { SeanceHistoriqueComponent } from './component/seance-historique/seance-historique.component';
 
 @NgModule({
   declarations: [
@@ -44,19 +44,19 @@ import { EntrainementComponent } from './component/entrainement/entrainement.com
     NavigationBarComponent,
     ProgrammeFormComponent,
     ProgrammeListComponent,
-    SeanceFormComponent,
-    SeanceListComponent,
-    SeanceComponent,
     ExerciceComponent,
     ProgrammeComponent,
     HomeComponent,
     GeneralComponent,
-    HeaderComponent,
-    ExercicePanelComponent,
-    StringListComponent,
-    SeancesListFromProgrammeComponent,
-    TableSerieComponent,
-    EntrainementComponent
+    EntrainementListeComponent,
+    EntrainementStartComponent,
+    CountPipe,
+    SerieFormComponent,
+    EntrainementFormComponent,
+    SeanceComponent,
+    EntrainementComponent,
+    SeanceStartComponent,
+    SeanceHistoriqueComponent
   ],
   imports: [
     BrowserModule,

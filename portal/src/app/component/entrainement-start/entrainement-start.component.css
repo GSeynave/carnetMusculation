@@ -1,0 +1,12 @@
+.serieContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.serieItem{
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}

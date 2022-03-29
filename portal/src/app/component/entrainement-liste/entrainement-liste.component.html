@@ -1,0 +1,50 @@
+<mat-form-field>
+  <mat-label> Programme : </mat-label>
+  <mat-select [ngModel]="selectedProgrammeIdEvent" (ngModelChange)="onProgrammeSelect($event)" name="programme">
+    <mat-option *ngFor="let programme of programmeListe" [value]="programme.id">
+      {{ programme.nom }}S
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-table *ngIf="dataSource.data.length > 0" [dataSource]="dataSource" mat-sort class="entrainements">
+  <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Date de création -->
+  <ng-container matColumnDef="dateCreation">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date création</th>
+    <td mat-cell *matCellDef="let entrainement">
+      {{ entrainement.dateCreation | date }}
+    </td>
+  </ng-container>
+
+  <!-- Nom -->
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
+    <td mat-cell *matCellDef="let entrainement">
+      {{ entrainement.nom }}
+    </td>
+  </ng-container>
+
+  <!-- Type -->
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+    <td mat-cell *matCellDef="let entrainement">
+      {{ entrainement.type }}
+    </td>
+  </ng-container>
+
+  <!-- Start -->
+  <ng-container matColumnDef="start">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      Démarrer l'entrainement
+    </th>
+    <td mat-cell *matCellDef="let entrainement">
+      <button mat-button (click)="onEntrainementSelect(entrainement.id)">
+        <span mat-icon class="material-icons">play_arrow</span>
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</mat-table>

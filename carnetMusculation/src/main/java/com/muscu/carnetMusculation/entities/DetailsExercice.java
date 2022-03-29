@@ -27,7 +27,7 @@ public class DetailsExercice {
 	Exercice exercice;
 	
 	@Column(name = "nb_serie", nullable = false)
-	private String nbSerie;
+	private long nbSerie;
 
 	public Long getId() {
 		return id;
@@ -53,11 +53,11 @@ public class DetailsExercice {
 		this.exercice = exercice;
 	}
 
-	public String getNbSerie() {
+	public long getNbSerie() {
 		return nbSerie;
 	}
 
-	public void setNbSerie(String nbSerie) {
+	public void setNbSerie(long nbSerie) {
 		this.nbSerie = nbSerie;
 	}
 

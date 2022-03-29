@@ -1,0 +1,23 @@
+<mat-card class="serieContainer">
+  <div class="serieItem">
+    <label>
+      Rep :
+      <input type="text" [(ngModel)]="nbRep">
+    </label>
+  </div>
+  <div class="serieItem">
+    <label>
+      Poids :
+      <input type="text" [(ngModel)]="poids">
+    </label>
+  </div>
+  <div class="serieItem">
+    <label>
+      Recup : {{ recup }}
+      <!-- Ajouter une icone chrono pour lancer automatiquement un chrono avec la recup -->
+    </label>
+  </div>
+  <div class="serieItem">
+    séance précédente ..
+  </div>
+</mat-card>

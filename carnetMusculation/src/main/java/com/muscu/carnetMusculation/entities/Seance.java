@@ -1,7 +1,7 @@
 package com.muscu.carnetMusculation.entities;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.muscu.carnetMusculation.utils.SeanceState;
 
 
 @Entity 
@@ -28,12 +30,15 @@ public class Seance {
 	@Temporal(TemporalType.DATE)
 	private Date dateEntrainement;
 
+	@Column(name="seance_state")
+	private SeanceState state;
+	
 	@ManyToOne
 	@JoinColumn(name="entrainement_id", nullable=false)
 	private Entrainement entrainement;
 
 	@OneToMany(mappedBy = "seance")
-	private Set<Serie> series;
+	private List<Serie> series;
 
 	public Long getId() {
 		return id;
@@ -51,19 +56,19 @@ public class Seance {
 		this.dateEntrainement = dateEntrainement;
 	}
 
+	public SeanceState getState() {
+		return state;
+	}
+
+	public void setState(SeanceState state) {
+		this.state = state;
+	}
+
 	public Entrainement getEntrainement() {
 		return entrainement;
 	}
 
 	public void setEntrainement(Entrainement entrainement) {
 		this.entrainement = entrainement;
-	}
-
-	public Set<Serie> getSeries() {
-		return series;
-	}
-
-	public void setSeries(Set<Serie> series) {
-		this.series = series;
 	}
 }

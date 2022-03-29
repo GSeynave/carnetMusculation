@@ -1,10 +1,14 @@
 package com.muscu.carnetMusculation.dto;
 
+import java.util.Date;
 import java.util.List;
+
+import com.muscu.carnetMusculation.utils.SeanceState;
 
 public class SeanceAPI {
 	private Long id;
-	private String dateEntrainement;
+	private Date dateEntrainement;
+	private SeanceState state;
 	private Long entrainementId;
 	private List<Long> series;
 	public Long getId() {
@@ -13,11 +17,17 @@ public class SeanceAPI {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getDateEntrainement() {
+	public Date getDateEntrainement() {
 		return dateEntrainement;
 	}
-	public void setDateEntrainement(String dateEntrainement) {
-		this.dateEntrainement = dateEntrainement;
+	public void setDateEntrainement(Date date) {
+		this.dateEntrainement = date;
+	}
+	public SeanceState getstate() {
+		return state;
+	}
+	public void setSeanceState(SeanceState state) {
+		this.state = state;
 	}
 	public Long getEntrainementId() {
 		return entrainementId;

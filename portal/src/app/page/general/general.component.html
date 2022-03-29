@@ -1,9 +1,4 @@
 <mat-card>
-  <app-programme
-    (onProgrammeSelect)="onProgrammeSelect($event)"
-  ></app-programme>
-
-  <app-entrainement *ngIf="programmeId !== -1" [programmeId]="programmeId">
-    test
-  </app-entrainement> </mat-card
->>
+  <mat-card-title>Générale</mat-card-title>
+  <app-programme></app-programme>
+</mat-card>

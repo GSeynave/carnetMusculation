@@ -1,7 +1,6 @@
 package com.muscu.carnetMusculation.controllers;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -10,19 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.muscu.carnetMusculation.dto.MapperAPI;
+import com.muscu.carnetMusculation.dto.DetailsExerciceAPI;
 import com.muscu.carnetMusculation.dto.ExerciceAPI;
+import com.muscu.carnetMusculation.dto.MapperAPI;
+import com.muscu.carnetMusculation.entities.DetailsExercice;
 import com.muscu.carnetMusculation.entities.Exercice;
-import com.muscu.carnetMusculation.services.impl.ExerciceServiceImpl;
+import com.muscu.carnetMusculation.services.IExerciceService;
 
 
 @RestController
@@ -30,4 +28,32 @@ import com.muscu.carnetMusculation.services.impl.ExerciceServiceImpl;
 @RequestMapping("/exercices")
 public class ExerciceController {
 
+	Logger LOGGER = LoggerFactory.getLogger(ExerciceController.class);
+	
+	@Autowired
+	private IExerciceService exerciceService;
+	@Autowired
+	private MapperAPI mapperApi;
+	
+	@GetMapping("/entrainement/{entrainementId}")
+	public @ResponseBody ResponseEntity<List<DetailsExerciceAPI>> findByProgrammeId(@PathVariable(name = "entrainementId") Long entrainementId) {
+		List<DetailsExercice> details = this.exerciceService.findByEntrainementId(entrainementId);
+
+		return new ResponseEntity<List<DetailsExerciceAPI>>(
+				details.stream()
+					.map(mapperApi::convertToDto)
+					.collect(Collectors.toList()),
+				HttpStatus.OK);
+	}
+	
+
+	@GetMapping("")
+	public @ResponseBody ResponseEntity<List<ExerciceAPI>> findAll() {
+		List<Exercice> exercices = this.exerciceService.findAll();
+		return new ResponseEntity<List<ExerciceAPI>>(
+				exercices.stream()
+					.map(mapperApi::convertToDto)
+					.collect(Collectors.toList()),
+				HttpStatus.OK);
+	}
 }

@@ -5,8 +5,11 @@ import { Programme } from '../class/programme';
 import { catchError, } from 'rxjs/operators';
 import { Exercice } from '../class/exercice';
 import { Seance } from '../class/seance';
-import { SerieLine } from '../component/table-serie/table-serie.component';
 import { Entrainement } from '../class/entrainement';
+import { detailExercice } from '../class/detail-exercice';
+import { EntrainementCreer } from '../class/entrainement-creer';
+import { SeanceInformationInit } from '../class/seance-information-init';
+import { State } from '../class/state';
 
 @Injectable({
   providedIn: 'root'
@@ -30,15 +33,15 @@ export class MusculationService implements ErrorHandler {
   getExercices(): Observable<Exercice[]> {
     return this.http.get<Exercice[]>(this.url + "exercices").pipe(
       catchError(err => {
-        console.log('Error while retrieving the list of exercices');
+        console.error('Error while retrieving the list of exercices');
         return throwError(err);
       })
     )
   }
-  getExercicesBySeanceId(seanceId: number): Observable<Exercice[]> {
-    return this.http.get<Exercice[]>(this.url + `exercices/seance/${seanceId}`).pipe(
+  getExercicesByEntrainementId(entrainementId: number): Observable<detailExercice[]> {
+    return this.http.get<detailExercice[]>(this.url + `exercices/entrainement/${entrainementId}`).pipe(
       catchError(err => {
-        console.log('Error while retrieving the list of exercices');
+        console.error('Error while retrieving the list of exercices');
         return throwError(err);
       })
     )
@@ -53,7 +56,7 @@ export class MusculationService implements ErrorHandler {
     return this.http.get<Seance[]>(this.url + "seances")
       .pipe(
         catchError(err => {
-          console.log('Error while retrieving the list of seances');
+          console.error('Error while retrieving the list of seances');
           return throwError(err);
         })
       )
@@ -61,7 +64,7 @@ export class MusculationService implements ErrorHandler {
   getSeancesByProgramme(programmeId: number): Observable<Seance[]> {
     return this.http.get<Seance[]>(this.url + `seances/programme/${programmeId}`).pipe(
       catchError(err => {
-        console.log('Error while retrieving the list of seances');
+        console.error('Error while retrieving the list of seances');
         return throwError(err);
       })
     )
@@ -71,11 +74,20 @@ export class MusculationService implements ErrorHandler {
    * Program's
    * @returns
    */
-  getProgrammes(page: number, pageSize: number, sort: string): Observable<Programme[]> {
+  getProgrammesPage(page: number, pageSize: number, sort: string): Observable<Programme[]> {
     return this.http.get<Programme[]>(this.url + `programmes?page=${page}&size=${pageSize}&sort=${sort}`,)
       .pipe(
         catchError(err => {
-          console.log('Error while retrieving the list of programmes');
+          console.error('Error while retrieving the list of programmes');
+          return throwError(err);
+        })
+      )
+  }
+  getProgrammes(): Observable<Programme[]> {
+    return this.http.get<Programme[]>(this.url + "programmes")
+      .pipe(
+        catchError(err => {
+          console.error('Error while retrieving the list of programmes');
           return throwError(err);
         })
       )
@@ -85,7 +97,7 @@ export class MusculationService implements ErrorHandler {
     return this.http.post<Programme>(this.url + "programmes", program)
       .pipe(
         catchError(err => {
-          console.log('Error while saving program', err);
+          console.error('Error while saving program', err);
           return throwError(err);
         })
       );
@@ -95,7 +107,7 @@ export class MusculationService implements ErrorHandler {
     return this.http.get<number>(this.url + "programmes/count")
       .pipe(
         catchError(err => {
-          console.log('Error while retrieving the list of programmes');
+          console.error('Error while retrieving the list of programmes');
           return throwError(err);
         })
       )
@@ -119,60 +131,57 @@ export class MusculationService implements ErrorHandler {
   }
 
   /**
-   * Program's
+   * Entirnaments
    * @returns
    */
   getEntrainements(programmeId: number): Observable<Entrainement[]> {
     return this.http.get<Entrainement[]>(this.url + `entrainements/programme/${programmeId}`)
       .pipe(
         catchError(err => {
-          console.log('Error while retrieving the list of programmes');
+          console.error('Error while retrieving the list of programmes');
           return throwError(err);
         })
       )
   }
 
-  /**
-  * Serie's
-  * @returns
-  */
-  getSeriesByExerciceId(exerciceId: number): Observable<SerieLine[]> {
-    return this.http.get<SerieLine[]>(this.url + `series/exercice/${exerciceId}`)
+  getEntrainementById(entrainementId: number): Observable<Entrainement> {
+    return this.http.get<Entrainement>(this.url + `entrainements/${entrainementId}`)
       .pipe(
         catchError(err => {
-          console.log('Error while retrieving the list of programmes');
+          console.error('Error while retrieving the list of programmes');
           return throwError(err);
         })
       )
   }
 
-
-
-  setSeance(seance: Seance): Observable<Seance> {
-    return this.http.post<Seance>(this.url + "seances", seance)
+  getEntrainementByProgrammeId(programmeId: number): Observable<Entrainement[]> {
+    return this.http.get<Entrainement[]>(this.url + `entrainements/programme/${programmeId}`)
       .pipe(
         catchError(err => {
-          console.log('Error while saving seance', err);
+          console.error('Error while retrieving the list of programmes');
           return throwError(err);
         })
-      );
+      )
+  }
+  setEntrainement(entrainementCreer: EntrainementCreer): Observable<EntrainementCreer> {
+    return this.http.post<EntrainementCreer>(this.url + "entrainements", entrainementCreer)
+    .pipe(
+      catchError(err => {
+        console.error('Error while saving entrainement', err);
+        return throwError(err);
+      })
+    );
   }
 
-  deleteSeance(idSeance: number): Observable<Seance> {
-    const headers = new HttpHeaders({
-      'content-type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    });
-    const options = {
-      headers: headers,
-      responseType: 'Program'
-    };
-    return this.http.delete<Seance>(this.url + "seances/" + idSeance,)
+
+  getDetailExercice(entrainementId: number, state: State): Observable<SeanceInformationInit> {
+    return this.http.get<SeanceInformationInit>(this.url + `seances/entrainement/${entrainementId}/${state}`)
       .pipe(
         catchError(err => {
-          console.log('Error while deleting seance', err);
+          console.error('Error while retrieving the list of programmes');
           return throwError(err);
         })
-      );
+      )
   }
+
 }

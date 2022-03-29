@@ -19,7 +19,7 @@ public class Serie {
 	private Long id;
 	
 	@Column(name = "numero_serie", nullable = false)
-	private String numeroSérie;
+	private String numeroSerie;
 	
 	@Column(name="rep", length=5, nullable=false, unique=false)
 	private String rep;
@@ -50,12 +50,12 @@ public class Serie {
 		this.id = id;
 	}
 
-	public String getNumeroSérie() {
-		return numeroSérie;
+	public String getNumeroSerie() {
+		return numeroSerie;
 	}
 
-	public void setNumeroSérie(String numeroSérie) {
-		this.numeroSérie = numeroSérie;
+	public void setNumeroSerie(String numeroSérie) {
+		this.numeroSerie = numeroSérie;
 	}
 
 	public String getRep() {

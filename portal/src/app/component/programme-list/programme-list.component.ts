@@ -43,7 +43,6 @@ export class ProgrammeListComponent implements OnChanges {
   constructor(private musculationService: MusculationService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changeees', changes);
     if (changes['programmeCount']) {
       this.pagination.itemCount = changes['programmeCount'].currentValue;
     }
@@ -101,7 +100,7 @@ export class ProgrammeListComponent implements OnChanges {
   onDelete(idProgramme: number) {
     this.musculationService.deleteProgramme(idProgramme).subscribe(() => {
       this.musculationService
-        .getProgrammes(
+        .getProgrammesPage(
           this.pageEvent.pageIndex,
           this.pageEvent.pageSize,
           this.pagination.sort

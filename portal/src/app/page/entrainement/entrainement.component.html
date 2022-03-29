@@ -1,0 +1,26 @@
+<mat-card>
+  <div class="container">
+    <button mat-stroked-button (click)="displayListe()">Vos entrainements</button>
+    <button mat-stroked-button (click)="displayCreer()">Creer un
+      entrainement</button>
+
+  </div>
+
+  <!-- Création d'un entrainement -->
+  <app-entrainement-form *ngIf="isCreerDisplay" [programmeListe]="programmeListe" [exerciceListe]="exerciceListe">
+  </app-entrainement-form>
+
+  <!-- Liste des entrainements lié à un programme -->
+  <app-entrainement-liste *ngIf="isListDisplay" [entrainementListe]="entrainementListe"
+    [programmeListe]="programmeListe" (selectedProgrammeIdEvent)="onProgrammeSelect($event)"
+    (onEntrainementSelect)="onEntrainementSelect($event)">
+  </app-entrainement-liste>
+
+  <!-- Démarrer un entrainement -->
+  <div *ngIf="entrainementSelected.id != -1">
+    <button mat-button (click)="retour()">
+      <span mat-icon class="material-icons">arrow_back</span>
+    </button>
+    <app-entrainement-start [entrainementSelected]="entrainementSelected"></app-entrainement-start>
+  </div>
+</mat-card>

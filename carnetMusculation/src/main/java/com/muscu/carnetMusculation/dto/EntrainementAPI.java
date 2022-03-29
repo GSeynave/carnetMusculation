@@ -1,15 +1,20 @@
 package com.muscu.carnetMusculation.dto;
 
+import java.util.List;
+
 import com.muscu.carnetMusculation.utils.EntrainementType;
 
 public class EntrainementAPI {
 	
 	private Long id;
 	private String dateCreation;
-	private String nom;
 	private Enum<EntrainementType> type;
-	private Long seanceIds;
-	private Long exerciceIds;
+	private String nom;
+	private Long programmeId;
+	private List<Long> seanceIds;
+	private List<Long> serieIds;
+	private List<Long> details;
+	
 	public Long getId() {
 		return id;
 	}
@@ -22,29 +27,42 @@ public class EntrainementAPI {
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
 	public Enum<EntrainementType> getType() {
 		return type;
 	}
 	public void setType(Enum<EntrainementType> type) {
 		this.type = type;
 	}
-	public Long getSeanceIds() {
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+	public Long getProgrammeId() {
+		return programmeId;
+	}
+	public void setProgrammeId(Long programmeId) {
+		this.programmeId = programmeId;
+	}
+	public List<Long> getSeanceIds() {
 		return seanceIds;
 	}
-	public void setSeanceIds(Long seanceIds) {
-		this.seanceIds = seanceIds;
+	public void setSeanceIds(List<Long> seanceId) {
+		this.seanceIds = seanceId;
 	}
-	public Long getExerciceIds() {
-		return exerciceIds;
+	public List<Long> getSerieIds() {
+		return serieIds;
 	}
-	public void setExerciceIds(Long exerciceIds) {
-		this.exerciceIds = exerciceIds;
+	public void setSerieIds(List<Long> serieIds) {
+		this.serieIds = serieIds;
 	}
+	public List<Long> getDetails() {
+		return details;
+	}
+	public void setDetails(List<Long> details) {
+		this.details = details;
+	}
+	
 
 }

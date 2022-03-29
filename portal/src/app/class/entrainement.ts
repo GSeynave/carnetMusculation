@@ -1,9 +1,9 @@
 import { EntrainementType } from "./entrainement-type";
 
 export class Entrainement {
-  id: number = 0;
+  id: number = -1;
   creationDate: string = "";
-  type: EntrainementType = 1;
+  type: EntrainementType = EntrainementType.NON_DEFINI;
   nom: String = "";
   seanceIds: number = 0;
   exerciceIds: number[] = [];

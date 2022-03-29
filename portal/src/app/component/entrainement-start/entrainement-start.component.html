@@ -1,0 +1,31 @@
+<mat-card>
+  <div>Séance d'entrainement {{ entrainementSelected.nom }}</div>
+
+  <div *ngFor="let detail of exerciceDetailListe">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> {{ detail.exercice.nom }} </mat-panel-title>
+          <mat-panel-description>
+            {{ detail.exercice.muscle }}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="serieContainer">
+          <ng-container
+            *ngFor="let serieNumber of detail.nbSerie | count"
+            class="serieItem"
+          >
+            <div>
+              <div class="serieHead">
+                <h4>Série n° {{ serieNumber + 1 }} / {{ detail.nbSerie }}</h4>
+              </div>
+              <div class="serieDescription">
+                <app-serie-form></app-serie-form>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</mat-card>

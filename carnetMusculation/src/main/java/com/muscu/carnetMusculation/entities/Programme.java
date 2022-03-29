@@ -1,6 +1,7 @@
 package com.muscu.carnetMusculation.entities;
 
 import java.util.Date;
+import java.util.List;
 import java.time.OffsetDateTime;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ public class Programme {
 	private Date dateModification;
 	
 	@OneToMany(mappedBy = "programme", cascade = CascadeType.ALL)
-	private Set<Entrainement> entrainements;
+	private List<Entrainement> entrainements;
 	
 	public long getId() {
 		return id;
@@ -74,13 +75,5 @@ public class Programme {
 
 	public void setDateModification(Date dateModification) {
 		this.dateModification = dateModification;
-	}
-
-	public Set<Entrainement> getEntrainements() {
-		return entrainements;
-	}
-
-	public void setEntrainements(Set<Entrainement> entrainements) {
-		this.entrainements = entrainements;
 	}
 }

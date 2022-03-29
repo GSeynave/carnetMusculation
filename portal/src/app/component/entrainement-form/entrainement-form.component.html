@@ -1,0 +1,88 @@
+<mat-card class="formCard">
+  <form [formGroup]="entrainementForm" (ngSubmit)="onSubmit()" class="formContainer">
+    <div class="entrainementformContainer">
+      <div>
+        <h2>Entrainement</h2>
+      </div>
+
+      <div class="entrainementFormItem">
+        <div>
+          <mat-form-field>
+            <mat-label> Programme : </mat-label>
+            <mat-select formControlName="programmeId">
+              <mat-option *ngFor="let programme of programmeListe" [value]="programme.id">
+                {{ programme.nom }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="entrainementFormItem">
+        <div>
+          <mat-form-field>
+            <mat-label> Nom : </mat-label>
+            <input matInput id="entrainementId" type="text" formControlName="nom" />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label> Type : </mat-label>
+            <mat-select formControlName="type">
+              <mat-option *ngFor="let type of enumsKeys" [value]="type">
+                {{ type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="details" class="exercicesFormContainer">
+      <h2>Exercices</h2>
+
+      <div class="exerciceItemContainer">
+        <div *ngFor="let detailsForm of details.controls; let i = index">
+          <div [formGroupName]="i" class="test">
+            <mat-form-field>
+              <mat-label>
+                Exercice...
+              </mat-label>
+              <mat-select formControlName="exercice">
+                <mat-option *ngFor="let exercice of exerciceListe" [value]="exercice">
+                  {{ exercice.nom }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>
+                Nombre de série :
+              </mat-label>
+              <input matInput id="nombreSerie" type="text" formControlName="nbSerie" />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>
+                Nombre de rep :
+              </mat-label>
+              <input matInput id="nbRep" type="text" formControlName="nbRep" />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>
+                Temps de récup :
+              </mat-label>
+              <input matInput id="recup" type="text" formControlName="recup" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <button mat-button type="button" (click)="addDetailFormGroupe()">
+        <span mat-icon class="material-icons">add</span>
+      </button>
+    </div>
+
+    <button mat-button type="submit" [disabled]="!entrainementForm.valid">
+      Creer l'entraiement
+    </button>
+  </form>
+</mat-card>

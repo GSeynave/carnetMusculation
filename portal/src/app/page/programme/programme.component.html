@@ -1,6 +1,5 @@
-<h1>Programmes</h1>
 <div class="programs">
-  <button mat-button *ngIf="createHidden" (click)="hideCreateForm()">
+  <button mat-button *ngIf="createHidden" (click)="hideCreateForm()" class="boutonCreerProgramme">
     Créer un programme
   </button>
 
@@ -11,8 +10,7 @@
   ></app-programme-form>
 
   <mat-accordion>
-    <mat-expansion-panel [(expanded)]="panelOpenState"
-    >
+    <mat-expansion-panel [(expanded)]="panelOpenState">
       <mat-expansion-panel-header>
         <mat-panel-title> Vos programmes </mat-panel-title>
         <mat-panel-description>

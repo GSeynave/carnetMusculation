@@ -1,9 +1,14 @@
 .programs{
-    height: 35em;
+    height: auto;
     display: flex;
 
     flex-direction: column;
     justify-content: space-between;
+    justify-items: center;
+}
+
+.boutonCreerProgramme{
+  width: 20%;
 }
 
 h1{

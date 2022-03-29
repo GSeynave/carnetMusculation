@@ -4,10 +4,13 @@ public class SerieAPI {
 	
 	Long id;
 	String rep;
-	String poids;
+	float poids;
 	String recup;
 	Long seanceId;
 	Long exerciceId;
+	Long entrainementId;
+	int numeroSerie;
+	
 	public Long getId() {
 		return id;
 	}
@@ -20,10 +23,10 @@ public class SerieAPI {
 	public void setRep(String rep) {
 		this.rep = rep;
 	}
-	public String getPoids() {
+	public float getPoids() {
 		return poids;
 	}
-	public void setPoids(String poids) {
+	public void setPoids(float poids) {
 		this.poids = poids;
 	}
 	public String getRecup() {
@@ -43,6 +46,18 @@ public class SerieAPI {
 	}
 	public void setExerciceId(Long exerciceId) {
 		this.exerciceId = exerciceId;
+	}
+	public Long getEntrainementId() {
+		return entrainementId;
+	}
+	public void setEntrainementId(Long entrainementId) {
+		this.entrainementId = entrainementId;
+	}
+	public int getNumeroSerie() {
+		return numeroSerie;
+	}
+	public void setNumeroSerie(int numeroSerie) {
+		this.numeroSerie = numeroSerie;
 	}
 
 }

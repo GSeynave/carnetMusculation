@@ -1,5 +1,6 @@
 package com.muscu.carnetMusculation.entities;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -25,10 +26,10 @@ public class Exercice {
 	private String muscle;
 
 	@OneToMany(mappedBy = "exercice")
-	private Set<DetailsExercice> details;
+	private List<DetailsExercice> details;
 	
 	@OneToMany(mappedBy = "exercice")
-	private Set<Serie> series;
+	private List<Serie> series;
 
 	public Long getId() {
 		return id;
@@ -52,21 +53,5 @@ public class Exercice {
 
 	public void setMuscle(String muscle) {
 		this.muscle = muscle;
-	}
-
-	public Set<Serie> getSeries() {
-		return series;
-	}
-
-	public void setSeries(Set<Serie> series) {
-		this.series = series;
-	}
-
-	public Set<DetailsExercice> getDetails() {
-		return details;
-	}
-
-	public void setDetails(Set<DetailsExercice> details) {
-		this.details = details;
 	}
 }
