@@ -3,58 +3,30 @@
   <form [formGroup]="programmeFormGroup" (ngSubmit)="onSubmit()">
     <div hidden>
       <mat-form-field appearance="fill">
-        <input
-          matInput
-          id="id"
-          type="text"
-          formControlName="id"
-          [(ngModel)]="programme.id"
-        />
+        <input matInput id="id" type="text" formControlName="id" [(ngModel)]="programme.id" />
       </mat-form-field>
     </div>
     <div>
       <mat-form-field appearance="fill">
         <mat-label>Nom </mat-label>
-        <input
-          matInput
-          id="name"
-          type="text"
-          formControlName="nom"
-          [(ngModel)]="programme.nom"
-          required
-        />
+        <input matInput id="name" type="text" formControlName="nom" [(ngModel)]="programme.nom" required />
       </mat-form-field>
     </div>
     <div hidden>
       <mat-form-field appearance="fill">
-        <input
-          matInput
-          id="dateCreation"
-          type="text"
-          formControlName="dateCreation"
-          [(ngModel)]="programme.dateCreation"
-        />
+        <input matInput id="dateCreation" type="text" formControlName="dateCreation"
+          [(ngModel)]="programme.dateCreation" />
       </mat-form-field>
     </div>
     <div hidden>
       <mat-form-field appearance="fill">
-        <input
-          matInput
-          id="dateModification"
-          type="text"
-          formControlName="dateModification"
-          [(ngModel)]="programme.dateModification"
-        />
+        <input matInput id="dateModification" type="text" formControlName="dateModification"
+          [(ngModel)]="programme.dateModification" />
       </mat-form-field>
     </div>
     <div>
-      <button
-        mat-raised-button
-        color="warn"
-        type="submit"
-        [disabled]="!this.programmeFormGroup.valid"
-        class="createButton"
-      >
+      <button mat-raised-button color="warn" type="submit" [disabled]="!this.programmeFormGroup.valid"
+        class="createButton">
         Créer
       </button>
     </div>
