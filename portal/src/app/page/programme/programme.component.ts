@@ -14,7 +14,6 @@ export class ProgrammeComponent implements OnInit {
   programmes: Programme[] = [];
   pagination: Pagination = new Pagination(0, 10, [5, 10, 20], 0, 'nom');
   createHidden: boolean = true;
-  panelOpenState: boolean = true;
 
   @ViewChild(ProgrammeFormComponent) programmeForm: ProgrammeFormComponent =
     new ProgrammeFormComponent();
