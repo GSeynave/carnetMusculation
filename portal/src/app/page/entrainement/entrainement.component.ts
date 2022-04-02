@@ -18,22 +18,33 @@ export class EntrainementComponent implements OnInit {
   public entrainementListe: Entrainement[] = [];
   public isCreerDisplay: boolean = false;
   public isListDisplay: boolean = true;
+  public programmeSelected: Programme = new Programme();
+  private programmeId: number = -1;
 
   constructor(private musculationService: MusculationService, private route: ActivatedRoute) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['programmeId']) {
-      this.getEntrainements(changes['programmeId'].currentValue);
-    }
-  }
-
   ngOnInit(): void {
+
+    this.route.paramMap.subscribe(paramMap => {
+      this.programmeId = Number(paramMap.get('programmeId'));
+
+      if(this.programmeId > 0){
+        this.musculationService.getProgrammeById(this.programmeId).subscribe( (data) => {
+          this.programmeSelected = data;
+          this.getEntrainements(this.programmeSelected.id);
+        })
+      }
+    });
+
+
     this.musculationService.getProgrammes().subscribe( (data) => {
       this.programmeListe = data;
     })
     this.musculationService.getExercices().subscribe( (data) => {
       this.exerciceListe = data;
     })
+
+
   }
 
   getEntrainements(programmeId: number) {

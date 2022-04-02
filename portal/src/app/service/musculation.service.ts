@@ -92,6 +92,15 @@ export class MusculationService implements ErrorHandler {
         })
       )
   }
+  getProgrammeById(programmeId: number): Observable<Programme> {
+    return this.http.get<Programme>(this.url + `programmes/${programmeId}`)
+      .pipe(
+        catchError(err => {
+          console.error('Error while retrieving the list of programmes');
+          return throwError(err);
+        })
+      )
+  }
 
   setProgramme(program: Programme): Observable<Programme> {
     return this.http.post<Programme>(this.url + "programmes", program)

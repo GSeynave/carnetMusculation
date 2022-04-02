@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-label> Programme : </mat-label>
-  <mat-select [ngModel]="selectedProgrammeIdEvent" (ngModelChange)="onProgrammeSelect($event)" name="programme">
+  <mat-select [(ngModel)]="programmeSelected.id" (ngModelChange)="onProgrammeSelect($event)">
     <mat-option *ngFor="let programme of programmeListe" [value]="programme.id">
       {{ programme.nom }}S
     </mat-option>

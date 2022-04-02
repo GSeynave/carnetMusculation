@@ -49,7 +49,7 @@ export class ProgrammeComponent implements OnInit {
   }
 
   onProgrammeSelect(programmeId: number): void {
-    this.router.navigate(['/entrainement/programme/', programmeId ]);
+    this.router.navigate(['/entrainements/programme/', programmeId ]);
   }
 
   onSubmit(programme: Programme) {

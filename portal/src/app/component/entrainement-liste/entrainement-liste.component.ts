@@ -16,6 +16,7 @@ export class EntrainementListeComponent implements OnInit {
   @Output() selectedProgrammeIdEvent = new EventEmitter<number>();
   @Input() entrainementListe: Entrainement[] = [];
   @Input() programmeListe: Programme[] = [];
+  @Input() programmeSelected: Programme = new Programme();
 
   @Output('onEntrainementSelect') entrainementSelected: EventEmitter<number> =
     new EventEmitter();
@@ -30,6 +31,9 @@ export class EntrainementListeComponent implements OnInit {
     if (changes['entrainementListe']) {
       this.dataSource = new MatTableDataSource(changes['entrainementListe'].currentValue);
     }
+    if (changes['programmeSelected']) {
+      this.programmeSelected = changes['programmeSelected'].currentValue;
+    }
   }
 
   onEntrainementSelect(entrainementId: number): void {
@@ -38,7 +42,6 @@ export class EntrainementListeComponent implements OnInit {
   }
 
   onProgrammeSelect(programmeId: number): void{
-    console.log("emit : ", programmeId);
     this.selectedProgrammeIdEvent.emit(programmeId);
   }
 
