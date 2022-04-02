@@ -31,7 +31,7 @@ import { EntrainementStartComponent } from './component/entrainement-start/entra
 import { CountPipe } from './pipe/count.pipe';
 import { SerieFormComponent } from './component/serie-form/serie-form.component';
 import { EntrainementFormComponent } from './component/entrainement-form/entrainement-form.component';
-import { SeanceComponent } from './component/seance/seance.component';
+import { SeanceComponent } from './page/seance/seance.component';
 import { EntrainementComponent } from './page/entrainement/entrainement.component';
 import { SeanceStartComponent } from './component/seance-start/seance-start.component';
 import { SeanceHistoriqueComponent } from './component/seance-historique/seance-historique.component';

@@ -1,9 +1,8 @@
 import { APP_BASE_HREF } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SeanceComponent } from './component/seance/seance.component';
+import { SeanceComponent } from './page/seance/seance.component';
 import { EntrainementComponent } from './page/entrainement/entrainement.component';
-import { ExerciceComponent } from './page/exercice/exercice.component';
 import { HomeComponent } from './page/home/home.component';
 import { ProgrammeComponent } from './page/programme/programme.component';
 
