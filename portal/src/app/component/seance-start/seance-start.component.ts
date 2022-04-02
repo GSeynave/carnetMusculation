@@ -13,6 +13,7 @@ export class SeanceStartComponent implements OnInit {
 
 
 
+  isSeanceSelected: boolean = false;
   @Input() programmeId: number = -1;
   @Input() entrainementId: number = -1;
 
@@ -27,6 +28,10 @@ export class SeanceStartComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if(this.programmeId > 0 && this.entrainementId > 0){
+      this.isSeanceSelected = true;
+    }
+
   }
 
   onProgrammeSelect(programmeId: number): void {
@@ -38,8 +43,8 @@ export class SeanceStartComponent implements OnInit {
 
   onEntrainementSelect(entrainementId: number): void {
     this.selectedEntrainementIdEvent.emit(entrainementId);
-    this.entrainementListe = [];
     this.seanceInformationInit = new SeanceInformationInit();
+    this.isSeanceSelected = true;
   }
 
 }
