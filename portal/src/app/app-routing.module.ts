@@ -9,10 +9,11 @@ import { ProgrammeComponent } from './page/programme/programme.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'programme', component: ProgrammeComponent },
-  { path: 'entrainement', component: EntrainementComponent },
-  { path: 'seance', component: SeanceComponent },
-  { path: 'seance/entrainement/:entrainementId', component: SeanceComponent },
+  { path: 'programmes', component: ProgrammeComponent },
+  { path: 'entrainements', component: EntrainementComponent },
+  { path: 'entrainements/programme/:programmeId', component: EntrainementComponent },
+  { path: 'seances', component: SeanceComponent },
+  { path: 'seances/entrainement/:entrainementId', component: SeanceComponent },
   { path: '**', component: HomeComponent },  // Wildcard route for a 404 page
 ];
 
