@@ -1,14 +1,15 @@
-<div class="programs">
-  <button mat-button *ngIf="createHidden" (click)="hideCreateForm()" class="boutonCreerProgramme">
-    Créer un programme
-  </button>
+<mat-card>
+  <div class="programs">
+    <button mat-button *ngIf="createHidden" (click)="hideCreateForm()" class="boutonCreerProgramme">
+      Créer un programme
+    </button>
 
-  <app-programme-form *ngIf="!createHidden" (programmeOnSubmit)="onSubmit($event)" (hideCreateForm)="hideCreateForm()">
-  </app-programme-form>
+    <app-programme-form *ngIf="!createHidden" (programmeOnSubmit)="onSubmit($event)"
+      (hideCreateForm)="hideCreateForm()">
+    </app-programme-form>
 
-  <mat-card>
     <app-programme-list (programmeOnUpdate)="onSubmit($event)" (programmeGetPage)="getPage($event)"
       [(pagination)]="pagination" [programmes]="programmes" (onProgrammeSelect)="onProgrammeSelect($event)">
     </app-programme-list>
-  </mat-card>
-</div>
+  </div>
+</mat-card>
