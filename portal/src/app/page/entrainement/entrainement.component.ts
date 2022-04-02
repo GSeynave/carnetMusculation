@@ -1,5 +1,5 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Entrainement } from 'src/app/class/entrainement';
 import { Exercice } from 'src/app/class/exercice';
 import { Programme } from 'src/app/class/programme';
@@ -21,7 +21,7 @@ export class EntrainementComponent implements OnInit {
   public programmeSelected: Programme = new Programme();
   private programmeId: number = -1;
 
-  constructor(private musculationService: MusculationService, private route: ActivatedRoute) { }
+  constructor(private musculationService: MusculationService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -58,6 +58,8 @@ export class EntrainementComponent implements OnInit {
       this.musculationService.getEntrainementById(entrainementId).subscribe((data) => {
         this.entrainementSelected = data;
       });
+
+    this.router.navigate([`/seances/programme/${this.programmeId}/entrainement/${entrainementId}`,  ]);
     }
   }
 

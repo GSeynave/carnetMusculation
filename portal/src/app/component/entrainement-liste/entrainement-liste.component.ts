@@ -37,7 +37,6 @@ export class EntrainementListeComponent implements OnInit {
   }
 
   onEntrainementSelect(entrainementId: number): void {
-    // FIXME: route vers seanceStart.
     this.entrainementSelected.emit(entrainementId);
   }
 

@@ -2,7 +2,7 @@
 
   <mat-form-field>
     <mat-label> Programme : </mat-label>
-    <mat-select [ngModel]="selectedProgrammeIdEvent" (ngModelChange)="onProgrammeSelect($event)" name="programme">
+    <mat-select [(ngModel)]="programmeId" (ngModelChange)="onProgrammeSelect($event)" name="programme">
       <mat-option *ngFor="let programme of programmeListe" [value]="programme.id">
         {{ programme.nom }}
       </mat-option>
@@ -15,7 +15,7 @@
 <div *ngIf="entrainementListe.length > 0">
   <mat-form-field>
     <mat-label> Entrainement : </mat-label>
-    <mat-select [ngModel]="selectedEntrainementIdEvent" (ngModelChange)="onEntrainementSelect($event)"
+    <mat-select [(ngModel)]="entrainementId" (ngModelChange)="onEntrainementSelect($event)"
       name="entrainement">
       <mat-option *ngFor="let entrainement of entrainementListe" [value]="entrainement.id">
         {{ entrainement.nom }}

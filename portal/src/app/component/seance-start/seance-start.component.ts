@@ -13,6 +13,9 @@ export class SeanceStartComponent implements OnInit {
 
 
 
+  @Input() programmeId: number = -1;
+  @Input() entrainementId: number = -1;
+
   @Input() programmeListe: Programme[] = [];
   @Output() selectedProgrammeIdEvent = new EventEmitter<number>();
 
@@ -30,6 +33,7 @@ export class SeanceStartComponent implements OnInit {
     this.selectedProgrammeIdEvent.emit(programmeId);
     this.entrainementListe = [];
     this.seanceInformationInit = new SeanceInformationInit();
+    this.entrainementId = -1;
   }
 
   onEntrainementSelect(entrainementId: number): void {
