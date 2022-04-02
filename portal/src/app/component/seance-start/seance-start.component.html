@@ -10,6 +10,8 @@
   </mat-form-field>
 </div>
 
+<div *ngIf="entrainementListe.length <= 0" class="warning">Il n'y a actuellement pas d'entrainement pour ce programme.</div>
+
 <div *ngIf="entrainementListe.length > 0">
   <mat-form-field>
     <mat-label> Entrainement : </mat-label>

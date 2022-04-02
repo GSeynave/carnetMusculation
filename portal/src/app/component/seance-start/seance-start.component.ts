@@ -28,10 +28,14 @@ export class SeanceStartComponent implements OnInit {
 
   onProgrammeSelect(programmeId: number): void {
     this.selectedProgrammeIdEvent.emit(programmeId);
+    this.entrainementListe = [];
+    this.seanceInformationInit = new SeanceInformationInit();
   }
 
   onEntrainementSelect(entrainementId: number): void {
     this.selectedEntrainementIdEvent.emit(entrainementId);
+    this.entrainementListe = [];
+    this.seanceInformationInit = new SeanceInformationInit();
   }
 
 }

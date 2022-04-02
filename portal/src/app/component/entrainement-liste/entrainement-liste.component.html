@@ -6,6 +6,9 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
+
+<div *ngIf="dataSource.data.length <= 0" class="warning">Il n'y a actuellement pas d'entrainement pour ce programme.</div>
+
 <mat-table *ngIf="dataSource.data.length > 0" [dataSource]="dataSource" mat-sort class="entrainements">
   <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
