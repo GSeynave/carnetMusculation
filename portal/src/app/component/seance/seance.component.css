@@ -1,0 +1,11 @@
+
+.menu {
+
+  border-bottom: 200px;
+  width: auto;
+}
+
+.menu .mat-stroked-button {
+  width: 50%;
+  font-weight: bold;
+}

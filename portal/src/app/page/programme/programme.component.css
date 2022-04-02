@@ -1,16 +1,17 @@
-.programs{
-    height: auto;
-    display: flex;
+.programme-page-container{
 
-    flex-direction: column;
-    justify-content: space-between;
-    justify-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.boutonCreerProgramme{
-  width: 20%;
+.menu {
+
+  border-bottom: 200px;
+  width: auto;
 }
 
-h1{
-    text-align: center;
+.menu .mat-stroked-button {
+  width: 50%;
+  font-weight: bold;
 }
