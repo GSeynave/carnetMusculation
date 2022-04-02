@@ -14,6 +14,8 @@ export class ProgrammeComponent implements OnInit {
   programmes: Programme[] = [];
   pagination: Pagination = new Pagination(0, 10, [5, 10, 20], 0, 'nom');
   createHidden: boolean = true;
+  public isCreerDisplay: boolean = false;
+  public isListDisplay: boolean = true;
 
   @ViewChild(ProgrammeFormComponent) programmeForm: ProgrammeFormComponent =
     new ProgrammeFormComponent();
@@ -36,15 +38,14 @@ export class ProgrammeComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  displayListe(): void{
+    this.isListDisplay =true;
+    this.isCreerDisplay = false;
+  }
 
-  hideCreateForm() {
-    console.log(this.createHidden);
-    if (this.createHidden) {
-      this.createHidden = false;
-    }
-    else {
-      this.createHidden = true;
-    }
+  displayCreer(): void{
+    this.isListDisplay =false;
+    this.isCreerDisplay = true;
   }
 
   onProgrammeSelect(programmeId: number): void {
