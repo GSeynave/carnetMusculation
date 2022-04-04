@@ -128,4 +128,14 @@ public class EntrainementServiceImpl implements IEntrainementService {
 		return this.entrainementRepository.save(entrainement);
 	}
 
+	@Override
+	public boolean existsById(Long id) {
+		return this.entrainementRepository.existsById(id);
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		this.entrainementRepository.deleteById(id);
+	}
+
 }

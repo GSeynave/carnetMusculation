@@ -10,8 +10,11 @@ import { Programme } from 'src/app/class/programme';
 })
 export class EntrainementListeComponent implements OnInit {
 
-  displayedColumns: string[] = ['dateCreation', 'nom', "type", "start"];
+  displayedColumns: string[] = ['dateCreation', 'nom', "type","update", "deletion", "start"];
   dataSource: MatTableDataSource<Entrainement> = new MatTableDataSource();
+  indexToUpdate: number = 0;
+  entrainementToUpdate: Entrainement = new Entrainement();
+  nomUpdated: string = '';
 
   @Output() selectedProgrammeIdEvent = new EventEmitter<number>();
   @Input() entrainementListe: Entrainement[] = [];
@@ -20,6 +23,12 @@ export class EntrainementListeComponent implements OnInit {
 
   @Output('onEntrainementSelect') entrainementSelected: EventEmitter<number> =
     new EventEmitter();
+
+  @Output('entrainementOnUpdate') entrainementOnUpdate: EventEmitter<Entrainement> =
+  new EventEmitter();
+
+  @Output('onDeleteEntrainementIdEvent') deleteEntrainementIdEvent: EventEmitter<number> =
+  new EventEmitter();
 
   constructor() { }
 
@@ -42,6 +51,29 @@ export class EntrainementListeComponent implements OnInit {
 
   onProgrammeSelect(programmeId: number): void{
     this.selectedProgrammeIdEvent.emit(programmeId);
+  }
+
+
+  setToUpdate(entrainement: Entrainement) {
+    this.entrainementToUpdate = entrainement;
+    this.nomUpdated = entrainement.nom;
+  }
+
+  onUpdate() {
+    this.entrainementToUpdate.nom = this.nomUpdated;
+    this.entrainementOnUpdate.emit(this.entrainementToUpdate);
+    this.entrainementToUpdate = new Entrainement();
+    this.nomUpdated = '';
+  }
+
+  cancelUpdate() {
+    this.entrainementToUpdate = new Entrainement();
+    this.nomUpdated = '';
+  }
+
+  onDelete(idEntrainement: number) {
+    console.log("delete ", idEntrainement);
+    this.deleteEntrainementIdEvent.emit(idEntrainement);
   }
 
 }

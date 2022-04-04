@@ -14,7 +14,7 @@
   <!-- Liste des entrainements lié à un programme -->
   <app-entrainement-liste *ngIf="isListDisplay" [entrainementListe]="entrainementListe"
     [programmeListe]="programmeListe" [programmeSelected]="programmeSelected" (selectedProgrammeIdEvent)="onProgrammeSelect($event)"
-    (onEntrainementSelect)="onEntrainementSelect($event)">
+    (onEntrainementSelect)="onEntrainementSelect($event)" (onDeleteEntrainementIdEvent)="onEntrainementDelete($event)">
   </app-entrainement-liste>
 
   <!-- Démarrer un entrainement -->

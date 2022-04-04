@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Entrainement } from 'src/app/class/entrainement';
 import { EntrainementCreer } from 'src/app/class/entrainement-creer';
 import { EntrainementType } from 'src/app/class/entrainement-type';
 import { Exercice } from 'src/app/class/exercice';
@@ -15,6 +16,8 @@ export class EntrainementFormComponent implements OnInit {
 
   @Input() programmeListe: Programme[] = [];
   @Input() exerciceListe: Exercice[] = [];
+  @Input() entrainementId: number = -1;
+  @Input() entrainementToUpdate: Entrainement = new Entrainement();
   entrainementType = EntrainementType;
   enumsKeys: String[] = [];
 

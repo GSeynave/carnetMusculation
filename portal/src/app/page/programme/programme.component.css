@@ -1,17 +1,15 @@
-.programme-page-container{
-
+.programme-page-container {
+  height: 25em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 }
 
 .menu {
-
-  border-bottom: 200px;
-  width: auto;
+  width: 100%;
 }
-
-.menu .mat-stroked-button {
+.mat-stroked-button {
   width: 50%;
-  font-weight: bold;
 }
+

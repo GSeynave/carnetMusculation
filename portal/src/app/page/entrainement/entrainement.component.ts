@@ -63,6 +63,11 @@ export class EntrainementComponent implements OnInit {
     }
   }
 
+  onEntrainementDelete(entrainementId: number): void {
+    console.log("delete ", entrainementId);
+    this.musculationService.deleteEntrainement(entrainementId).subscribe();
+  }
+
   retour(): void {
     this.entrainementSelected.id = -1;
   }

@@ -182,6 +182,22 @@ export class MusculationService implements ErrorHandler {
     );
   }
 
+  deleteEntrainement(idEntrainement: number): Observable<number> {
+    const headers = new HttpHeaders({
+      'content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+    const options = {
+      headers: headers,
+      responseType: 'number'
+    };
+    return this.http.delete<number>(this.url + "entrainements/" + idEntrainement,)
+      .pipe(
+        catchError(err => {
+          return throwError(err);
+        })
+      );
+  }
 
   getDetailExercice(entrainementId: number, state: State): Observable<SeanceInformationInit> {
     return this.http.get<SeanceInformationInit>(this.url + `seances/entrainement/${entrainementId}/${state}`)

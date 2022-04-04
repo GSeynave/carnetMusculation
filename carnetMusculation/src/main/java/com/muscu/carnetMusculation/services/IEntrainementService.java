@@ -19,4 +19,8 @@ public interface IEntrainementService {
 	
 	EntrainementAPI creationEntrainement(EntrainementCreerAPI entrainementCreerApi);
 
+	boolean existsById(Long id);
+
+	void deleteById(Long id);
+
 }

@@ -81,8 +81,15 @@
       </button>
     </div>
 
-    <button mat-button type="submit" [disabled]="!entrainementForm.valid">
-      Creer l'entraiement
-    </button>
+    <div *ngIf="entrainementId !== -1; else elseBlock">
+      <button mat-button type="submit" [disabled]="!entrainementForm.valid">
+        Mettre à jour l'entraiement
+      </button>
+    </div>
+    <ng-template #elseBlock>
+      <button mat-button type="submit" [disabled]="!entrainementForm.valid">
+        Creer l'entraiement
+      </button>
+    </ng-template>
   </form>
 </mat-card>

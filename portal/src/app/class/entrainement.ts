@@ -4,7 +4,7 @@ export class Entrainement {
   id: number = -1;
   creationDate: string = "";
   type: EntrainementType = EntrainementType.NON_DEFINI;
-  nom: String = "";
+  nom: string = "";
   seanceIds: number = 0;
   exerciceIds: number[] = [];
 }

@@ -7,10 +7,17 @@
       programme </button>
   </div>
 
-    <app-programme-form *ngIf="isCreerDisplay" (programmeOnSubmit)="onSubmit($event)">
-    </app-programme-form>
+  <div class="programme-page-content">
+    <ng-container>
+      <app-programme-form *ngIf="isCreerDisplay" (programmeOnSubmit)="onSubmit($event)">
+      </app-programme-form>
+    </ng-container>
 
-    <app-programme-list *ngIf="isListDisplay" (programmeOnUpdate)="onSubmit($event)" (programmeGetPage)="getPage($event)"
-      [(pagination)]="pagination" [programmes]="programmes" (onProgrammeSelect)="onProgrammeSelect($event)">
-    </app-programme-list>
+    <ng-container>
+      <app-programme-list *ngIf="isListDisplay" (programmeOnUpdate)="onSubmit($event)"
+        (programmeGetPage)="getPage($event)" [(pagination)]="pagination" [programmes]="programmes"
+        (onProgrammeSelect)="onProgrammeSelect($event)">
+      </app-programme-list>
+    </ng-container>
+  </div>
 </mat-card>

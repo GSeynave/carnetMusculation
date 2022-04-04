@@ -7,7 +7,8 @@
   </mat-select>
 </mat-form-field>
 
-<div *ngIf="dataSource.data.length <= 0" class="warning">Il n'y a actuellement pas d'entrainement pour ce programme.</div>
+<div *ngIf="dataSource.data.length <= 0" class="warning">Il n'y a actuellement pas d'entrainement pour ce programme.
+</div>
 
 <mat-table *ngIf="dataSource.data.length > 0" [dataSource]="dataSource" mat-sort class="entrainements">
   <!--- Note that these columns can be defined in any order.
@@ -25,7 +26,19 @@
   <ng-container matColumnDef="nom">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
     <td mat-cell *matCellDef="let entrainement">
-      {{ entrainement.nom }}
+      <div>
+        {{ entrainement.nom }}
+      </div>
+      <!-- TO FIX, find a way to update entrainement proprement -->
+      <div *ngIf="entrainementToUpdate.id === entrainement.id">
+        <app-entrainement-form [entrainementId]="entrainement.id"></app-entrainement-form>
+        <button mat-button>
+          <span mat-icon class="material-icons" (click)="onUpdate()">check_circle_outline</span>
+        </button>
+        <button mat-button>
+          <span mat-icon class="material-icons" (click)="cancelUpdate()">highlight_off</span>
+        </button>
+      </div>
     </td>
   </ng-container>
 
@@ -36,6 +49,26 @@
       {{ entrainement.type }}
     </td>
   </ng-container>
+
+ <!-- Mettre a jour -->
+ <ng-container matColumnDef="update">
+  <th mat-header-cell *matHeaderCellDef></th>
+  <td mat-cell *matCellDef="let entrainement">
+    <button mat-button (click)="setToUpdate(entrainement)">
+      <span mat-icon *ngIf="entrainementToUpdate.id != entrainement.id" class="material-icons">create</span>
+    </button>
+  </td>
+</ng-container>
+
+<!-- Supprimer -->
+<ng-container matColumnDef="deletion">
+  <th mat-header-cell *matHeaderCellDef></th>
+  <td mat-cell *matCellDef="let programme">
+    <button mat-button (click)="onDelete(programme.id)">
+      <span mat-icon type="button" class="material-icons">delete</span>
+    </button>
+  </td>
+</ng-container>
 
   <!-- Start -->
   <ng-container matColumnDef="start">
