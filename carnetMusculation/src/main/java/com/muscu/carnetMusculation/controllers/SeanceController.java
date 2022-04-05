@@ -29,7 +29,7 @@ public class SeanceController {
 	@GetMapping("/entrainement/{entrainementId}/{state}")
 	public @ResponseBody ResponseEntity<SeanceInformationInit> findByEntrainementIdAndState(@PathVariable(name = "entrainementId") Long entrainementId, @PathVariable(name = "state") int state) {
 		LOGGER.debug("Recherche des séance pour l'entrainement avec l'id {} et l'état {}", entrainementId, state);
-		SeanceInformationInit sii = seanceService.findByEntrainementIdAndState(entrainementId, SeanceState.getSeanceStateByCode(state));
+		SeanceInformationInit sii = seanceService.findSIIByEntrainementIdAndState(entrainementId, SeanceState.getSeanceStateByCode(state));
 		return new ResponseEntity<SeanceInformationInit>(sii, HttpStatus.OK);
 	}
 }

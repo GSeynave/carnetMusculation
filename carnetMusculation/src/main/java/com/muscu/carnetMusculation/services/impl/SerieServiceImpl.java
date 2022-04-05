@@ -34,4 +34,25 @@ public class SerieServiceImpl implements ISerieService {
 	public List<Serie> findBySeanceIdAndNumeroSerie(Long seanceId, String numeroSerie) {
 		return this.serieRepository.findBySeanceIdAndNumeroSerie(seanceId, numeroSerie);
 	}
+
+	@Override
+	public Serie save(Serie serie) {
+		return this.serieRepository.save(serie);
+	}
+
+	@Override
+	public Serie findBySeanceIdAndNumeroSerieAndExerciceId(Long seanceId, String numeroSerie, Long exerciceId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Serie> findBySeanceId(Long seanceId) {
+		return this.serieRepository.findBySeanceId(seanceId);
+	}
+
+	@Override
+	public void deleteByIds(List<Long> ids) {
+		this.serieRepository.deleteAllById(ids);;
+	}
 }

@@ -70,6 +70,11 @@ public class EntrainementController {
 	public @ResponseBody ResponseEntity<EntrainementAPI> save(@RequestBody EntrainementCreerAPI entrainementCreerApi){
 		return new ResponseEntity<EntrainementAPI>(entrainementService.creationEntrainement(entrainementCreerApi), HttpStatus.OK);
 	}
+
+	@PostMapping("/update")
+	public @ResponseBody ResponseEntity<EntrainementAPI> update(@RequestBody EntrainementCreerAPI entrainementCreerApi){
+		return new ResponseEntity<EntrainementAPI>(mapperApi.convertToDto(entrainementService.update(entrainementCreerApi)), HttpStatus.OK);
+	}
 	
 	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<Long> delete(@PathVariable Long id){

@@ -47,9 +47,8 @@ public class SeanceServiceImpl implements ISeanceService {
 	}
 
 	@Override
-	public SeanceInformationInit findByEntrainementIdAndState(Long entrainementId, SeanceState state) {
-		Seance seance = this.seanceRepository.findByEntrainementIdAndState(entrainementId, state);
-		//TODO alimenter SII
+	public SeanceInformationInit findSIIByEntrainementIdAndState(Long entrainementId, SeanceState state) {
+		Seance seance = this.findByEntrainementIdAndState(entrainementId, state);
 		SeanceInformationInit sii = new SeanceInformationInit();
 		
 		sii.setEntrainementId(seance.getEntrainement().getId());
@@ -70,5 +69,10 @@ public class SeanceServiceImpl implements ISeanceService {
 		}
 		sii.setDetailsExercice(detailsList);
 		return sii;
+	}
+
+	@Override
+	public Seance findByEntrainementIdAndState(Long entrainementId, SeanceState state) {
+		return this.seanceRepository.findByEntrainementIdAndState(entrainementId, state);
 	}
 }

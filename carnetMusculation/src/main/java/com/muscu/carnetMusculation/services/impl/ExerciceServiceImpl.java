@@ -1,7 +1,9 @@
 package com.muscu.carnetMusculation.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +34,11 @@ public class ExerciceServiceImpl implements IExerciceService {
 	@Override
 	public List<Exercice> findAll() {
 		return this.exerciceRepository.findAll();
+	}
+
+	@Override
+	public Exercice findById(Long exerciceId) {
+		return this.exerciceRepository.findById(exerciceId).orElseThrow(() -> 
+		new EntityNotFoundException("Programme not found with id :" +exerciceId));
 	}
 }

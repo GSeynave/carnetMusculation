@@ -28,6 +28,10 @@ public class Entrainement {
 	@Temporal(TemporalType.DATE)
 	@Column(name="date_creation")
 	private Date dateCreation;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name="date_modification ")
+	private Date dateModification;
 	
 	@Column(name = "type")
 	private Enum<EntrainementType> type;
@@ -62,6 +66,14 @@ public class Entrainement {
 
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	public Date getDateModification() {
+		return dateModification;
+	}
+
+	public void setDateModification(Date dateModification) {
+		this.dateModification = dateModification;
 	}
 
 	public Enum<EntrainementType> getType() {

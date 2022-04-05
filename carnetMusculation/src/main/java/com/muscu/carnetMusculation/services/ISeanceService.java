@@ -8,6 +8,7 @@ import com.muscu.carnetMusculation.utils.SeanceState;
 public interface ISeanceService {
 	Seance save(Seance seance);
 	Seance saveBySeanceAPI(SeanceAPI seanceApi);
-	SeanceInformationInit findByEntrainementIdAndState(Long entrainementId, SeanceState state);
+	SeanceInformationInit findSIIByEntrainementIdAndState(Long entrainementId, SeanceState state);
+	Seance findByEntrainementIdAndState(Long entrainementId, SeanceState state);
 
 }

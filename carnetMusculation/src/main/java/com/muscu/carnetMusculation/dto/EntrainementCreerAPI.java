@@ -7,17 +7,31 @@ import com.muscu.carnetMusculation.utils.EntrainementType;
 
 public class EntrainementCreerAPI {
 	
+	private Long entrainementId;
 	private Date creationDate;
+	private Date modificationDate;
 	private String nom;
 	private EntrainementType type;
 	private Long programmeId;
 	private List<Details> details;
 	
+	public Long getEntrainementId() {
+		return entrainementId;
+	}
+	public void setEntrainementId(Long entrainementId) {
+		this.entrainementId = entrainementId;
+	}
 	public Date getCreationDate() {
 		return creationDate;
 	}
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+	public Date getModificationDate() {
+		return modificationDate;
+	}
+	public void setModificationDate(Date modificationDate) {
+		this.modificationDate = modificationDate;
 	}
 	public String getNom() {
 		return nom;

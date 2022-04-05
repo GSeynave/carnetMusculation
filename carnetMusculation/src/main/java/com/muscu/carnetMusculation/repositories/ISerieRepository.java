@@ -10,4 +10,5 @@ public interface ISerieRepository extends CrudRepository<Serie, Long> {
 
 	List<Serie> findByExerciceId(Long id);
 	List<Serie> findBySeanceIdAndNumeroSerie(Long seanceId, String numeroSerie);
+	List<Serie> findBySeanceId(Long seanceId);
 }

@@ -17,6 +17,8 @@ public interface IEntrainementService {
 	
 	Entrainement save(EntrainementAPI entrainementApi);
 	
+	Entrainement update(EntrainementCreerAPI entrainementApi);
+	
 	EntrainementAPI creationEntrainement(EntrainementCreerAPI entrainementCreerApi);
 
 	boolean existsById(Long id);

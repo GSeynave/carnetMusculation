@@ -3,16 +3,20 @@ package com.muscu.carnetMusculation.services.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import com.muscu.carnetMusculation.dto.Details;
 import com.muscu.carnetMusculation.dto.EntrainementAPI;
 import com.muscu.carnetMusculation.dto.EntrainementCreerAPI;
+import com.muscu.carnetMusculation.dto.ExerciceAPI;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.SeanceAPI;
 import com.muscu.carnetMusculation.dto.SerieAPI;
@@ -25,6 +29,7 @@ import com.muscu.carnetMusculation.entities.Serie;
 import com.muscu.carnetMusculation.repositories.IDetailsExerciceRepository;
 import com.muscu.carnetMusculation.repositories.IEntrainementRepository;
 import com.muscu.carnetMusculation.services.IEntrainementService;
+import com.muscu.carnetMusculation.services.IExerciceService;
 import com.muscu.carnetMusculation.services.IProgrammeService;
 import com.muscu.carnetMusculation.services.ISeanceService;
 import com.muscu.carnetMusculation.services.ISerieService;
@@ -43,6 +48,8 @@ public class EntrainementServiceImpl implements IEntrainementService {
 	private ISerieService serieService;
 	@Autowired
 	private IProgrammeService programmeService;
+	@Autowired
+	private IExerciceService exerciceService;
 	@Autowired
 	private MapperAPI mapperApi;
 
@@ -136,6 +143,74 @@ public class EntrainementServiceImpl implements IEntrainementService {
 	@Override
 	public void deleteById(Long id) {
 		this.entrainementRepository.deleteById(id);
+	}
+
+	@Override
+	public Entrainement update(EntrainementCreerAPI entrainementApi) {
+		
+		Entrainement entrainement = this.findById(entrainementApi.getEntrainementId());
+		Programme programme = this.programmeService.findById(entrainementApi.getProgrammeId());
+		if(!ObjectUtils.isEmpty(entrainement)) {
+			entrainement.setId(entrainementApi.getEntrainementId());
+			entrainement.setProgramme(programme);
+			entrainement.setDateModification(entrainementApi.getModificationDate());
+			entrainement.setNom(entrainementApi.getNom());
+			entrainement.setType(entrainementApi.getType());
+			entrainement = this.save(entrainement);
+		
+			Seance seance = this.seanceService.findByEntrainementIdAndState(entrainement.getId(), SeanceState.INIT);
+			List<Serie> series = this.serieService.findBySeanceId(seance.getId());
+			List<DetailsExercice> detailsExercices = this.detailsRepository.findAllByEntrainementId(entrainement.getId());
+			
+			if(CollectionUtils.isEmpty(entrainementApi.getDetails())) {
+
+				// Suppression des series / exercices qui ne sont plus dans la séance d'entrainement
+				this.serieService.deleteByIds(series.stream().map(Serie::getId).collect(Collectors.toList()));
+				this.detailsRepository.deleteAllById(detailsExercices.stream().map(DetailsExercice::getId).collect(Collectors.toList()));
+			}
+			else {
+				for (Details detail : entrainementApi.getDetails()) {
+					
+					ExerciceAPI exerciceApi = detail.getExercice();
+					Serie serie = this.serieService.findBySeanceIdAndNumeroSerieAndExerciceId(seance.getId(), "0", exerciceApi.getId());
+					Exercice exercice = this.exerciceService.findById(exerciceApi.getId());
+					DetailsExercice detailExercice = this.detailsRepository.findByEntrainementIdAndExerciceId(entrainement.getId(), exerciceApi.getId());
+					
+					if(ObjectUtils.isEmpty(serie)) {
+						serie = new Serie();
+						serie.setNumeroSerie("0");
+					}
+					serie.setRecup(detail.getRecup());
+					serie.setRep(detail.getNbRep());
+					serie.setEntrainement(entrainement);
+					serie.setExercice(exercice);
+					serie.setSeance(seance);
+					serie = this.serieService.save(serie);
+					if(ObjectUtils.isEmpty(detailExercice)) {
+						detailExercice = new DetailsExercice();
+						detailExercice.setEntrainement(entrainement);
+						detailExercice.setExercice(exercice);
+					}
+					detailExercice.setNbSerie(detail.getNbSerie());
+					this.detailsRepository.save(detailExercice);
+					
+					if(CollectionUtils.containsInstance(series, serie)) {
+						series.remove(serie);
+					}
+					if(CollectionUtils.containsInstance(detailsExercices, detailExercice)) {
+						detailsExercices.remove(detailExercice);
+					}
+				}
+			
+			
+			// Suppression des series / exercices qui ne sont plus dans la séance d'entrainement
+			this.serieService.deleteByIds(series.stream().map(Serie::getId).collect(Collectors.toList()));
+			this.detailsRepository.deleteAllById(detailsExercices.stream().map(DetailsExercice::getId).collect(Collectors.toList()));
+			}
+		}
+				
+		
+		return entrainement;
 	}
 
 }
