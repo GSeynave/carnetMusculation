@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Entrainement } from 'src/app/class/entrainement';
-import { Exercice } from 'src/app/class/exercice';
-import { detailExercice } from 'src/app/class/detail-exercice';
+import { DetailExercice } from 'src/app/class/detail-exercice';
 import { MusculationService } from 'src/app/service/musculation.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { MusculationService } from 'src/app/service/musculation.service';
 })
 export class EntrainementStartComponent implements OnInit {
 
-  public exerciceDetailListe: detailExercice [] = [];
+  public exerciceDetailListe: DetailExercice [] = [];
   @Input() entrainementSelected: Entrainement = new Entrainement();
 
   constructor(private musculationService: MusculationService) {

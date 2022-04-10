@@ -13,8 +13,10 @@
 
   <!-- Liste des entrainements lié à un programme -->
   <app-entrainement-liste *ngIf="isListDisplay" [entrainementListe]="entrainementListe"
-    [programmeListe]="programmeListe" [programmeSelected]="programmeSelected" (selectedProgrammeIdEvent)="onProgrammeSelect($event)"
-    (onEntrainementSelect)="onEntrainementSelect($event)" (onDeleteEntrainementIdEvent)="onEntrainementDelete($event)">
+    [programmeListe]="programmeListe" [programmeSelected]="programmeSelected"
+    (selectedProgrammeIdEvent)="onProgrammeSelect($event)" (onEntrainementSelect)="onEntrainementSelect($event)"
+    (onDeleteEntrainementIdEvent)="onEntrainementDelete($event)"
+    (onModificationEntrainement)="onModificationEntrainement($event)">
   </app-entrainement-liste>
 
   <!-- Démarrer un entrainement -->
@@ -24,4 +26,11 @@
     </button>
     <app-entrainement-start [entrainementSelected]="entrainementSelected"></app-entrainement-start>
   </div>
+
+
+
+  <!-- Pour modification d'un entrainement -->
+  <app-entrainement-form *ngIf="isModification" [programmeListe]="programmeListe" [exerciceListe]="exerciceListe"
+    [entrainementToUpdate]="entrainementToUpdate" (annulerModification)="annulerModification()">
+  </app-entrainement-form>
 </mat-card>

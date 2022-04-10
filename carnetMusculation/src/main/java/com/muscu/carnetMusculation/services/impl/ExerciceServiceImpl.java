@@ -41,4 +41,26 @@ public class ExerciceServiceImpl implements IExerciceService {
 		return this.exerciceRepository.findById(exerciceId).orElseThrow(() -> 
 		new EntityNotFoundException("Programme not found with id :" +exerciceId));
 	}
+
+	@Override
+	public void deleteById(Long exerciceId) {
+		this.exerciceRepository.deleteById(exerciceId);
+	}
+
+	@Override
+	public DetailsExercice findByEntrainementIdAndExerciceId(long id, Long exerciceId) {
+		return this.detailsRepository.findByEntrainementIdAndExerciceId(id, exerciceId);
+	}
+
+	@Override
+	public void deleteDetailsByIds(List<Long> detailsToDelete) {
+		this.detailsRepository.deleteAllById(detailsToDelete);
+		
+	}
+
+	@Override
+	public void deleteByEntrainementIdAndExerciceIdIn(long id, List<Long> exerciceIdList) {
+		this.detailsRepository.deleteByEntrainementIdAndExerciceIdIn(id, exerciceIdList);
+		
+	}
 }

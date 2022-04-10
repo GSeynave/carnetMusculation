@@ -1,6 +1,7 @@
 package com.muscu.carnetMusculation.entities;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,11 +19,11 @@ public class DetailsExercice {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "entrainement_id")
 	Entrainement entrainement;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "exercice_id")
 	Exercice exercice;
 	

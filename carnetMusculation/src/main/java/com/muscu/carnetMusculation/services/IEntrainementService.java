@@ -1,5 +1,6 @@
 package com.muscu.carnetMusculation.services;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.muscu.carnetMusculation.dto.EntrainementAPI;
@@ -17,12 +18,12 @@ public interface IEntrainementService {
 	
 	Entrainement save(EntrainementAPI entrainementApi);
 	
-	Entrainement update(EntrainementCreerAPI entrainementApi);
-	
-	EntrainementAPI creationEntrainement(EntrainementCreerAPI entrainementCreerApi);
+	EntrainementCreerAPI creationEntrainement(EntrainementCreerAPI entrainementCreerApi) throws ParseException;
 
 	boolean existsById(Long id);
 
 	void deleteById(Long id);
+
+	EntrainementCreerAPI findSeanceInformationInitByEntrainementId(Long entrainementId);
 
 }

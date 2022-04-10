@@ -1,18 +1,13 @@
+import { DetailExercice } from "./detail-exercice";
 import { EntrainementType } from "./entrainement-type";
-import { Exercice } from "./exercice";
-
-export class Details{
-  exercice: Exercice = new Exercice();
-  nbrep: number = -1;
-  nbSerie: number = -1;
-  recup: string = "";
-}
 
 export class EntrainementCreer {
 
-  programmeId: number = -1;
+  entrainementId: number = -1;
+  creationDate: string = "";
+  modificationDate: string = "";
   nom: String = "";
   type: EntrainementType = EntrainementType.NON_DEFINI;
-  creationDate: string = "";
-  exercicesDetails: Details[] = [];
+  programmeId: number = -1;
+  details: DetailExercice[] = [];
 }

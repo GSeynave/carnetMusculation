@@ -12,4 +12,6 @@ public interface IEntrainementRepository extends PagingAndSortingRepository<Entr
 	Optional<Entrainement> findById(Long id);
 	
 	List<Entrainement> findByProgrammeId(Long id);
+
+	Entrainement findByNom(String nom);
 }

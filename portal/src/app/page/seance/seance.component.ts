@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { detailExercice } from 'src/app/class/detail-exercice';
 import { Entrainement } from 'src/app/class/entrainement';
 import { Programme } from 'src/app/class/programme';
 import { SeanceInformationInit } from 'src/app/class/seance-information-init';

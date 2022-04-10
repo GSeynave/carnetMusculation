@@ -11,4 +11,6 @@ public interface IDetailsExerciceRepository extends PagingAndSortingRepository<D
 	DetailsExercice findByEntrainementIdAndExerciceId(Long exerciceId, Long entrainementId);
 	
 	List<DetailsExercice> findAllByEntrainementId(Long entrainementId);
+
+	void deleteByEntrainementIdAndExerciceIdIn(long id, List<Long> exerciceIdList);
 }

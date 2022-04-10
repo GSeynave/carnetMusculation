@@ -6,7 +6,8 @@ public class ExerciceAPI {
 	private Long id;
 	private String nom;
 	private String muscle;
-	private List<Long> programs;
+	private Long detailId;
+	List<Long> serieIds;
 	public Long getId() {
 		return id;
 	}
@@ -25,11 +26,17 @@ public class ExerciceAPI {
 	public void setMuscle(String muscle) {
 		this.muscle = muscle;
 	}
-	public List<Long> getPrograms() {
-		return programs;
+	public Long getDetailId() {
+		return detailId;
 	}
-	public void setPrograms(List<Long> programs) {
-		this.programs = programs;
+	public void setDetailId(Long detailId) {
+		this.detailId = detailId;
 	}
-
+	public List<Long> getSerieIds() {
+		return serieIds;
+	}
+	public void setSerieIds(List<Long> serieIds) {
+		this.serieIds = serieIds;
+	}
+	
 }

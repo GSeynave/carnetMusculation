@@ -34,9 +34,9 @@ public class Entrainement {
 	private Date dateModification;
 	
 	@Column(name = "type")
-	private Enum<EntrainementType> type;
+	private String type;
 
-	@Column(name="nom", length=50, nullable=false, unique=false)
+	@Column(name="nom", length=50, nullable=false, unique=true)
 	private String nom;
 	
 	@ManyToOne
@@ -76,11 +76,11 @@ public class Entrainement {
 		this.dateModification = dateModification;
 	}
 
-	public Enum<EntrainementType> getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Enum<EntrainementType> type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

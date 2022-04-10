@@ -11,4 +11,6 @@ public interface ISerieRepository extends CrudRepository<Serie, Long> {
 	List<Serie> findByExerciceId(Long id);
 	List<Serie> findBySeanceIdAndNumeroSerie(Long seanceId, String numeroSerie);
 	List<Serie> findBySeanceId(Long seanceId);
+	Serie findBySeanceIdAndNumeroSerieAndEntrainementIdAndExerciceId(Long seanceId, String numeroSerie, Long entrainementId,  Long exerciceId);
+	void deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(long entrainementId, Long seanceId, List<Long> exerciceIdList);
 }

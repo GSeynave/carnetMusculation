@@ -1,5 +1,6 @@
 package com.muscu.carnetMusculation.controllers;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,15 +66,19 @@ public class EntrainementController {
 		DetailsExercice details = entrainementService.findDetailsByEntrainementIdAndExerciceId(exerciceId, entrainementId);
 		return new ResponseEntity<DetailsExerciceAPI>(mapperApi.convertToDto(details), HttpStatus.OK);
 	}
+
+	@GetMapping("/{entrainementId}/details")
+	public @ResponseBody ResponseEntity<EntrainementCreerAPI> findSeanceInformationInitByEntrainementId(
+			@PathVariable(name = "entrainementId") Long entrainementId) {
+		LOGGER.debug("Recherche seance information init avec entrainement id {}", entrainementId);
+		return new ResponseEntity<EntrainementCreerAPI>(entrainementService.findSeanceInformationInitByEntrainementId(entrainementId), HttpStatus.OK);
+	}
 	
 	@PostMapping()
-	public @ResponseBody ResponseEntity<EntrainementAPI> save(@RequestBody EntrainementCreerAPI entrainementCreerApi){
-		return new ResponseEntity<EntrainementAPI>(entrainementService.creationEntrainement(entrainementCreerApi), HttpStatus.OK);
-	}
-
-	@PostMapping("/update")
-	public @ResponseBody ResponseEntity<EntrainementAPI> update(@RequestBody EntrainementCreerAPI entrainementCreerApi){
-		return new ResponseEntity<EntrainementAPI>(mapperApi.convertToDto(entrainementService.update(entrainementCreerApi)), HttpStatus.OK);
+	public @ResponseBody ResponseEntity<EntrainementCreerAPI> save(@RequestBody EntrainementCreerAPI entrainementCreerApi) throws ParseException{
+		LOGGER.debug("Post de l'entrainement : {}", entrainementCreerApi);
+		System.out.println(entrainementCreerApi.toString());
+		return new ResponseEntity<EntrainementCreerAPI>(entrainementService.creationEntrainement(entrainementCreerApi), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")

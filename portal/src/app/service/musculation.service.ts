@@ -6,10 +6,10 @@ import { catchError, } from 'rxjs/operators';
 import { Exercice } from '../class/exercice';
 import { Seance } from '../class/seance';
 import { Entrainement } from '../class/entrainement';
-import { detailExercice } from '../class/detail-exercice';
-import { EntrainementCreer } from '../class/entrainement-creer';
+import { DetailExercice } from '../class/detail-exercice';
 import { SeanceInformationInit } from '../class/seance-information-init';
 import { State } from '../class/state';
+import { EntrainementCreer } from '../class/entrainement-creer';
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +38,8 @@ export class MusculationService implements ErrorHandler {
       })
     )
   }
-  getExercicesByEntrainementId(entrainementId: number): Observable<detailExercice[]> {
-    return this.http.get<detailExercice[]>(this.url + `exercices/entrainement/${entrainementId}`).pipe(
+  getExercicesByEntrainementId(entrainementId: number): Observable<DetailExercice[]> {
+    return this.http.get<DetailExercice[]>(this.url + `exercices/entrainement/${entrainementId}`).pipe(
       catchError(err => {
         console.error('Error while retrieving the list of exercices');
         return throwError(err);
@@ -172,14 +172,24 @@ export class MusculationService implements ErrorHandler {
         })
       )
   }
+
+  getEntrainementDetailsById(entrainementId: number): Observable<EntrainementCreer> {
+    return this.http.get<EntrainementCreer>(this.url + `entrainements/${entrainementId}/details`)
+      .pipe(
+        catchError(err => {
+          console.error('Error while retrieving an entrainement and the details');
+          return throwError(err);
+        })
+      )
+  }
   setEntrainement(entrainementCreer: EntrainementCreer): Observable<EntrainementCreer> {
     return this.http.post<EntrainementCreer>(this.url + "entrainements", entrainementCreer)
-    .pipe(
-      catchError(err => {
-        console.error('Error while saving entrainement', err);
-        return throwError(err);
-      })
-    );
+      .pipe(
+        catchError(err => {
+          console.error('Error while saving entrainement', err);
+          return throwError(err);
+        })
+      );
   }
 
   deleteEntrainement(idEntrainement: number): Observable<number> {

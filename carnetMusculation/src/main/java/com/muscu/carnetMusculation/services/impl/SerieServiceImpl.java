@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.SerieAPI;
+import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Serie;
 import com.muscu.carnetMusculation.repositories.ISerieRepository;
 import com.muscu.carnetMusculation.services.ISerieService;
@@ -41,12 +42,6 @@ public class SerieServiceImpl implements ISerieService {
 	}
 
 	@Override
-	public Serie findBySeanceIdAndNumeroSerieAndExerciceId(Long seanceId, String numeroSerie, Long exerciceId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Serie> findBySeanceId(Long seanceId) {
 		return this.serieRepository.findBySeanceId(seanceId);
 	}
@@ -54,5 +49,16 @@ public class SerieServiceImpl implements ISerieService {
 	@Override
 	public void deleteByIds(List<Long> ids) {
 		this.serieRepository.deleteAllById(ids);;
+	}
+
+	@Override
+	public Serie findBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(Long seanceId, String numeroSerie, Long entrainementId, Long exerciceId) {
+		return this.serieRepository.findBySeanceIdAndNumeroSerieAndEntrainementIdAndExerciceId(seanceId, numeroSerie, entrainementId, exerciceId);
+	}
+
+	@Override
+	public void deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(long entrainementId, Long seanceId, List<Long> exerciceIdList) {
+		this.serieRepository.deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(entrainementId, seanceId, exerciceIdList);
+		
 	}
 }

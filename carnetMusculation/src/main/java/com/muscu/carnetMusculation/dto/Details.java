@@ -2,16 +2,17 @@ package com.muscu.carnetMusculation.dto;
 
 public class Details {
 
-	ExerciceAPI exercice;
+	Long exerciceId;
 	String nbRep;
 	long nbSerie;
 	String recup;
 	
-	public ExerciceAPI getExercice() {
-		return exercice;
+	
+	public Long getExerciceId() {
+		return exerciceId;
 	}
-	public void setExercice(ExerciceAPI exercice) {
-		this.exercice = exercice;
+	public void setExerciceId(Long exerciceId) {
+		this.exerciceId = exerciceId;
 	}
 	public String getNbRep() {
 		return nbRep;

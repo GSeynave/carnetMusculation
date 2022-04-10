@@ -1,6 +1,6 @@
 export enum EntrainementType {
-  FULL_BODY = "Full body",
-  UPPER_BODY = "Upper body",
-  LOWER_BODY = "Lower body",
-  NON_DEFINI = "null"
+	FULL_BODY = "FULL_BODY",
+	UPPER_BODY= "UPPER_BODY",
+	LOWER_BODY = "LOWER_BODY",
+	NON_DEFINI = "NON_DEFINI"
 }

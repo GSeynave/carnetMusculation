@@ -46,8 +46,8 @@
               <mat-label>
                 Exercice...
               </mat-label>
-              <mat-select formControlName="exercice">
-                <mat-option *ngFor="let exercice of exerciceListe" [value]="exercice">
+              <mat-select formControlName="exerciceId">
+                <mat-option *ngFor="let exercice of exerciceListe" [value]="exercice.id">
                   {{ exercice.nom }}
                 </mat-option>
               </mat-select>
@@ -73,6 +73,9 @@
               </mat-label>
               <input matInput id="recup" type="text" formControlName="recup" />
             </mat-form-field>
+            <button mat-button (click)="removeOrClearDetails(i)">
+              Supprimer
+            </button>
           </div>
         </div>
       </div>
@@ -81,9 +84,12 @@
       </button>
     </div>
 
-    <div *ngIf="entrainementId !== -1; else elseBlock">
+    <div *ngIf="entrainementToUpdate.entrainementId !== -1; else elseBlock">
       <button mat-button type="submit" [disabled]="!entrainementForm.valid">
         Mettre à jour l'entraiement
+      </button>
+      <button mat-button type="button" (click)="annulerModification()" [disabled]="!entrainementForm.valid">
+        Annuler
       </button>
     </div>
     <ng-template #elseBlock>

@@ -31,7 +31,6 @@
       </div>
       <!-- TO FIX, find a way to update entrainement proprement -->
       <div *ngIf="entrainementToUpdate.id === entrainement.id">
-        <app-entrainement-form [entrainementId]="entrainement.id"></app-entrainement-form>
         <button mat-button>
           <span mat-icon class="material-icons" (click)="onUpdate()">check_circle_outline</span>
         </button>
@@ -54,7 +53,7 @@
  <ng-container matColumnDef="update">
   <th mat-header-cell *matHeaderCellDef></th>
   <td mat-cell *matCellDef="let entrainement">
-    <button mat-button (click)="setToUpdate(entrainement)">
+    <button mat-button (click)="onModificationEntrainement(entrainement.id)">
       <span mat-icon *ngIf="entrainementToUpdate.id != entrainement.id" class="material-icons">create</span>
     </button>
   </td>

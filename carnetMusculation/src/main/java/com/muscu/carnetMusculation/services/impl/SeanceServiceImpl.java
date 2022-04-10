@@ -60,7 +60,7 @@ public class SeanceServiceImpl implements ISeanceService {
 		
 		for (Serie serie : series) {
 			Details details = new Details();
-			details.setExercice(mapperApi.convertToDto(serie.getExercice()));
+			details.setExerciceId(mapperApi.convertToDto(serie.getExercice()).getId());
 			details.setNbRep(serie.getRep());
 			DetailsExercice detailsExercice =  this.detailsExerciceRepository.findByEntrainementIdAndExerciceId(serie.getEntrainement().getId(), serie.getExercice().getId());
 			details.setNbSerie(detailsExercice.getNbSerie());

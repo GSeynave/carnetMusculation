@@ -1,6 +1,7 @@
 package com.muscu.carnetMusculation.entities;
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +39,7 @@ public class Serie {
 	@JoinColumn(name = "exercice_id")
 	Exercice exercice;
 
-	@ManyToOne
+	@ManyToOne (cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "entrainement_id")
 	Entrainement entrainement;
 

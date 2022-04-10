@@ -13,7 +13,6 @@ import { Router } from '@angular/router';
 export class ProgrammeComponent implements OnInit {
   programmes: Programme[] = [];
   pagination: Pagination = new Pagination(0, 10, [5, 10, 20], 0, 'nom');
-  createHidden: boolean = true;
   public isCreerDisplay: boolean = false;
   public isListDisplay: boolean = true;
 
