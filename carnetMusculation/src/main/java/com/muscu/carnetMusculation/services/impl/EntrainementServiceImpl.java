@@ -94,17 +94,6 @@ public class EntrainementServiceImpl implements IEntrainementService {
 			seance = this.seanceService.save(seance);
 		}
 
-//		List<Long> exerciceIds = this.exerciceService.findByEntrainementId(entrainement.getId()).stream()
-//				.map(DetailsExercice::getExercice).map(Exercice::getId).collect(Collectors.toList());
-//		List<Long> newExerciceIds = entrainementCreerApi.getDetails().stream().map(Details::getExerciceId)
-//				.collect(Collectors.toList());
-//		for (Long exerciceId : exerciceIds) {
-//
-//			if (!newExerciceIds.contains(exerciceId)) {
-//				this.exerciceService.deleteById(exerciceId);
-//			}
-//		}
-
 		List<Details> details = new ArrayList<Details>();
 		List<Serie> series = new ArrayList<Serie>();
 		List<DetailsExercice> detailsExercices = new ArrayList<DetailsExercice>();

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+	<changeSet id="CREATE_PROGRAMME" author="GauthierS" dbms="MySQL">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="PROGRAMME" />
+			</not>
+		</preConditions>
+		<createTable tableName="PROGRAMME">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="date_creation" type="date">
+			</column>
+			<column name="date_modification" type="date">
+			</column>
+			<column name="nom" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="CREATE_EXERCICE" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="EXERCICE" />
+			</not>
+		</preConditions>
+		<createTable tableName="EXERCICE">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="muscle" type="varchar(50)">
+			</column>
+			<column name="nom" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="CREATE_ENTRAINEMENT" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="ENTRAINEMENT" />
+			</not>
+		</preConditions>
+		<createTable tableName="ENTRAINEMENT">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="date_creation" type="date">
+			</column>
+			<column name="date_modification" type="date">
+			</column>
+			<column name="nom" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="type" type="varchar(20)">
+			</column>
+			<column name="programme_id" type="bigint">
+				<constraints nullable="false"
+					foreignKeyName="fk_entrainement_programme"
+					references="programme(id)" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="CREATE_ENTRAINEMENT_EXERCICE"
+		author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="ENTRAINEMENT_EXERCICE" />
+			</not>
+		</preConditions>
+		<createTable tableName="ENTRAINEMENT_EXERCICE">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="nb_serie" type="bigint">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="entrainement_id" type="bigint">
+				<constraints nullable="false"
+					foreignKeyName="fk_entrainement_id" references="entrainement(id)" />
+			</column>
+			<column name="exercice_id" type="bigint">
+				<constraints nullable="false"
+					foreignKeyName="fk_exercice_id" references="exercice(id)" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="CREATE_SEANCE" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="SEANCE" />
+			</not>
+		</preConditions>
+		<createTable tableName="SEANCE">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="date_entrainement" type="date">
+			</column>
+			<column name="seance_state" type="int">
+				<constraints nullable="false"></constraints>
+			</column>
+			<column name="nom" type="varchar(50)">
+				<constraints nullable="false" />
+			</column>
+			<column name="entrainement_id" type="bigint">
+				<constraints nullable="false"
+					foreignKeyName="fk_seance_entrainement"
+					references="entrainement(id)" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="CREATE_SERIE" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="SERIE" />
+			</not>
+		</preConditions>
+		<createTable tableName="SERIE">
+			<column name="id" type="bigint">
+				<constraints primaryKey="true" />
+			</column>
+			<column name="numero_serie" type="varchar(5)">
+			</column>
+			<column name="poids" type="varchar(10)">
+			</column>
+			<column name="recup" type="varchar(10)">
+			</column>
+			<column name="rep" type="varchar(10)">
+				<constraints nullable="false" />
+			</column>
+			<column name="entrainement_id" type="bigint">
+				<constraints nullable="false"
+					foreignKeyName="fk_serie_entrainement"
+					references="entrainement(id)" />
+			</column>
+			<column name="exercice_id" type="bigint">
+				<constraints nullable="false"
+					foreignKeyName="fk_serie_exercice" references="exercice(id)" />
+			</column>
+			<column name="seance_id" type="bigint">
+				<constraints nullable="false"
+					foreignKeyName="fk_serie_seance" references="seance(id)" />
+			</column>
+		</createTable>
+	</changeSet>
+
+	<changeSet id="CREATE_HIBERNATE_SEQUENCE" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<not>
+				<tableExists tableName="HIBERNATE_SEQUENCE" />
+			</not>
+		</preConditions>
+		<createTable tableName="HIBERNATE_SEQUENCE">
+			<column name="next_val" type="bigint">
+				<constraints primaryKey="true" />
+			</column>
+		</createTable>
+	</changeSet>
+</databaseChangeLog> 
