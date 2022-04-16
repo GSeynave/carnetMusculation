@@ -26,32 +26,29 @@ public class ProgrammeServiceImpl implements IProgrammeService {
 
 	@Override
 	@Transactional
-	public Programme save(Programme programme) {
-		return programmeRepository.save(programme);
+	public void save(Programme programme) {
+		this.programmeRepository.save(programme);
 	}
 
 	@Override
 	@Transactional
 	public Programme findById(Long id) {
-		return programmeRepository.findById(id).orElseThrow(() -> 
-		new EntityNotFoundException("Programme not found with id :" +id));
+		return this.programmeRepository.findById(id);
 	}
 
 	@Override
 	@Transactional
-	public List<Programme> findAll(){
-		return (List<Programme>) programmeRepository.findAll();
+	public List<Programme> findAll(Pageable pageable){
+		List<Programme> programmes = this.programmeRepository.findAll();
+		return programmes;
 	}
 
 	@Override
 	@Transactional
 	public List<Programme> findPaginated(int pageNo, int size, String sort){
 		Pageable page = PageRequest.of(pageNo, size, Sort.by(sort));
-		Page<Programme> pageResult = programmeRepository.findAll(page);
-		if(pageResult.hasContent()) {
-			return pageResult.getContent();
-		}
-		return new ArrayList<Programme>();
+		List<Programme> pageResult = programmeRepository.findPaginated(page);
+		return pageResult;
 	}
 
 	@Override
@@ -60,15 +57,15 @@ public class ProgrammeServiceImpl implements IProgrammeService {
 		programmeRepository.deleteById(id);
 	}
 
-	@Override
-	@Transactional
-	public boolean existsById(Long id) {
-		return programmeRepository.existsById(id);
-	}
+//	@Override
+//	@Transactional
+//	public boolean existsById(Long id) {
+//		return programmeRepository.existsById(id);
+//	}
 
 	@Override
 	@Transactional
-	public int countAll() {
+	public long countAll() {
 		return programmeRepository.countAll();
 	}
 }

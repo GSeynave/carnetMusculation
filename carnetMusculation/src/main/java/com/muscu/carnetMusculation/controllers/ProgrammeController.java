@@ -8,8 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +43,8 @@ public class ProgrammeController {
 
 	@GetMapping()
 	public @ResponseBody ResponseEntity<List<ProgrammeAPI>> findAll() {
-		List<Programme> programmes = programmeService.findAll();
+		Pageable pageable = null;
+		List<Programme> programmes = programmeService.findAll(pageable);
 		LOGGER.debug("nb program returned {}", programmes.size());
 		return new ResponseEntity<List<ProgrammeAPI>>(
 				programmes.stream()
@@ -50,18 +53,18 @@ public class ProgrammeController {
 				HttpStatus.OK);
 	}
 
-	@GetMapping(params = {"page", "size", "sort"})
-	public @ResponseBody ResponseEntity<List<ProgrammeAPI>> findPaginated(
-			@RequestParam("page") String page,
-			@RequestParam("size") String size,
-			@RequestParam("sort") String sort) {
-		List<Programme> programmes = programmeService.findPaginated(Integer.valueOf(page), Integer.valueOf(size), sort);
-		return new ResponseEntity<List<ProgrammeAPI>>(
-				programmes.stream()
-					.map(mapperApi::convertToDto)
-					.collect(Collectors.toList()),
-				HttpStatus.OK);
-	}
+//	@GetMapping(params = {"page", "size", "sort"})
+//	public @ResponseBody ResponseEntity<List<ProgrammeAPI>> findPaginated(
+//			@RequestParam("page") String page,
+//			@RequestParam("size") String size,
+//			@RequestParam("sort") String sort) {
+//		List<Programme> programmes = programmeService.findPaginated(Integer.valueOf(page), Integer.valueOf(size), sort);
+//		return new ResponseEntity<List<ProgrammeAPI>>(
+//				programmes.stream()
+//					.map(mapperApi::convertToDto)
+//					.collect(Collectors.toList()),
+//				HttpStatus.OK);
+//	}
 		
 	@GetMapping("/{id}")
 	public @ResponseBody ResponseEntity<ProgrammeAPI> findById(@PathVariable Long id) {
@@ -81,7 +84,7 @@ public class ProgrammeController {
 	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<Long> deleteById(@PathVariable Long id) {
 		System.out.println("delete id :" +id);
-		if(programmeService.existsById(id)) {
+		if(ObjectUtils.isEmpty(this.programmeService.findById(id))) {
 			programmeService.deleteById(id);
 			return new ResponseEntity<Long>(id, HttpStatus.OK);
 		}
@@ -91,9 +94,9 @@ public class ProgrammeController {
 	}
 
 	@GetMapping("/count")
-	public @ResponseBody ResponseEntity<Integer> countAll() {
+	public @ResponseBody ResponseEntity<Long> countAll() {
 		LOGGER.debug("count all");
-		return new ResponseEntity<Integer>(programmeService.countAll(), HttpStatus.OK);
+		return new ResponseEntity<Long>(programmeService.countAll(), HttpStatus.OK);
 	}
 
 }

@@ -2,8 +2,6 @@ package com.muscu.carnetMusculation.entities;
 
 import java.util.Date;
 import java.util.List;
-import java.time.OffsetDateTime;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,16 +17,19 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="programme")
+@Table(name="Programme")
 @NamedNativeQueries({
-	@NamedNativeQuery(name = "programme.deleteById", query = "delete from programme p where p.id = :id"),
-	@NamedNativeQuery(name = "programme.findAll", query = "select * from programme p", resultClass=Programme.class),
-	@NamedNativeQuery(name = "programme.findById", query = "select * from programme p where p.id = :id", resultClass=Programme.class)
+	@NamedNativeQuery(name = "programme.deleteById", query = "delete from Programme p where p.id = :id"),
+	@NamedNativeQuery(name = "programme.findAll", query = "select * from Programme p", resultClass = Programme.class),
+	@NamedNativeQuery(name = "programme.findPaginated", query = "select * from Programme p order by :sort", resultClass = Programme.class),
+	@NamedNativeQuery(name = "programme.findById", query = "select * from Programme p where p.id = :id", resultClass = Programme.class),
+	@NamedNativeQuery(name = "programme.countAll", query = "select count(*) from Programme p"),
 })
 public class Programme {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	private long id;
 
 	@Column(name="nom", length=50, nullable=false, unique=false)

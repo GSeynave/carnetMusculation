@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+	<changeSet id="CLEAN_PROGRAMME" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="PROGRAMME"/>
+		</preConditions>
+		<delete tableName="PROGRAMME"></delete>
+	</changeSet>
+
+	<changeSet id="CLEAN_ENTRAINEMENT_EXERCICE"
+		author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="ENTRAINEMENT_EXERCICE"/>
+		</preConditions>
+		<delete tableName="ENTRAINEMENT_EXERCICE"></delete>
+	</changeSet>
+
+	<changeSet id="CLEAN_ENTRAINEMENT" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="ENTRAINEMENT"/>
+		</preConditions>
+		<delete tableName="ENTRAINEMENT"></delete>
+	</changeSet>
+
+	<changeSet id="CLEAN_EXERCICE" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="EXERCICE"/>
+		</preConditions>
+		<delete tableName="EXERCICE"></delete>
+	</changeSet>
+
+	<changeSet id="CLEAN_SERIE" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="SERIE"/>
+		</preConditions>
+		<delete tableName="SERIE"></delete>
+	</changeSet>
+
+	<changeSet id="CLEAN_SEANCE" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="SEANCE"/>
+		</preConditions>
+		<delete tableName="SEANCE"></delete>
+	</changeSet>
+</databaseChangeLog> 

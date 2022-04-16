@@ -2,6 +2,8 @@ package com.muscu.carnetMusculation.repositories;
 
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,10 +14,12 @@ import org.springframework.stereotype.Repository;
 import com.muscu.carnetMusculation.entities.Programme;
 
 @Repository
-public interface IProgrammeRepository extends PagingAndSortingRepository<Programme, Long> {
+public interface IProgrammeRepository {
 
-	Page<Programme> findAll(Pageable pageable);
-	
-	@Query(value = "SELECT count(*) FROM PROGRAMME", nativeQuery = true)
-	int countAll();
+	List<Programme> findAll();
+	List<Programme> findPaginated(Pageable pageable);
+	Programme findById(long id);
+	long countAll();
+	void save(Programme programme);
+	void deleteById(long id);
 }

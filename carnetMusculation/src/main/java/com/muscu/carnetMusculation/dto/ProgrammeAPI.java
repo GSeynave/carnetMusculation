@@ -7,6 +7,7 @@ public class ProgrammeAPI {
 	private Long id;
 	private String nom;
 	private String dateCreation;
+	private String dateModification;
 	private List<Long> entrainementsIds;
 	
 	public Long getId() {
@@ -23,6 +24,12 @@ public class ProgrammeAPI {
 	}
 	public String getDateCreation() {
 		return dateCreation;
+	}
+	public String getDateModification() {
+		return dateModification;
+	}
+	public void setDateModification(String dateModification) {
+		this.dateModification = dateModification;
 	}
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
