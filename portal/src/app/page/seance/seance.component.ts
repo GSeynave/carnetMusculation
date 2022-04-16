@@ -26,7 +26,7 @@ export class SeanceComponent implements OnInit {
       this.entrainementId = Number(paramMap.get('entrainementId'));
 
       if(this.programmeId > 0) {
-        this.musculationService.getEntrainementByProgrammeId(this.programmeId).subscribe( (data) => {
+        this.musculationService.getEntrainementsByProgrammeId(this.programmeId).subscribe( (data) => {
           this.entrainementListe = data;
           if(this.entrainementId > 0 && this.entrainementListe.length > 0){
             this.onEntrainementSelect(this.entrainementId);
@@ -54,7 +54,7 @@ export class SeanceComponent implements OnInit {
   }
 
   onProgrammeSelect(programmeId: number): void{
-    this.musculationService.getEntrainementByProgrammeId(programmeId).subscribe( (data) => {
+    this.musculationService.getEntrainementsByProgrammeId(programmeId).subscribe( (data) => {
       this.entrainementListe = data;
     })
   }

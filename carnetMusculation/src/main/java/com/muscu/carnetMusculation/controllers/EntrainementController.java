@@ -23,7 +23,7 @@ import com.muscu.carnetMusculation.dto.DetailsExerciceAPI;
 import com.muscu.carnetMusculation.dto.EntrainementAPI;
 import com.muscu.carnetMusculation.dto.EntrainementCreerAPI;
 import com.muscu.carnetMusculation.dto.MapperAPI;
-import com.muscu.carnetMusculation.entities.DetailsExercice;
+import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Entrainement;
 import com.muscu.carnetMusculation.services.IEntrainementService;
 
@@ -63,7 +63,7 @@ public class EntrainementController {
 			@PathVariable(name = "entrainementId") Long entrainementId,
 			@PathVariable(name = "exerciceId") Long exerciceId) {
 		LOGGER.debug("Recherche details exercice id {} et entrainement id {}", entrainementId, exerciceId);
-		DetailsExercice details = entrainementService.findDetailsByEntrainementIdAndExerciceId(exerciceId, entrainementId);
+		EntrainementExercice details = entrainementService.findDetailsByEntrainementIdAndExerciceId(entrainementId, exerciceId);
 		return new ResponseEntity<DetailsExerciceAPI>(mapperApi.convertToDto(details), HttpStatus.OK);
 	}
 

@@ -34,7 +34,7 @@
 			</not>
 		</preConditions>
 		<createTable tableName="EXERCICE">
-			<column name="id" type="bigint">
+			<column name="id" type="bigint" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="muscle" type="varchar(50)">
@@ -52,7 +52,7 @@
 			</not>
 		</preConditions>
 		<createTable tableName="ENTRAINEMENT">
-			<column name="id" type="bigint">
+			<column name="id" type="bigint" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="date_creation" type="date">
@@ -80,7 +80,7 @@
 			</not>
 		</preConditions>
 		<createTable tableName="ENTRAINEMENT_EXERCICE">
-			<column name="id" type="bigint">
+			<column name="id" type="bigint" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="nb_serie" type="bigint">
@@ -104,7 +104,7 @@
 			</not>
 		</preConditions>
 		<createTable tableName="SEANCE">
-			<column name="id" type="bigint">
+			<column name="id" type="bigint" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="date_entrainement" type="date">
@@ -130,7 +130,7 @@
 			</not>
 		</preConditions>
 		<createTable tableName="SERIE">
-			<column name="id" type="bigint">
+			<column name="id" type="bigint" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="numero_serie" type="varchar(5)">

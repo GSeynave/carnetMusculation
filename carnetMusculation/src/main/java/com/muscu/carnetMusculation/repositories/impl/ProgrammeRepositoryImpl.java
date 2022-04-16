@@ -1,4 +1,4 @@
-package com.muscu.carnetMusculation.repositories;
+package com.muscu.carnetMusculation.repositories.impl;
 
 import java.util.List;
 
@@ -11,17 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import com.muscu.carnetMusculation.entities.Programme;
+import com.muscu.carnetMusculation.repositories.IProgrammeRepository;
 
 @Repository
-public class ProgrammeRepository implements IProgrammeRepository {
+public class ProgrammeRepositoryImpl implements IProgrammeRepository {
 	@PersistenceContext
 	private EntityManager em;
-
-	@Override
-	public List<Programme> findAll() {
-		TypedQuery<Programme> query = em.createNamedQuery("programme.findAll", Programme.class);
-		return query.getResultList();
-	}
 
 	@Override
 	public List<Programme> findPaginated(Pageable pageable) {
@@ -46,10 +41,11 @@ public class ProgrammeRepository implements IProgrammeRepository {
 	}
 	
 	@Override
-	public void save(Programme programme) {
+	public Programme save(Programme programme) {
 		if(programme != null) {
 			em.persist(programme);
 		}
+		return programme;
 	}
 
 	@Override

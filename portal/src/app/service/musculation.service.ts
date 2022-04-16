@@ -48,29 +48,6 @@ export class MusculationService implements ErrorHandler {
   }
 
   /**
-   *
-   * @returns Seance's
-   */
-  getSeances(): Observable<Seance[]> {
-    console.log("getSeance")
-    return this.http.get<Seance[]>(this.url + "seances")
-      .pipe(
-        catchError(err => {
-          console.error('Error while retrieving the list of seances');
-          return throwError(err);
-        })
-      )
-  }
-  getSeancesByProgramme(programmeId: number): Observable<Seance[]> {
-    return this.http.get<Seance[]>(this.url + `seances/programme/${programmeId}`).pipe(
-      catchError(err => {
-        console.error('Error while retrieving the list of seances');
-        return throwError(err);
-      })
-    )
-  }
-
-  /**
    * Program's
    * @returns
    */
@@ -140,19 +117,9 @@ export class MusculationService implements ErrorHandler {
   }
 
   /**
-   * Entirnaments
+   * Entrainements
    * @returns
    */
-  getEntrainements(programmeId: number): Observable<Entrainement[]> {
-    return this.http.get<Entrainement[]>(this.url + `entrainements/programme/${programmeId}`)
-      .pipe(
-        catchError(err => {
-          console.error('Error while retrieving the list of programmes');
-          return throwError(err);
-        })
-      )
-  }
-
   getEntrainementById(entrainementId: number): Observable<Entrainement> {
     return this.http.get<Entrainement>(this.url + `entrainements/${entrainementId}`)
       .pipe(
@@ -163,7 +130,7 @@ export class MusculationService implements ErrorHandler {
       )
   }
 
-  getEntrainementByProgrammeId(programmeId: number): Observable<Entrainement[]> {
+  getEntrainementsByProgrammeId(programmeId: number): Observable<Entrainement[]> {
     return this.http.get<Entrainement[]>(this.url + `entrainements/programme/${programmeId}`)
       .pipe(
         catchError(err => {
@@ -173,15 +140,6 @@ export class MusculationService implements ErrorHandler {
       )
   }
 
-  getEntrainementDetailsById(entrainementId: number): Observable<EntrainementCreer> {
-    return this.http.get<EntrainementCreer>(this.url + `entrainements/${entrainementId}/details`)
-      .pipe(
-        catchError(err => {
-          console.error('Error while retrieving an entrainement and the details');
-          return throwError(err);
-        })
-      )
-  }
   setEntrainement(entrainementCreer: EntrainementCreer): Observable<EntrainementCreer> {
     return this.http.post<EntrainementCreer>(this.url + "entrainements", entrainementCreer)
       .pipe(

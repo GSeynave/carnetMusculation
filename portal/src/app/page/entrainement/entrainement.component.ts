@@ -35,7 +35,7 @@ export class EntrainementComponent implements OnInit {
       if (this.programmeId > 0) {
         this.musculationService.getProgrammeById(this.programmeId).subscribe((data) => {
           this.programmeSelected = data;
-          this.getEntrainements(this.programmeSelected.id);
+          this.getEntrainementsByProgrammeId(this.programmeSelected.id);
         })
       }
     });
@@ -51,8 +51,8 @@ export class EntrainementComponent implements OnInit {
 
   }
 
-  getEntrainements(programmeId: number) {
-    this.musculationService.getEntrainements(programmeId).subscribe((data) => {
+  getEntrainementsByProgrammeId(programmeId: number) {
+    this.musculationService.getEntrainementsByProgrammeId(programmeId).subscribe((data) => {
       this.entrainementListe = data;
     });
   }
@@ -87,16 +87,14 @@ export class EntrainementComponent implements OnInit {
   }
 
   onProgrammeSelect(programmeId: number): void {
-    this.musculationService.getEntrainementByProgrammeId(programmeId).subscribe((data) => {
+    this.musculationService.getEntrainementsByProgrammeId(programmeId).subscribe((data) => {
       this.entrainementListe = data;
     })
   }
 
   onModificationEntrainement(entrainementId: number): void {
-    this.musculationService.getEntrainementDetailsById(entrainementId).subscribe((data) =>  {
-      this.entrainementToUpdate = data;
+    this.getEntrainementsByProgrammeId(entrainementId);
       this.isModification = true;
-    });
   }
   annulerModification(): void {
     this.isModification = false;

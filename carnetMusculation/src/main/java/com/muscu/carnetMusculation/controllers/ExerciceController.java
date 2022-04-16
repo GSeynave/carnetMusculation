@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.muscu.carnetMusculation.dto.DetailsExerciceAPI;
 import com.muscu.carnetMusculation.dto.ExerciceAPI;
 import com.muscu.carnetMusculation.dto.MapperAPI;
-import com.muscu.carnetMusculation.entities.DetailsExercice;
+import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.services.IExerciceService;
 
@@ -37,7 +37,7 @@ public class ExerciceController {
 	
 	@GetMapping("/entrainement/{entrainementId}")
 	public @ResponseBody ResponseEntity<List<DetailsExerciceAPI>> findByProgrammeId(@PathVariable(name = "entrainementId") Long entrainementId) {
-		List<DetailsExercice> details = this.exerciceService.findByEntrainementId(entrainementId);
+		List<EntrainementExercice> details = this.exerciceService.findByEntrainementId(entrainementId);
 
 		return new ResponseEntity<List<DetailsExerciceAPI>>(
 				details.stream()

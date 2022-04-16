@@ -10,9 +10,7 @@ public interface IProgrammeService {
 	
 	Programme findById(Long id);
 	
-	void save(Programme programme);
-	
-	List<Programme> findAll(Pageable pageable);
+	Programme save(Programme programme);
 	
 	void deleteById(Long id);
 	

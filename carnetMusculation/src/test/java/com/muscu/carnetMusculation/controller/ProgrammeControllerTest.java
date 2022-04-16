@@ -1,7 +1,6 @@
 package com.muscu.carnetMusculation.controller;
 
 import java.util.Date;
-import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,13 +19,6 @@ public class ProgrammeControllerTest {
 	@Autowired
 	private ProgrammeController programmeController;
 
-	@Test
-	public void findAllTest() {
-		ResponseEntity<List<ProgrammeAPI>> responseEntity = programmeController.findAll();
-		List<ProgrammeAPI> programmeApiList = responseEntity.getBody();
-
-		Assertions.assertEquals(2, programmeApiList.size());
-	}
 
 	@Test
 	public void findByIdTest() {

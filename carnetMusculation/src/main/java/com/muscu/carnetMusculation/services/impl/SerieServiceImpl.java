@@ -20,15 +20,6 @@ import com.muscu.carnetMusculation.services.ISerieService;
 public class SerieServiceImpl implements ISerieService {
 	@Autowired
 	private ISerieRepository serieRepository;
-	@Autowired
-	private MapperAPI mapperApi;
-
-	@Override
-	@Transactional
-	public Serie saveBySerieAPI(SerieAPI serieApi) {
-		Serie serie = mapperApi.convertToEntity(serieApi);
-		return this.serieRepository.save(serie);
-	}
 	
 	@Override
 	@Transactional
@@ -48,7 +39,7 @@ public class SerieServiceImpl implements ISerieService {
 
 	@Override
 	public void deleteByIds(List<Long> ids) {
-		this.serieRepository.deleteAllById(ids);;
+		this.serieRepository.deleteByIdIn(ids);;
 	}
 
 	@Override

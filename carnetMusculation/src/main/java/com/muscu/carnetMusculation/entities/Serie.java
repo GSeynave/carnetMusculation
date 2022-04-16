@@ -9,14 +9,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity 
 @Table(name="serie")
+@NamedNativeQueries({
+	@NamedNativeQuery(name = "serie.findById", query = "select * from Serie s where s.id = :id", resultClass = Serie.class),
+	@NamedNativeQuery(name = "serie.findBySeanceIdAndNumeroSerie", query = "select * from Serie s where s.seance_id = :seanceId and s.numero_serie = :numeroSerie", resultClass = Serie.class),
+	@NamedNativeQuery(name = "serie.findBySeanceIdAndNumeroSerieAndEntrainementIdAndExerciceId", query = "select * from Serie s where s.seance_id = :seanceId and s.numero_serie = :numeroSerie and s.entrainement_id = :entrainementId and s.exercice_id = :exerciceId", resultClass = Serie.class),
+	@NamedNativeQuery(name = "serie.findBySeanceId", query = "select * from Serie s where s.seance_id = :seanceId", resultClass = Serie.class),
+	@NamedNativeQuery(name = "serie.deleteByEntrainementIdAndSeanceIdAndExerciceIdIn", query = "delete from Serie s where s.entrainement_id =:entrainementId and s.seance_id = :seanceId and s.exercice_id in :exerciceIds"),
+	@NamedNativeQuery(name = "serie.deleteById", query = "delete from Serie s where s.id = :id")
+})
 public class Serie {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 	
 	@Column(name = "numero_serie", nullable = false)

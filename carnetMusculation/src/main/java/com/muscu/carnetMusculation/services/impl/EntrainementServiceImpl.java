@@ -16,13 +16,13 @@ import com.muscu.carnetMusculation.dto.Details;
 import com.muscu.carnetMusculation.dto.EntrainementAPI;
 import com.muscu.carnetMusculation.dto.EntrainementCreerAPI;
 import com.muscu.carnetMusculation.dto.MapperAPI;
-import com.muscu.carnetMusculation.entities.DetailsExercice;
+import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Entrainement;
 import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Programme;
 import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.entities.Serie;
-import com.muscu.carnetMusculation.repositories.IDetailsExerciceRepository;
+import com.muscu.carnetMusculation.repositories.IEntrainementExerciceRepository;
 import com.muscu.carnetMusculation.repositories.IEntrainementRepository;
 import com.muscu.carnetMusculation.services.IEntrainementService;
 import com.muscu.carnetMusculation.services.IExerciceService;
@@ -38,7 +38,7 @@ public class EntrainementServiceImpl implements IEntrainementService {
 	@Autowired
 	private IEntrainementRepository entrainementRepository;
 	@Autowired
-	private IDetailsExerciceRepository detailsRepository;
+	private IEntrainementExerciceRepository detailsRepository;
 	@Autowired
 	private ISeanceService seanceService;
 	@Autowired
@@ -54,7 +54,7 @@ public class EntrainementServiceImpl implements IEntrainementService {
 
 	@Transactional
 	public Entrainement findById(Long id) {
-		return this.entrainementRepository.findById(id).orElse(null);
+		return this.entrainementRepository.findById(id);
 	}
 
 	@Transactional
@@ -63,8 +63,8 @@ public class EntrainementServiceImpl implements IEntrainementService {
 	}
 
 	@Transactional
-	public DetailsExercice findDetailsByEntrainementIdAndExerciceId(Long exerciceId, Long entrainementId) {
-		return this.detailsRepository.findByEntrainementIdAndExerciceId(exerciceId, entrainementId);
+	public EntrainementExercice findDetailsByEntrainementIdAndExerciceId(Long entrainementId, Long exerciceId) {
+		return this.detailsRepository.findByEntrainementIdAndExerciceId(entrainementId, exerciceId);
 	}
 
 	@Transactional
@@ -96,14 +96,14 @@ public class EntrainementServiceImpl implements IEntrainementService {
 
 		List<Details> details = new ArrayList<Details>();
 		List<Serie> series = new ArrayList<Serie>();
-		List<DetailsExercice> detailsExercices = new ArrayList<DetailsExercice>();
+		List<EntrainementExercice> detailsExercices = new ArrayList<EntrainementExercice>();
 
 		for (Details detail : entrainementCreerApi.getDetails()) {
 			Details detailEntrainement = new Details();
-			DetailsExercice detailExercice = this.exerciceService
+			EntrainementExercice detailExercice = this.exerciceService
 					.findByEntrainementIdAndExerciceId(entrainement.getId(), detail.getExerciceId());
 			if (ObjectUtils.isEmpty(detailExercice)) {
-				detailExercice = new DetailsExercice();
+				detailExercice = new EntrainementExercice();
 			}
 			detailExercice.setEntrainement(entrainement);
 			Exercice exercice = new Exercice();
@@ -137,7 +137,7 @@ public class EntrainementServiceImpl implements IEntrainementService {
 		entrainementCreer.setDetails(details);
 
 		List<Long> exerciceIdList = this.exerciceService.findByEntrainementId(entrainement.getId()).stream()
-				.map(DetailsExercice::getExercice).map(Exercice::getId).collect(Collectors.toList());
+				.map(EntrainementExercice::getExercice).map(Exercice::getId).collect(Collectors.toList());
 
 		exerciceIdList.removeAll(entrainementCreerApi.getDetails().stream().map(Details::getExerciceId).collect(Collectors.toList()));
 		
@@ -197,10 +197,10 @@ public class EntrainementServiceImpl implements IEntrainementService {
 		entrainementCreerApi.setModificationDate(entrainement.getDateModification().toString());
 
 		Seance seance = this.seanceService.findByEntrainementIdAndState(entrainementId, SeanceState.INIT);
-		List<DetailsExercice> detailsExercices = this.findDetailsByEntrainementId(entrainementId);
+		List<EntrainementExercice> detailsExercices = this.findDetailsByEntrainementId(entrainementId);
 		List<Details> details = new ArrayList<Details>();
 
-		for (DetailsExercice detailExercice : detailsExercices) {
+		for (EntrainementExercice detailExercice : detailsExercices) {
 
 			Details detail = new Details();
 			detail.setExerciceId(detailExercice.getExercice().getId());
@@ -217,7 +217,7 @@ public class EntrainementServiceImpl implements IEntrainementService {
 		return entrainementCreerApi;
 	}
 
-	private List<DetailsExercice> findDetailsByEntrainementId(Long entrainementId) {
+	private List<EntrainementExercice> findDetailsByEntrainementId(Long entrainementId) {
 		return this.detailsRepository.findAllByEntrainementId(entrainementId);
 	}
 

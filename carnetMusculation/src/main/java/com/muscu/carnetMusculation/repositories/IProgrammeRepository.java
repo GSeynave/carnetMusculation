@@ -16,10 +16,9 @@ import com.muscu.carnetMusculation.entities.Programme;
 @Repository
 public interface IProgrammeRepository {
 
-	List<Programme> findAll();
 	List<Programme> findPaginated(Pageable pageable);
 	Programme findById(long id);
 	long countAll();
-	void save(Programme programme);
+	Programme save(Programme programme);
 	void deleteById(long id);
 }

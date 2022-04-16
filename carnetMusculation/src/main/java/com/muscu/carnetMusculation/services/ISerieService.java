@@ -9,7 +9,6 @@ import com.muscu.carnetMusculation.entities.Serie;
 public interface ISerieService {
 
 	Serie save(Serie serie);
-	Serie saveBySerieAPI(SerieAPI serieApi);
 	List<Serie> findBySeanceIdAndNumeroSerie(Long seanceId, String numeroSerie);
 	List<Serie> findBySeanceId(Long seanceId);
 	void deleteByIds(List<Long> ids);

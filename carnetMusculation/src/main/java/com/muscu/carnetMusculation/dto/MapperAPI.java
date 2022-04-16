@@ -7,7 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.muscu.carnetMusculation.entities.DetailsExercice;
+import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Entrainement;
 import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Programme;
@@ -32,12 +32,12 @@ public class MapperAPI {
 	}
 
 	//Details mapper
-	public DetailsExerciceAPI convertToDto(DetailsExercice details) {
+	public DetailsExerciceAPI convertToDto(EntrainementExercice details) {
 		return mapper.map(details, DetailsExerciceAPI.class);
 	}
 
-	public DetailsExercice convertToEntity(DetailsExerciceAPI detailsApi) {
-		return mapper.map(detailsApi, DetailsExercice.class);
+	public EntrainementExercice convertToEntity(DetailsExerciceAPI detailsApi) {
+		return mapper.map(detailsApi, EntrainementExercice.class);
 	}
 
 	//Entrainement mapper

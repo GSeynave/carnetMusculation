@@ -1,13 +1,10 @@
 package com.muscu.carnetMusculation.services.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -26,21 +23,14 @@ public class ProgrammeServiceImpl implements IProgrammeService {
 
 	@Override
 	@Transactional
-	public void save(Programme programme) {
-		this.programmeRepository.save(programme);
+	public Programme save(Programme programme) {
+		return this.programmeRepository.save(programme);
 	}
 
 	@Override
 	@Transactional
 	public Programme findById(Long id) {
 		return this.programmeRepository.findById(id);
-	}
-
-	@Override
-	@Transactional
-	public List<Programme> findAll(Pageable pageable){
-		List<Programme> programmes = this.programmeRepository.findAll();
-		return programmes;
 	}
 
 	@Override

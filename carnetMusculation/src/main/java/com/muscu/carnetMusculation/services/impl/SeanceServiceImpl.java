@@ -12,11 +12,11 @@ import com.muscu.carnetMusculation.dto.Details;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.SeanceAPI;
 import com.muscu.carnetMusculation.dto.SeanceInformationInit;
-import com.muscu.carnetMusculation.entities.DetailsExercice;
+import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.entities.Serie;
-import com.muscu.carnetMusculation.repositories.IDetailsExerciceRepository;
+import com.muscu.carnetMusculation.repositories.IEntrainementExerciceRepository;
 import com.muscu.carnetMusculation.repositories.ISeanceRepository;
 import com.muscu.carnetMusculation.services.ISeanceService;
 import com.muscu.carnetMusculation.services.ISerieService;
@@ -30,7 +30,7 @@ public class SeanceServiceImpl implements ISeanceService {
 	@Autowired
 	private ISerieService serieService;
 	@Autowired
-	private IDetailsExerciceRepository detailsExerciceRepository;
+	private IEntrainementExerciceRepository detailsExerciceRepository;
 	@Autowired
 	private MapperAPI mapperApi;
 	
@@ -62,7 +62,7 @@ public class SeanceServiceImpl implements ISeanceService {
 			Details details = new Details();
 			details.setExerciceId(mapperApi.convertToDto(serie.getExercice()).getId());
 			details.setNbRep(serie.getRep());
-			DetailsExercice detailsExercice =  this.detailsExerciceRepository.findByEntrainementIdAndExerciceId(serie.getEntrainement().getId(), serie.getExercice().getId());
+			EntrainementExercice detailsExercice =  this.detailsExerciceRepository.findByEntrainementIdAndExerciceId(serie.getEntrainement().getId(), serie.getExercice().getId());
 			details.setNbSerie(detailsExercice.getNbSerie());
 			details.setRecup(serie.getRep());
 			detailsList.add(details);

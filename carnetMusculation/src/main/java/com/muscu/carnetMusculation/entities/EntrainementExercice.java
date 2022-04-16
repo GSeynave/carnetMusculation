@@ -9,14 +9,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "details_exercice")
-public class DetailsExercice {
+@Table(name = "entrainement_exercice")
+@NamedNativeQueries({
+	@NamedNativeQuery(name = "entrainementExercice.findByEntrainementIdAndExerciceId", query = "select * from EntrainementExercice e where e.entrainementId = :entrainement_id and e.exercice_id = :exerciceId", resultClass = EntrainementExercice.class),
+	@NamedNativeQuery(name = "entrainementExercice.findByEntrainementId", query = "select * from EntrainementExercice e where e.entrainement_id = :entrainementId", resultClass = EntrainementExercice.class),
+	@NamedNativeQuery(name = "entrainementExercice.deleteAllById", query = "delete from EntrainementExercice e where e.id in :id"),
+	@NamedNativeQuery(name = "entrainementExercice.deleteByEntrainementIdAndExerciceIdIn", query = "delete from EntrainementExercice e where e.entrainement_id = :id and e.exercice_id in :exerciceIds")
+})
+public class EntrainementExercice {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)

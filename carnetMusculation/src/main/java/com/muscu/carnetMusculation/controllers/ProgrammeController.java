@@ -41,30 +41,18 @@ public class ProgrammeController {
 	@Autowired
 	private MapperAPI mapperApi;
 
-	@GetMapping()
-	public @ResponseBody ResponseEntity<List<ProgrammeAPI>> findAll() {
-		Pageable pageable = null;
-		List<Programme> programmes = programmeService.findAll(pageable);
-		LOGGER.debug("nb program returned {}", programmes.size());
+	@GetMapping(params = {"page", "size", "sort"})
+	public @ResponseBody ResponseEntity<List<ProgrammeAPI>> findPaginated(
+			@RequestParam("page") String page,
+			@RequestParam("size") String size,
+			@RequestParam("sort") String sort) {
+		List<Programme> programmes = programmeService.findPaginated(Integer.valueOf(page), Integer.valueOf(size), sort);
 		return new ResponseEntity<List<ProgrammeAPI>>(
 				programmes.stream()
 					.map(mapperApi::convertToDto)
 					.collect(Collectors.toList()),
 				HttpStatus.OK);
 	}
-
-//	@GetMapping(params = {"page", "size", "sort"})
-//	public @ResponseBody ResponseEntity<List<ProgrammeAPI>> findPaginated(
-//			@RequestParam("page") String page,
-//			@RequestParam("size") String size,
-//			@RequestParam("sort") String sort) {
-//		List<Programme> programmes = programmeService.findPaginated(Integer.valueOf(page), Integer.valueOf(size), sort);
-//		return new ResponseEntity<List<ProgrammeAPI>>(
-//				programmes.stream()
-//					.map(mapperApi::convertToDto)
-//					.collect(Collectors.toList()),
-//				HttpStatus.OK);
-//	}
 		
 	@GetMapping("/{id}")
 	public @ResponseBody ResponseEntity<ProgrammeAPI> findById(@PathVariable Long id) {
@@ -77,7 +65,7 @@ public class ProgrammeController {
 	public @ResponseBody ResponseEntity<ProgrammeAPI> save(@RequestBody ProgrammeAPI programApi) {
 		LOGGER.debug("Saving programApi {}", programApi);
 		Programme program = mapperApi.convertToEntity(programApi);
-		programmeService.save(program);
+		programApi = mapperApi.convertToDto(this.programmeService.save(program));
 		return new ResponseEntity<ProgrammeAPI>(programApi , HttpStatus.OK);
 	}
 

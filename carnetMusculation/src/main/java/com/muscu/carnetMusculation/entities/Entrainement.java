@@ -11,18 +11,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.muscu.carnetMusculation.utils.EntrainementType;
-
 @Entity 
 @Table(name="Entrainement")
+@NamedNativeQueries({
+	@NamedNativeQuery(name = "entrainement.findById", query = "select * from Entrainement e where e.id = :id", resultClass = Entrainement.class),
+	@NamedNativeQuery(name = "entrainement.findByProgrammeId", query = "Select * from Entrainement e where e.programme_id = :programmeId", resultClass = Entrainement.class),
+	@NamedNativeQuery(name = "entrainement.findBYNom", query = "Select * from Entrainement e where e.nom = :nom", resultClass = Entrainement.class),
+	@NamedNativeQuery(name = "entrainement.deleteById", query = "delete from Entrainement e where e.id = :id")
+})
 public class Entrainement {
+	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	private long id;
 
 	@Temporal(TemporalType.DATE)
@@ -50,7 +58,7 @@ public class Entrainement {
 	private List<Serie> series;
 
 	@OneToMany(mappedBy = "entrainement", cascade = CascadeType.ALL)
-	private List<DetailsExercice> details;
+	private List<EntrainementExercice> details;
 
 	public long getId() {
 		return id;

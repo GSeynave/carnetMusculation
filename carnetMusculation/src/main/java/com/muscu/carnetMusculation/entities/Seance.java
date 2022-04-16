@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -20,10 +22,14 @@ import com.muscu.carnetMusculation.utils.SeanceState;
 
 @Entity 
 @Table(name="seance")
+@NamedNativeQueries({
+	@NamedNativeQuery(name = "seance.findByEntrainementIdAndState", query = "select * from Seance s where s.entrainement_id = :entrainementId and s.state = :state ", resultClass = Seance.class),
+})
 public class Seance {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
 	private Long id;
 
 	@Column(name="date_entrainement")

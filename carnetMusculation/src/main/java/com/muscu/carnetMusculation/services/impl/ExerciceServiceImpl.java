@@ -9,9 +9,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.muscu.carnetMusculation.entities.DetailsExercice;
+import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Exercice;
-import com.muscu.carnetMusculation.repositories.IDetailsExerciceRepository;
+import com.muscu.carnetMusculation.repositories.IEntrainementExerciceRepository;
 import com.muscu.carnetMusculation.repositories.IExerciceRepository;
 import com.muscu.carnetMusculation.services.IExerciceService;
 
@@ -19,13 +19,13 @@ import com.muscu.carnetMusculation.services.IExerciceService;
 public class ExerciceServiceImpl implements IExerciceService {
 
 	@Autowired
-	private IDetailsExerciceRepository detailsRepository;
+	private IEntrainementExerciceRepository detailsRepository;
 	@Autowired
 	private IExerciceRepository exerciceRepository;
 
 	@Transactional
 	@Override
-	public List<DetailsExercice> findByEntrainementId(Long entrainementId) {
+	public List<EntrainementExercice> findByEntrainementId(Long entrainementId) {
 		return this.detailsRepository.findAllByEntrainementId(entrainementId);
 
 	}
@@ -38,8 +38,7 @@ public class ExerciceServiceImpl implements IExerciceService {
 
 	@Override
 	public Exercice findById(Long exerciceId) {
-		return this.exerciceRepository.findById(exerciceId).orElseThrow(() -> 
-		new EntityNotFoundException("Programme not found with id :" +exerciceId));
+		return this.exerciceRepository.findById(exerciceId);
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class ExerciceServiceImpl implements IExerciceService {
 	}
 
 	@Override
-	public DetailsExercice findByEntrainementIdAndExerciceId(long id, Long exerciceId) {
+	public EntrainementExercice findByEntrainementIdAndExerciceId(long id, Long exerciceId) {
 		return this.detailsRepository.findByEntrainementIdAndExerciceId(id, exerciceId);
 	}
 
