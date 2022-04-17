@@ -28,6 +28,12 @@ public class ProgrammeRepositoryImpl implements IProgrammeRepository {
 	}
 	
 	@Override
+	public List<Programme> findAll() {
+		TypedQuery<Programme> query = em.createNamedQuery("programme.findAll", Programme.class);
+		return query.getResultList();
+	}
+	
+	@Override
 	public Programme findById(long id) {
 		TypedQuery<Programme> query = em.createNamedQuery("programme.findById", Programme.class);
 		query.setParameter("id", id);

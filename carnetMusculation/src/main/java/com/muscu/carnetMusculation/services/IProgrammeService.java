@@ -18,6 +18,8 @@ public interface IProgrammeService {
 	
 	List<Programme> findPaginated(int page, int size, String sort);
 	
+	List<Programme> findAll();
+
 	long countAll();
 	
 }

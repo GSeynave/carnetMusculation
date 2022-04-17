@@ -134,7 +134,7 @@ export class MusculationService implements ErrorHandler {
     return this.http.get<Entrainement[]>(this.url + `entrainements/programme/${programmeId}`)
       .pipe(
         catchError(err => {
-          console.error('Error while retrieving the list of programmes');
+          console.error('Error while retrieving the list of entrainements');
           return throwError(err);
         })
       )

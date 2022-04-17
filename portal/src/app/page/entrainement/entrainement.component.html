@@ -1,11 +1,11 @@
 <mat-card class="programme-page-container">
 
-  <div class="menu">
+  <nav aria-label="entrainement-nav" class="menu">
     <button mat-stroked-button (click)="displayListe()">Vos entrainements</button>
     <button mat-stroked-button (click)="displayCreer()">Creer un
       entrainement</button>
 
-  </div>
+    </nav>
 
   <!-- Création d'un entrainement -->
   <app-entrainement-form *ngIf="isCreerDisplay" [programmeListe]="programmeListe" [exerciceListe]="exerciceListe">
@@ -20,12 +20,12 @@
   </app-entrainement-liste>
 
   <!-- Démarrer un entrainement -->
-  <div *ngIf="entrainementSelected.id != -1">
+  <section *ngIf="entrainementSelected.id != -1">
     <button mat-button (click)="retour()">
       <span mat-icon class="material-icons">arrow_back</span>
     </button>
     <app-entrainement-start [entrainementSelected]="entrainementSelected"></app-entrainement-start>
-  </div>
+  </section>
 
 
 

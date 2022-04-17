@@ -43,6 +43,12 @@ public class ProgrammeServiceImpl implements IProgrammeService {
 
 	@Override
 	@Transactional
+	public List<Programme> findAll(){
+		return programmeRepository.findAll();
+	}
+
+	@Override
+	@Transactional
 	public void deleteById(Long id){
 		programmeRepository.deleteById(id);
 	}

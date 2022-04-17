@@ -1,13 +1,13 @@
 <mat-card class="programme-page-container">
 
 
-  <div class="menu">
+  <nav aria-label="programme-nav" class="menu">
     <button mat-stroked-button (click)="displayListe()">Vos programmes</button>
     <button mat-stroked-button (click)="displayCreer()">Creer un
       programme </button>
-  </div>
+  </nav>
 
-  <div class="programme-page-content">
+  <section class="programme-page-content">
     <ng-container>
       <app-programme-form *ngIf="isCreerDisplay" (programmeOnSubmit)="onSubmit($event)">
       </app-programme-form>
@@ -19,5 +19,5 @@
         (onProgrammeSelect)="onProgrammeSelect($event)">
       </app-programme-list>
     </ng-container>
-  </div>
+  </section>
 </mat-card>
