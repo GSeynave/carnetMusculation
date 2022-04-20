@@ -6,7 +6,7 @@ import com.muscu.carnetMusculation.dto.SerieAPI;
 import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Serie;
 
-public interface ISerieService {
+public interface SerieService {
 
 	Serie save(Serie serie);
 	List<Serie> findBySeanceIdAndNumeroSerie(Long seanceId, String numeroSerie);
@@ -14,4 +14,5 @@ public interface ISerieService {
 	void deleteByIds(List<Long> ids);
 	Serie findBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(Long seanceId, String numeroSerie, Long entrainementId, Long exerciceId);
 	void deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(long entrainementId, Long seanceId, List<Long> exerciceIdList);
+	boolean existsBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(Long seanceId, String numeroSerie, long exerciceId, Long entrainementId);
 }

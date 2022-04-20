@@ -8,7 +8,7 @@ import com.muscu.carnetMusculation.dto.EntrainementCreerAPI;
 import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Entrainement;
 
-public interface IEntrainementService {
+public interface EntrainementService {
 
 	Entrainement findById(Long id);
 
@@ -21,6 +21,8 @@ public interface IEntrainementService {
 	EntrainementCreerAPI creationEntrainement(EntrainementCreerAPI entrainementCreerApi) throws ParseException;
 
 	boolean existsById(Long id);
+
+	boolean existsByNom(String nom);
 
 	void deleteById(Long id);
 

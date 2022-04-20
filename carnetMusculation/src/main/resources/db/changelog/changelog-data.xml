@@ -31,4 +31,40 @@
 			</column>
 		</insert>
 	</changeSet>
+	
+	<changeSet id="INSERT_EXERCICES" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="EXERCICE"/>
+		</preConditions>
+		<insert tableName="EXERCICE">
+			<column name="id" value="1"></column>
+			<column name="muscle" value="Pectoraux"></column>
+			<column name="nom" value="Developpé couché"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="2"></column>
+			<column name="muscle" value="Dos"></column>
+			<column name="nom" value="Traction"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="3"></column>
+			<column name="muscle" value="Dos"></column>
+			<column name="nom" value="Rowing bust"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="4"></column>
+			<column name="muscle" value="Dos"></column>
+			<column name="nom" value="Tirage vertical"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="5"></column>
+			<column name="muscle" value="Epaules"></column>
+			<column name="nom" value="Developpé militaire haltère"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="6"></column>
+			<column name="muscle" value="Triceps"></column>
+			<column name="nom" value="Extensions poulie"></column>
+		</insert>
+	</changeSet>
 </databaseChangeLog> 

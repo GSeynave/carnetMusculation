@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.muscu.carnetMusculation.entities.Exercice;
 
-public interface IExerciceRepository{
+public interface ExerciceRepository extends PagingAndSortingRepository<Exercice, Long>{
 	
 	List<Exercice> findAll();
 	Exercice findById(long id);

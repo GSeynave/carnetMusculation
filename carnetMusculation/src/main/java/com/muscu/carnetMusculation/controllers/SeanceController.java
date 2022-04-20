@@ -15,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.muscu.carnetMusculation.dto.SeanceInformationInit;
 import com.muscu.carnetMusculation.entities.Seance;
-import com.muscu.carnetMusculation.services.ISeanceService;
+import com.muscu.carnetMusculation.services.SeanceService;
 import com.muscu.carnetMusculation.utils.SeanceState;
 
 @RestController
@@ -25,7 +25,7 @@ public class SeanceController {
 	Logger LOGGER = LoggerFactory.getLogger(EntrainementController.class);
 
 	@Autowired
-	private ISeanceService seanceService;
+	private SeanceService seanceService;
 
 	@GetMapping("/entrainement/{entrainementId}/{state}")
 	public @ResponseBody ResponseEntity<SeanceInformationInit> findByEntrainementIdAndState(

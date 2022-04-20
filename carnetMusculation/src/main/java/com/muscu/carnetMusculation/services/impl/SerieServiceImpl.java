@@ -12,14 +12,14 @@ import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.SerieAPI;
 import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Serie;
-import com.muscu.carnetMusculation.repositories.ISerieRepository;
-import com.muscu.carnetMusculation.services.ISerieService;
+import com.muscu.carnetMusculation.repositories.SerieRepository;
+import com.muscu.carnetMusculation.services.SerieService;
 
 
 @Service
-public class SerieServiceImpl implements ISerieService {
+public class SerieServiceImpl implements SerieService {
 	@Autowired
-	private ISerieRepository serieRepository;
+	private SerieRepository serieRepository;
 	
 	@Override
 	@Transactional
@@ -51,5 +51,11 @@ public class SerieServiceImpl implements ISerieService {
 	public void deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(long entrainementId, Long seanceId, List<Long> exerciceIdList) {
 		this.serieRepository.deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(entrainementId, seanceId, exerciceIdList);
 		
+	}
+
+	@Override
+	public boolean existsBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(Long seanceId, String numeroSerie,
+			long exerciceId, Long entrainementId) {
+		return this.serieRepository.existsBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(seanceId, numeroSerie, exerciceId, entrainementId);
 	}
 }

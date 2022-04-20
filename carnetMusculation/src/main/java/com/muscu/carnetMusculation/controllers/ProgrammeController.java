@@ -27,7 +27,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.ProgrammeAPI;
 import com.muscu.carnetMusculation.entities.Programme;
-import com.muscu.carnetMusculation.services.IProgrammeService;
+import com.muscu.carnetMusculation.services.ProgrammeService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -36,7 +36,7 @@ public class ProgrammeController {
 	Logger LOGGER = LoggerFactory.getLogger(ProgrammeController.class);
 
 	@Autowired
-	private IProgrammeService programmeService;
+	private ProgrammeService programmeService;
 
 	@Autowired
 	private MapperAPI mapperApi;

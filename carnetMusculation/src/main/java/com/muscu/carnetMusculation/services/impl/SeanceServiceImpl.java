@@ -16,21 +16,21 @@ import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.entities.Serie;
-import com.muscu.carnetMusculation.repositories.IEntrainementExerciceRepository;
-import com.muscu.carnetMusculation.repositories.ISeanceRepository;
-import com.muscu.carnetMusculation.services.ISeanceService;
-import com.muscu.carnetMusculation.services.ISerieService;
+import com.muscu.carnetMusculation.repositories.EntrainementExerciceRepository;
+import com.muscu.carnetMusculation.repositories.SeanceRepository;
+import com.muscu.carnetMusculation.services.SeanceService;
+import com.muscu.carnetMusculation.services.SerieService;
 import com.muscu.carnetMusculation.utils.SeanceState;
 
 
 @Service
-public class SeanceServiceImpl implements ISeanceService {
+public class SeanceServiceImpl implements SeanceService {
 	@Autowired
-	private ISeanceRepository seanceRepository;
+	private SeanceRepository seanceRepository;
 	@Autowired
-	private ISerieService serieService;
+	private SerieService serieService;
 	@Autowired
-	private IEntrainementExerciceRepository detailsExerciceRepository;
+	private EntrainementExerciceRepository detailsExerciceRepository;
 	@Autowired
 	private MapperAPI mapperApi;
 	
@@ -74,5 +74,10 @@ public class SeanceServiceImpl implements ISeanceService {
 	@Override
 	public Seance findByEntrainementIdAndState(Long entrainementId, SeanceState state) {
 		return this.seanceRepository.findByEntrainementIdAndState(entrainementId, state);
+	}
+
+	@Override
+	public boolean existsByEntrainementIdAndState(long entrainementId, SeanceState state) {
+		return this.seanceRepository.existsByEntrainementIdAndState(entrainementId, state);
 	}
 }

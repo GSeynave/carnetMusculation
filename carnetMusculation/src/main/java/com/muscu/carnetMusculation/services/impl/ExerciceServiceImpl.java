@@ -11,17 +11,17 @@ import org.springframework.stereotype.Service;
 
 import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Exercice;
-import com.muscu.carnetMusculation.repositories.IEntrainementExerciceRepository;
-import com.muscu.carnetMusculation.repositories.IExerciceRepository;
-import com.muscu.carnetMusculation.services.IExerciceService;
+import com.muscu.carnetMusculation.repositories.EntrainementExerciceRepository;
+import com.muscu.carnetMusculation.repositories.ExerciceRepository;
+import com.muscu.carnetMusculation.services.ExerciceService;
 
 @Service
-public class ExerciceServiceImpl implements IExerciceService {
+public class ExerciceServiceImpl implements ExerciceService {
 
 	@Autowired
-	private IEntrainementExerciceRepository detailsRepository;
+	private EntrainementExerciceRepository detailsRepository;
 	@Autowired
-	private IExerciceRepository exerciceRepository;
+	private ExerciceRepository exerciceRepository;
 
 	@Transactional
 	@Override
@@ -38,7 +38,12 @@ public class ExerciceServiceImpl implements IExerciceService {
 
 	@Override
 	public Exercice findById(Long exerciceId) {
-		return this.exerciceRepository.findById(exerciceId);
+		Optional<Exercice> exercice = this.exerciceRepository.findById(exerciceId);
+		if (exercice.isPresent()) {
+			return exercice.get();
+		} else {
+			throw new EntityNotFoundException("Exercice non trouvé pour l'id : " +exerciceId);
+		}
 	}
 
 	@Override
@@ -60,6 +65,15 @@ public class ExerciceServiceImpl implements IExerciceService {
 	@Override
 	public void deleteByEntrainementIdAndExerciceIdIn(long id, List<Long> exerciceIdList) {
 		this.detailsRepository.deleteByEntrainementIdAndExerciceIdIn(id, exerciceIdList);
-		
+	}
+
+	@Override
+	public boolean existsById(Long exerciceId) {
+		return this.exerciceRepository.existsById(exerciceId);
+	}
+
+	@Override
+	public boolean existsByEntrainementId(long entrainementId) {
+		return this.detailsRepository.existsByEntrainementId(entrainementId);
 	}
 }

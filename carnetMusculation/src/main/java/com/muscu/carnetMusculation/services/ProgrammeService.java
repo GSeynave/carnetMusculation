@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.muscu.carnetMusculation.entities.Programme;
 
-public interface IProgrammeService {
+public interface ProgrammeService {
 	
 	Programme findById(Long id);
 	

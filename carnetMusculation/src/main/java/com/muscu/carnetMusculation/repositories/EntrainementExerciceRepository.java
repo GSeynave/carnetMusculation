@@ -6,7 +6,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.muscu.carnetMusculation.entities.EntrainementExercice;
 
-public interface IEntrainementExerciceRepository {
+public interface EntrainementExerciceRepository extends PagingAndSortingRepository<EntrainementExercice, Long> {
 
 	EntrainementExercice findByEntrainementIdAndExerciceId(Long entrainementId, Long exerciceId);
 	
@@ -14,7 +14,9 @@ public interface IEntrainementExerciceRepository {
 
 	void deleteByEntrainementIdAndExerciceIdIn(long id, List<Long> exerciceIdList);
 	
-	void deleteAllById(List<Long> ids);
+	void deleteAllByIdIn(List<Long> ids);
 	
 	EntrainementExercice save(EntrainementExercice entrainementExercice);
+
+	boolean existsByEntrainementId(long entrainementId);
 }

@@ -1,7 +1,0 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    background-color: rgb(121, 121, 121);
-    height: 100%;
-}

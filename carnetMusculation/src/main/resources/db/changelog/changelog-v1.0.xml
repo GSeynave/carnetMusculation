@@ -112,9 +112,6 @@
 			<column name="seance_state" type="bigint">
 				<constraints nullable="false"></constraints>
 			</column>
-			<column name="nom" type="varchar(50)">
-				<constraints nullable="false" />
-			</column>
 			<column name="entrainement_id" type="bigint">
 				<constraints nullable="false"
 					foreignKeyName="fk_seance_entrainement"

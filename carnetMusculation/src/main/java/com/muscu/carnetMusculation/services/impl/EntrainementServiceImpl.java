@@ -4,8 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,37 +18,37 @@ import com.muscu.carnetMusculation.dto.Details;
 import com.muscu.carnetMusculation.dto.EntrainementAPI;
 import com.muscu.carnetMusculation.dto.EntrainementCreerAPI;
 import com.muscu.carnetMusculation.dto.MapperAPI;
-import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Entrainement;
+import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Programme;
 import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.entities.Serie;
-import com.muscu.carnetMusculation.repositories.IEntrainementExerciceRepository;
-import com.muscu.carnetMusculation.repositories.IEntrainementRepository;
-import com.muscu.carnetMusculation.services.IEntrainementService;
-import com.muscu.carnetMusculation.services.IExerciceService;
-import com.muscu.carnetMusculation.services.IProgrammeService;
-import com.muscu.carnetMusculation.services.ISeanceService;
-import com.muscu.carnetMusculation.services.ISerieService;
+import com.muscu.carnetMusculation.repositories.EntrainementExerciceRepository;
+import com.muscu.carnetMusculation.repositories.EntrainementRepository;
+import com.muscu.carnetMusculation.services.EntrainementService;
+import com.muscu.carnetMusculation.services.ExerciceService;
+import com.muscu.carnetMusculation.services.ProgrammeService;
+import com.muscu.carnetMusculation.services.SeanceService;
+import com.muscu.carnetMusculation.services.SerieService;
 import com.muscu.carnetMusculation.utils.EntrainementType;
 import com.muscu.carnetMusculation.utils.SeanceState;
 
 @Service
-public class EntrainementServiceImpl implements IEntrainementService {
+public class EntrainementServiceImpl implements EntrainementService {
 
 	@Autowired
-	private IEntrainementRepository entrainementRepository;
+	private EntrainementRepository entrainementRepository;
 	@Autowired
-	private IEntrainementExerciceRepository detailsRepository;
+	private EntrainementExerciceRepository detailsRepository;
 	@Autowired
-	private ISeanceService seanceService;
+	private SeanceService seanceService;
 	@Autowired
-	private ISerieService serieService;
+	private SerieService serieService;
 	@Autowired
-	private IProgrammeService programmeService;
+	private ProgrammeService programmeService;
 	@Autowired
-	private IExerciceService exerciceService;
+	private ExerciceService exerciceService;
 	@Autowired
 	private MapperAPI mapperApi;
 
@@ -54,7 +56,12 @@ public class EntrainementServiceImpl implements IEntrainementService {
 
 	@Transactional
 	public Entrainement findById(Long id) {
-		return this.entrainementRepository.findById(id);
+		Optional<Entrainement> entrainement = this.entrainementRepository.findById(id);
+		if (entrainement.isPresent()) {
+			return entrainement.get();
+		} else {
+			throw new EntityNotFoundException("Entrainement non trouvé pour l'id : " + id);
+		}
 	}
 
 	@Transactional
@@ -71,29 +78,35 @@ public class EntrainementServiceImpl implements IEntrainementService {
 	public EntrainementCreerAPI creationEntrainement(EntrainementCreerAPI entrainementCreerApi) throws ParseException {
 		EntrainementCreerAPI entrainementCreer = new EntrainementCreerAPI();
 
+		// Programme
 		Programme programme = this.programmeService.findById(entrainementCreerApi.getProgrammeId());
-		entrainementCreerApi
-				.setProgrammeId(this.programmeService.findById(entrainementCreerApi.getProgrammeId()).getId());
-
-		Entrainement entrainement = this.entrainementRepository.findByNom(entrainementCreerApi.getNom());
-		if (ObjectUtils.isEmpty(entrainement)) {
-			entrainement = new Entrainement();
+		entrainementCreerApi.setProgrammeId(programme.getId());
+		Entrainement entrainement = new Entrainement();
+		if (this.existsByNom(entrainementCreerApi.getNom())) {
+			entrainement = getEntrainementByNom(entrainementCreerApi.getNom());
 		}
+		
+		// Entrainement
 		entrainement.setDateCreation(DATE_FORMATTER.parse(entrainementCreerApi.getCreationDate()));
 		entrainement.setDateModification(DATE_FORMATTER.parse(entrainementCreerApi.getModificationDate()));
 		entrainement.setNom(entrainementCreerApi.getNom());
 		entrainement.setType(entrainementCreerApi.getType().getValue());
 		entrainement.setProgramme(programme);
 		entrainement = this.save(entrainement);
+
 		entrainementCreer = setEntrainementCreerApi(entrainement);
 		entrainementCreer.setProgrammeId(programme.getId());
-
-		Seance seance = this.seanceService.findByEntrainementIdAndState(entrainement.getId(), SeanceState.INIT);
-		if (ObjectUtils.isEmpty(seance)) {
+		// Seance
+		Seance seance;
+		if (this.seanceService.existsByEntrainementIdAndState(entrainement.getId(), SeanceState.INIT)) {
+			seance = this.seanceService.findByEntrainementIdAndState(entrainement.getId(), SeanceState.INIT);
+		} else {
 			seance = setSeance(entrainement);
 			seance = this.seanceService.save(seance);
 		}
 
+		// FIXME Ne plus remonter d'erreurs si liste série non modifiée
+		// Details / Serie
 		List<Details> details = new ArrayList<Details>();
 		List<Serie> series = new ArrayList<Serie>();
 		List<EntrainementExercice> detailsExercices = new ArrayList<EntrainementExercice>();
@@ -102,12 +115,15 @@ public class EntrainementServiceImpl implements IEntrainementService {
 			Details detailEntrainement = new Details();
 			EntrainementExercice detailExercice = this.exerciceService
 					.findByEntrainementIdAndExerciceId(entrainement.getId(), detail.getExerciceId());
-			if (ObjectUtils.isEmpty(detailExercice)) {
+			if (detailExercice == null) {
 				detailExercice = new EntrainementExercice();
+				detailExercice.setEntrainement(entrainement);
 			}
-			detailExercice.setEntrainement(entrainement);
 			Exercice exercice = new Exercice();
-			exercice = this.exerciceService.findById(detail.getExerciceId());
+			if (this.exerciceService.existsById(detail.getExerciceId())) {
+				exercice = this.exerciceService.findById(detail.getExerciceId());
+			}
+
 			detailExercice.setExercice(exercice);
 			detailExercice.setNbSerie(detail.getNbSerie());
 			detailsExercices.add(this.detailsRepository.save(detailExercice));
@@ -115,11 +131,14 @@ public class EntrainementServiceImpl implements IEntrainementService {
 			detailEntrainement.setExerciceId(exercice.getId());
 			detailEntrainement.setNbSerie(detail.getNbSerie());
 
-			Serie serie = this.serieService.findBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(seance.getId(),
-					"0", entrainement.getId(), exercice.getId());
-			if (ObjectUtils.isEmpty(serie)) {
-				serie = new Serie();
-			}
+			Serie serie = new Serie();
+			if(this.serieService.existsBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(seance.getId(),
+						"0", exercice.getId(), entrainement.getId() )) {
+				
+				serie = this.serieService.findBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(seance.getId(),
+						"0", exercice.getId(), entrainement.getId());
+			} 
+			
 			serie.setNumeroSerie("0");
 			serie.setSeance(seance);
 			serie.setExercice(exercice);
@@ -136,15 +155,28 @@ public class EntrainementServiceImpl implements IEntrainementService {
 
 		entrainementCreer.setDetails(details);
 
-		List<Long> exerciceIdList = this.exerciceService.findByEntrainementId(entrainement.getId()).stream()
-				.map(EntrainementExercice::getExercice).map(Exercice::getId).collect(Collectors.toList());
+		// FIXME Retirer l'exercice manquant !!
+		// Remove exercice
+		List<Long> exerciceIdList;
+		if(this.exerciceService.existsByEntrainementId(entrainement.getId())) {
+			exerciceIdList = this.exerciceService.findByEntrainementId(entrainement.getId()).stream()
+					.map(EntrainementExercice::getExercice).map(Exercice::getId).collect(Collectors.toList());
 
-		exerciceIdList.removeAll(entrainementCreerApi.getDetails().stream().map(Details::getExerciceId).collect(Collectors.toList()));
-		
-		this.serieService.deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(entrainement.getId(), seance.getId(), exerciceIdList);
-		this.exerciceService.deleteByEntrainementIdAndExerciceIdIn(entrainement.getId(), exerciceIdList);
+			exerciceIdList.removeAll(entrainementCreerApi.getDetails().stream().map(Details::getExerciceId)
+					.collect(Collectors.toList()));
+			this.serieService.deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(entrainement.getId(), seance.getId(),
+					exerciceIdList);
+			this.exerciceService.deleteByEntrainementIdAndExerciceIdIn(entrainement.getId(), exerciceIdList);
+		}
+
 		return entrainementCreer;
 	}
+
+	private Entrainement getEntrainementByNom(String nom) {
+		Entrainement entrainement = this.entrainementRepository.findByNom(nom);
+		return ObjectUtils.isEmpty(entrainement) ? null : entrainement;
+	}
+
 
 	private Seance setSeance(Entrainement entrainement) {
 		Seance seance = new Seance();
@@ -178,6 +210,11 @@ public class EntrainementServiceImpl implements IEntrainementService {
 	@Override
 	public boolean existsById(Long id) {
 		return this.entrainementRepository.existsById(id);
+	}
+
+	@Override
+	public boolean existsByNom(String nom) {
+		return this.entrainementRepository.existsByNom(nom);
 	}
 
 	@Override

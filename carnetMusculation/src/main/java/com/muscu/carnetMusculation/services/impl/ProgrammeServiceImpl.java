@@ -1,25 +1,29 @@
 package com.muscu.carnetMusculation.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Programme;
-import com.muscu.carnetMusculation.repositories.IProgrammeRepository;
-import com.muscu.carnetMusculation.services.IProgrammeService;
+import com.muscu.carnetMusculation.repositories.ProgrammeRepository;
+import com.muscu.carnetMusculation.services.ProgrammeService;
 
 
 @Service
-public class ProgrammeServiceImpl implements IProgrammeService {
+public class ProgrammeServiceImpl implements ProgrammeService {
 
 	@Autowired
-	private IProgrammeRepository programmeRepository;
+	private ProgrammeRepository programmeRepository;
 
 	@Override
 	@Transactional
@@ -30,15 +34,20 @@ public class ProgrammeServiceImpl implements IProgrammeService {
 	@Override
 	@Transactional
 	public Programme findById(Long id) {
-		return this.programmeRepository.findById(id);
+		Optional<Programme> programme = this.programmeRepository.findById(id);
+		if (programme.isPresent()) {
+			return programme.get();
+		} else {
+			throw new EntityNotFoundException("Exercice non trouvé pour l'id : " +id);
+		}
 	}
 
 	@Override
 	@Transactional
 	public List<Programme> findPaginated(int pageNo, int size, String sort){
 		Pageable page = PageRequest.of(pageNo, size, Sort.by(sort));
-		List<Programme> pageResult = programmeRepository.findPaginated(page);
-		return pageResult;
+		Page<Programme> pageResult = programmeRepository.findAll(page);
+		return pageResult.toList();
 	}
 
 	@Override
@@ -62,7 +71,7 @@ public class ProgrammeServiceImpl implements IProgrammeService {
 	@Override
 	@Transactional
 	public long countAll() {
-		return programmeRepository.countAll();
+		return programmeRepository.count();
 	}
 }
 

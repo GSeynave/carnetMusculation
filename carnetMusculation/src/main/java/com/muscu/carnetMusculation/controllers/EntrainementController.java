@@ -29,7 +29,7 @@ import com.muscu.carnetMusculation.dto.EntrainementCreerAPI;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.entities.Entrainement;
 import com.muscu.carnetMusculation.entities.EntrainementExercice;
-import com.muscu.carnetMusculation.services.IEntrainementService;
+import com.muscu.carnetMusculation.services.EntrainementService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -38,7 +38,7 @@ public class EntrainementController {
 	Logger LOGGER = LoggerFactory.getLogger(EntrainementController.class);
 
 	@Autowired
-	private IEntrainementService entrainementService;
+	private EntrainementService entrainementService;
 
 	@Autowired
 	private MapperAPI mapperApi;

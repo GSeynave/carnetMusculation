@@ -7,13 +7,15 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.muscu.carnetMusculation.entities.Entrainement;
 
-public interface IEntrainementRepository {
+public interface EntrainementRepository extends PagingAndSortingRepository<Entrainement, Long>{
 
-	Entrainement findById(Long id);
+	Optional<Entrainement> findById(Long id);
 	
 	List<Entrainement> findByProgrammeId(Long programmeId);
 
 	Entrainement findByNom(String nom);
+	
+	Boolean existsByNom(String nom);
 	
 	Entrainement save(Entrainement entrainement);
 	
