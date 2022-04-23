@@ -50,7 +50,7 @@ public class Serie {
 	@JoinColumn(name = "exercice_id")
 	Exercice exercice;
 
-	@ManyToOne (cascade = CascadeType.PERSIST)
+	@ManyToOne
 	@JoinColumn(name = "entrainement_id")
 	Entrainement entrainement;
 

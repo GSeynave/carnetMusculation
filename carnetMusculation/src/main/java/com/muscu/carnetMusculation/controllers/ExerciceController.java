@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,7 +20,7 @@ import com.muscu.carnetMusculation.dto.ExerciceAPI;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Exercice;
-import com.muscu.carnetMusculation.services.ExerciceService;
+import com.muscu.carnetMusculation.services.impl.ExerciceService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = { "*" })
@@ -30,10 +29,14 @@ public class ExerciceController {
 
 	Logger LOGGER = LoggerFactory.getLogger(ExerciceController.class);
 
-	@Autowired
-	private ExerciceService exerciceService;
-	@Autowired
-	private MapperAPI mapperApi;
+	private final ExerciceService exerciceService;
+	private final MapperAPI mapperApi;
+
+	public ExerciceController(ExerciceService exerciceService, MapperAPI mapperApi) {
+		super();
+		this.exerciceService = exerciceService;
+		this.mapperApi = mapperApi;
+	}
 
 	@GetMapping("/entrainement/{entrainementId}")
 	public @ResponseBody ResponseEntity<List<DetailsExerciceAPI>> findByEntrainementId(

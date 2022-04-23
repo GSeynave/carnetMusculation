@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
@@ -29,7 +28,7 @@ import com.muscu.carnetMusculation.dto.EntrainementCreerAPI;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.entities.Entrainement;
 import com.muscu.carnetMusculation.entities.EntrainementExercice;
-import com.muscu.carnetMusculation.services.EntrainementService;
+import com.muscu.carnetMusculation.services.impl.EntrainementService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -37,11 +36,14 @@ import com.muscu.carnetMusculation.services.EntrainementService;
 public class EntrainementController {
 	Logger LOGGER = LoggerFactory.getLogger(EntrainementController.class);
 
-	@Autowired
-	private EntrainementService entrainementService;
+	private final EntrainementService entrainementService;
+	private final MapperAPI mapperApi;
 
-	@Autowired
-	private MapperAPI mapperApi;
+	public EntrainementController(EntrainementService entrainementService, MapperAPI mapperApi) {
+		super();
+		this.entrainementService = entrainementService;
+		this.mapperApi = mapperApi;
+	}
 
 	@GetMapping("/{id}")
 

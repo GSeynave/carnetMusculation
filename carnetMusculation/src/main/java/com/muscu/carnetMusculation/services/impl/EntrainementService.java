@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -26,16 +25,11 @@ import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.entities.Serie;
 import com.muscu.carnetMusculation.repositories.EntrainementExerciceRepository;
 import com.muscu.carnetMusculation.repositories.EntrainementRepository;
-import com.muscu.carnetMusculation.services.EntrainementService;
-import com.muscu.carnetMusculation.services.ExerciceService;
-import com.muscu.carnetMusculation.services.ProgrammeService;
-import com.muscu.carnetMusculation.services.SeanceService;
-import com.muscu.carnetMusculation.services.SerieService;
 import com.muscu.carnetMusculation.utils.EntrainementType;
 import com.muscu.carnetMusculation.utils.SeanceState;
 
 @Service
-public class EntrainementServiceImpl implements EntrainementService {
+public class EntrainementService {
 
 	private final EntrainementRepository entrainementRepository;
 	private final EntrainementExerciceRepository detailsRepository;
@@ -45,7 +39,7 @@ public class EntrainementServiceImpl implements EntrainementService {
 	private final ExerciceService exerciceService;
 	private final MapperAPI mapperApi;
 	
-	public EntrainementServiceImpl(EntrainementRepository entrainementRepository,
+	public EntrainementService(EntrainementRepository entrainementRepository,
 			EntrainementExerciceRepository detailsRepository, SeanceService seanceService, SerieService serieService,
 			ProgrammeService programmeService, ExerciceService exerciceService, MapperAPI mapperApi) {
 		super();
@@ -214,22 +208,22 @@ public class EntrainementServiceImpl implements EntrainementService {
 		return this.entrainementRepository.save(entrainement);
 	}
 
-	@Override
+	@Transactional
 	public boolean existsById(Long id) {
 		return this.entrainementRepository.existsById(id);
 	}
 
-	@Override
+	@Transactional
 	public boolean existsByNom(String nom) {
 		return this.entrainementRepository.existsByNom(nom);
 	}
 
-	@Override
+	@Transactional
 	public void deleteById(Long id) {
 		this.entrainementRepository.deleteById(id);
 	}
 
-	@Override
+	@Transactional
 	public EntrainementCreerAPI findSeanceInformationInitByEntrainementId(Long entrainementId) {
 		EntrainementCreerAPI entrainementCreerApi = new EntrainementCreerAPI();
 		Entrainement entrainement = this.findById(entrainementId);
@@ -261,6 +255,7 @@ public class EntrainementServiceImpl implements EntrainementService {
 		return entrainementCreerApi;
 	}
 
+	@Transactional
 	private List<EntrainementExercice> findDetailsByEntrainementId(Long entrainementId) {
 		return this.detailsRepository.findAllByEntrainementId(entrainementId);
 	}

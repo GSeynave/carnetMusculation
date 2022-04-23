@@ -2,7 +2,6 @@ package com.muscu.carnetMusculation.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.muscu.carnetMusculation.dto.SeanceInformationInit;
-import com.muscu.carnetMusculation.entities.Seance;
-import com.muscu.carnetMusculation.services.SeanceService;
+import com.muscu.carnetMusculation.services.impl.SeanceService;
 import com.muscu.carnetMusculation.utils.SeanceState;
 
 @RestController
@@ -24,8 +22,13 @@ import com.muscu.carnetMusculation.utils.SeanceState;
 public class SeanceController {
 	Logger LOGGER = LoggerFactory.getLogger(EntrainementController.class);
 
-	@Autowired
-	private SeanceService seanceService;
+	private final SeanceService seanceService;
+
+	public SeanceController(SeanceService seanceService) {
+		super();
+		this.seanceService = seanceService;
+	}
+
 
 	@GetMapping("/entrainement/{entrainementId}/{state}")
 	public @ResponseBody ResponseEntity<SeanceInformationInit> findByEntrainementIdAndState(

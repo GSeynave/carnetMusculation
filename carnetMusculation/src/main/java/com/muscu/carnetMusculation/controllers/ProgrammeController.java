@@ -1,14 +1,10 @@
 package com.muscu.carnetMusculation.controllers;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
@@ -27,7 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.ProgrammeAPI;
 import com.muscu.carnetMusculation.entities.Programme;
-import com.muscu.carnetMusculation.services.ProgrammeService;
+import com.muscu.carnetMusculation.services.impl.ProgrammeService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -35,11 +31,14 @@ import com.muscu.carnetMusculation.services.ProgrammeService;
 public class ProgrammeController {
 	Logger LOGGER = LoggerFactory.getLogger(ProgrammeController.class);
 
-	@Autowired
-	private ProgrammeService programmeService;
+	private final ProgrammeService programmeService;
+	private final MapperAPI mapperApi;
 
-	@Autowired
-	private MapperAPI mapperApi;
+	public ProgrammeController(ProgrammeService programmeService, MapperAPI mapperApi) {
+		super();
+		this.programmeService = programmeService;
+		this.mapperApi = mapperApi;
+	}
 
 	@GetMapping(params = { "page", "size", "sort" })
 	public @ResponseBody ResponseEntity<List<ProgrammeAPI>> findPaginated(@RequestParam("page") String page,

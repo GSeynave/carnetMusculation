@@ -6,32 +6,31 @@ import java.util.Optional;
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.muscu.carnetMusculation.entities.Exercice;
 import com.muscu.carnetMusculation.entities.Programme;
 import com.muscu.carnetMusculation.repositories.ProgrammeRepository;
-import com.muscu.carnetMusculation.services.ProgrammeService;
 
 
 @Service
-public class ProgrammeServiceImpl implements ProgrammeService {
+public class ProgrammeService {
 
-	@Autowired
-	private ProgrammeRepository programmeRepository;
+	private final ProgrammeRepository programmeRepository;
 
-	@Override
+	public ProgrammeService(ProgrammeRepository programmeRepository) {
+		super();
+		this.programmeRepository = programmeRepository;
+	}
+
 	@Transactional
 	public Programme save(Programme programme) {
 		return this.programmeRepository.save(programme);
 	}
 
-	@Override
 	@Transactional
 	public Programme findById(Long id) {
 		Optional<Programme> programme = this.programmeRepository.findById(id);
@@ -42,7 +41,6 @@ public class ProgrammeServiceImpl implements ProgrammeService {
 		}
 	}
 
-	@Override
 	@Transactional
 	public List<Programme> findPaginated(int pageNo, int size, String sort){
 		Pageable page = PageRequest.of(pageNo, size, Sort.by(sort));
@@ -50,13 +48,11 @@ public class ProgrammeServiceImpl implements ProgrammeService {
 		return pageResult.toList();
 	}
 
-	@Override
 	@Transactional
 	public List<Programme> findAll(){
 		return programmeRepository.findAll();
 	}
 
-	@Override
 	@Transactional
 	public void deleteById(Long id){
 		programmeRepository.deleteById(id);
@@ -68,7 +64,6 @@ public class ProgrammeServiceImpl implements ProgrammeService {
 //		return programmeRepository.existsById(id);
 //	}
 
-	@Override
 	@Transactional
 	public long countAll() {
 		return programmeRepository.count();
