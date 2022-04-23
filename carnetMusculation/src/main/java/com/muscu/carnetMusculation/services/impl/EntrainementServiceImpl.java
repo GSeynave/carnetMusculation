@@ -37,20 +37,27 @@ import com.muscu.carnetMusculation.utils.SeanceState;
 @Service
 public class EntrainementServiceImpl implements EntrainementService {
 
-	@Autowired
-	private EntrainementRepository entrainementRepository;
-	@Autowired
-	private EntrainementExerciceRepository detailsRepository;
-	@Autowired
-	private SeanceService seanceService;
-	@Autowired
-	private SerieService serieService;
-	@Autowired
-	private ProgrammeService programmeService;
-	@Autowired
-	private ExerciceService exerciceService;
-	@Autowired
-	private MapperAPI mapperApi;
+	private final EntrainementRepository entrainementRepository;
+	private final EntrainementExerciceRepository detailsRepository;
+	private final SeanceService seanceService;
+	private final SerieService serieService;
+	private final ProgrammeService programmeService;
+	private final ExerciceService exerciceService;
+	private final MapperAPI mapperApi;
+	
+	public EntrainementServiceImpl(EntrainementRepository entrainementRepository,
+			EntrainementExerciceRepository detailsRepository, SeanceService seanceService, SerieService serieService,
+			ProgrammeService programmeService, ExerciceService exerciceService, MapperAPI mapperApi) {
+		super();
+		this.entrainementRepository = entrainementRepository;
+		this.detailsRepository = detailsRepository;
+		this.seanceService = seanceService;
+		this.serieService = serieService;
+		this.programmeService = programmeService;
+		this.exerciceService = exerciceService;
+		this.mapperApi = mapperApi;
+	}
+
 
 	private final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-mm-DD");
 
