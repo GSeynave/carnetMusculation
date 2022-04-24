@@ -31,4 +31,49 @@
 			</column>
 		</insert>
 	</changeSet>
+	<changeSet id="INSERT_ENTRAINEMENT_DATA" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="ENTRAINEMENT"/>
+		</preConditions>
+		<insert tableName="ENTRAINEMENT">
+			<column name="id" value ="1"></column>
+			<column name="date_creation" value="2022-04-15"></column>
+			<column name="date_modification" value="2022-04-15"></column>
+			<column name="nom" value="Entrainement 1"></column>
+			<column name="type" value="FULL_BODY"></column>
+			<column name="programme_id" value="1"></column>
+		</insert>
+		<insert tableName="ENTRAINEMENT">
+			<column name="id" value ="2"></column>
+			<column name="date_creation" value="2022-04-15"></column>
+			<column name="date_modification" value="2022-04-15"></column>
+			<column name="nom" value="UPER_BODY"></column>
+			<column name="type" value="UPPER_BODY"></column>
+			<column name="programme_id" value="2"></column>
+		</insert>
+		<insert tableName="ENTRAINEMENT">
+			<column name="id" value ="3"></column>
+			<column name="date_creation" value="2022-04-15"></column>
+			<column name="date_modification" value="2022-04-15"></column>
+			<column name="nom" value="Uper 2"></column>
+			<column name="type" value="UPPER_BODY"></column>
+			<column name="programme_id" value="2"></column>
+		</insert>
+		<insert tableName="ENTRAINEMENT">
+			<column name="id" value ="4"></column>
+			<column name="date_creation" value="2022-04-15"></column>
+			<column name="date_modification" value="2022-04-15"></column>
+			<column name="nom" value="Lower 1"></column>
+			<column name="type" value="UPPER_BODY"></column>
+			<column name="programme_id" value="2"></column>
+		</insert>
+		<insert tableName="ENTRAINEMENT">
+			<column name="id" value ="5"></column>
+			<column name="date_creation" value="2022-04-15"></column>
+			<column name="date_modification" value="2022-04-15"></column>
+			<column name="nom" value="Lower 2"></column>
+			<column name="type" value="LOWER_BODY"></column>
+			<column name="programme_id" value="2"></column>
+		</insert>
+	</changeSet>
 </databaseChangeLog> 

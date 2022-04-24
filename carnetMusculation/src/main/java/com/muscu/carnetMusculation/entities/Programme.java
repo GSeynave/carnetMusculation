@@ -1,6 +1,6 @@
 package com.muscu.carnetMusculation.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "Programme")
@@ -26,12 +24,10 @@ public class Programme {
 	private String nom;
 
 	@Column(name = "date_creation")
-	@Temporal(TemporalType.DATE)
-	private Date dateCreation;
+	private LocalDate dateCreation;
 
 	@Column(name = "date_modification")
-	@Temporal(TemporalType.DATE)
-	private Date dateModification;
+	private LocalDate dateModification;
 
 	@OneToMany(mappedBy = "programme")
 	private List<Entrainement> entrainements;
@@ -52,19 +48,19 @@ public class Programme {
 		this.nom = nom;
 	}
 
-	public Date getDateCreation() {
+	public LocalDate getDateCreation() {
 		return dateCreation;
 	}
 
-	public void setDateCreation(Date dateCreation) {
+	public void setDateCreation(LocalDate dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 
-	public Date getDateModification() {
+	public LocalDate getDateModification() {
 		return dateModification;
 	}
 
-	public void setDateModification(Date dateModification) {
+	public void setDateModification(LocalDate dateModification) {
 		this.dateModification = dateModification;
 	}
 }

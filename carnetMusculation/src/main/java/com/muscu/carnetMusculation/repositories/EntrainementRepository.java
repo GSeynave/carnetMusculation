@@ -3,6 +3,7 @@ package com.muscu.carnetMusculation.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -18,7 +19,7 @@ public interface EntrainementRepository extends PagingAndSortingRepository<Entra
 	
 	@Query("SELECT e"
 		+ " FROM Entrainement e"
-		+ " WHERE e.programme = :programmeId")
+		+ " WHERE e.programme.id = :programmeId")
 	List<Entrainement> findByProgrammeId(@Param("programmeId") Long programmeId);
 
 	@Query("SELECT e"
@@ -38,6 +39,7 @@ public interface EntrainementRepository extends PagingAndSortingRepository<Entra
 		+ " WHERE e.id = :id")
 	Boolean existsById(@Param("id") long id);
 	
+	@Modifying
 	@Query("DELETE"
 		+ " FROM Entrainement e"
 		+ " WHERE e.id = :id")
