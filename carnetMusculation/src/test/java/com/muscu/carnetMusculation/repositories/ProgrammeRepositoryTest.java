@@ -23,7 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.muscu.carnetMusculation.CarnetMusculationApplication;
 import com.muscu.carnetMusculation.SQLConfig;
 import com.muscu.carnetMusculation.entities.Programme;
-import com.muscu.carnetMusculation.utils.ObjectBuilder;
+import com.muscu.carnetMusculation.utils.EntityBuilder;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @Transactional
@@ -45,11 +45,11 @@ public class ProgrammeRepositoryTest {
 		Assertions.assertTrue(resultList.hasContent());
 		Assertions.assertEquals(2, resultList.getTotalElements());
 		
-		Programme programme1 = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm1");
-		Programme programme2 = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm2");
-		Programme programme3 = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm3");
-		Programme programme4 = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm4");
-		Programme programme5 = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm5");
+		Programme programme1 = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm1");
+		Programme programme2 = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm2");
+		Programme programme3 = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm3");
+		Programme programme4 = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm4");
+		Programme programme5 = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "A pgm5");
 		
 		entityManager.persist(programme1);
 		entityManager.persist(programme2);
@@ -85,7 +85,7 @@ public class ProgrammeRepositoryTest {
 	@Test
 	public void testSave() {
 		String nom = "test";
-		Programme programme = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), nom);
+		Programme programme = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), nom);
 		entityManager.persist(programme);
 		
 		TypedQuery<Programme> query = entityManager.createQuery("SELECT p FROM Programme p WHERE p.nom = :nom", Programme.class);
@@ -97,7 +97,7 @@ public class ProgrammeRepositoryTest {
 	@Test
 	public void testDeleteById() {
 		String nom = "test";
-		Programme programme = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), nom);
+		Programme programme = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), nom);
 		entityManager.persist(programme);
 		
 		TypedQuery<Programme> query = entityManager.createQuery("SELECT p FROM Programme p WHERE p.nom = :nom", Programme.class);

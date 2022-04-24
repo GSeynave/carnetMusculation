@@ -15,7 +15,6 @@ public interface EntrainementExerciceRepository extends PagingAndSortingReposito
 		+ " FROM EntrainementExercice e"
 		+ " WHERE e.entrainement.id = :entrainementId"
 		+ " AND e.exercice.id = :exerciceId")
-	
 	EntrainementExercice findByEntrainementIdAndExerciceId(
 			@Param("entrainementId") Long entrainementId,
 			@Param("exerciceId") Long exerciceId);
@@ -30,12 +29,13 @@ public interface EntrainementExerciceRepository extends PagingAndSortingReposito
 		+ " FROM EntrainementExercice e"
 		+ " WHERE e.entrainement.id = :entrainementId"
 		+ " AND e.exercice.id in :exerciceIdList")
-	void deleteByEntrainementIdAndExerciceIdIn(@Param("entrainementId") long id, @Param("exerciceIdList") List<Long> exerciceIdList);
+	int deleteByEntrainementIdAndExerciceIdIn(@Param("entrainementId") long id, @Param("exerciceIdList") List<Long> exerciceIdList);
 
+	@Modifying
 	@Query("DELETE"
 		+ " FROM EntrainementExercice e"
 		+ " WHERE e.id in :ids")
-	void deleteAllByIdIn(@Param("ids") List<Long> ids);
+	int deleteAllByIdIn(@Param("ids") List<Long> ids);
 
 	EntrainementExercice save(EntrainementExercice entrainementExercice);
 	

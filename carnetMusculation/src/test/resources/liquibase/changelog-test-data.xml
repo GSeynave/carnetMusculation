@@ -76,4 +76,161 @@
 			<column name="programme_id" value="2"></column>
 		</insert>
 	</changeSet>
+	<changeSet id="INSERT_EXERCICE_DATA" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="EXERCICE"/>
+		</preConditions>
+		<insert tableName="EXERCICE">
+			<column name="id" value="1"></column>
+			<column name="nom" value="Developpé couché"></column>
+			<column name="muscle" value="Pectoraux"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="2"></column>
+			<column name="nom" value="Tractions"></column>
+			<column name="muscle" value="Dos"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="3"></column>
+			<column name="nom" value="Pec deck"></column>
+			<column name="muscle" value="Pectoraux"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="4"></column>
+			<column name="nom" value="Squat"></column>
+			<column name="muscle" value="Quadriceps"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="5"></column>
+			<column name="nom" value="Elevations latérales"></column>
+			<column name="muscle" value="Epaules"></column>
+		</insert>
+		<insert tableName="EXERCICE">
+			<column name="id" value="6"></column>
+			<column name="nom" value="Extensions poulies"></column>
+			<column name="muscle" value="Triceps"></column>
+		</insert>
+	</changeSet>
+	<changeSet id="INSERT_SEANCE_DATA" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="SEANCE"/>
+		</preConditions>
+		<insert tableName="SEANCE">
+			<column name="id" value="1"></column>
+			<column name="date_entrainement" value="2022-04-24"></column>
+			<column name="seance_state" value="0"></column>
+			<column name="entrainement_id" value="1"></column>
+		</insert>
+		<insert tableName="SEANCE">
+			<column name="id" value="2"></column>
+			<column name="date_entrainement" value="2022-04-24"></column>
+			<column name="seance_state" value="1"></column>
+			<column name="entrainement_id" value="1"></column>
+		</insert>
+		<insert tableName="SEANCE">
+			<column name="id" value="3"></column>
+			<column name="date_entrainement" value="2022-04-24"></column>
+			<column name="seance_state" value="0"></column>
+			<column name="entrainement_id" value="2"></column>
+		</insert>
+	</changeSet>
+	<changeSet id="INSERT_SERIE_DATA" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="SERIE"/>
+		</preConditions>
+		<insert tableName="SERIE">
+			<column name="id" value="1"></column>
+			<column name="numero_serie" value="0"></column>
+			<column name="poids" value="6"></column>
+			<column name="recup" value="210"></column>
+			<column name="rep" value="10"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="1"></column>
+			<column name="seance_id" value="1"></column>
+		</insert>
+		<insert tableName="SERIE">
+			<column name="id" value="2"></column>
+			<column name="numero_serie" value="1"></column>
+			<column name="poids" value="6"></column>
+			<column name="recup" value="210"></column>
+			<column name="rep" value="10"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="1"></column>
+			<column name="seance_id" value="1"></column>
+		</insert>
+		<insert tableName="SERIE">
+			<column name="id" value="3"></column>
+			<column name="numero_serie" value="2"></column>
+			<column name="poids" value="6"></column>
+			<column name="recup" value="210"></column>
+			<column name="rep" value="10"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="1"></column>
+			<column name="seance_id" value="1"></column>
+		</insert>
+		<insert tableName="SERIE">
+			<column name="id" value="4"></column>
+			<column name="numero_serie" value="3"></column>
+			<column name="poids" value="6"></column>
+			<column name="recup" value="210"></column>
+			<column name="rep" value="10"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="1"></column>
+			<column name="seance_id" value="1"></column>
+		</insert>
+		<insert tableName="SERIE">
+			<column name="id" value="5"></column>
+			<column name="numero_serie" value="0"></column>
+			<column name="poids" value="6"></column>
+			<column name="recup" value="210"></column>
+			<column name="rep" value="10"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="2"></column>
+			<column name="seance_id" value="1"></column>
+		</insert>
+		<insert tableName="SERIE">
+			<column name="id" value="6"></column>
+			<column name="numero_serie" value="0"></column>
+			<column name="poids" value="6"></column>
+			<column name="recup" value="210"></column>
+			<column name="rep" value="10"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="3"></column>
+			<column name="seance_id" value="1"></column>
+		</insert>
+		<insert tableName="SERIE">
+			<column name="id" value="7"></column>
+			<column name="numero_serie" value="0"></column>
+			<column name="poids" value="6"></column>
+			<column name="recup" value="210"></column>
+			<column name="rep" value="10"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="4"></column>
+			<column name="seance_id" value="1"></column>
+		</insert>
+	</changeSet>
+	
+	<changeSet id="INSERT_ENTRAINEMENT_EXERCICE_DATA" author="GauthierS">
+		<preConditions onFail="MARK_RAN">
+			<tableExists tableName="ENTRAINEMENT_EXERCICE"/>
+		</preConditions>
+		<insert tableName="ENTRAINEMENT_EXERCICE">
+			<column name="id" value="1"></column>
+			<column name="nb_serie" value="4"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="1"></column>
+		</insert>
+		<insert tableName="ENTRAINEMENT_EXERCICE">
+			<column name="id" value="2"></column>
+			<column name="nb_serie" value="4"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="2"></column>
+		</insert>
+		<insert tableName="ENTRAINEMENT_EXERCICE">
+			<column name="id" value="3"></column>
+			<column name="nb_serie" value="4"></column>
+			<column name="entrainement_id" value="1"></column>
+			<column name="exercice_id" value="3"></column>
+		</insert>
+	</changeSet>
 </databaseChangeLog> 

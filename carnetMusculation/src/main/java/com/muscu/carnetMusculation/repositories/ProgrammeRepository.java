@@ -41,5 +41,5 @@ public interface ProgrammeRepository extends PagingAndSortingRepository<Programm
 	@Query("DELETE"
 		+ " FROM Programme p"
 		+ " WHERE p.id = :id")
-	int deleteById(long id);
+	int deleteById(@Param("id") long id);
 }

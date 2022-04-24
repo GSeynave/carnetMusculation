@@ -20,7 +20,7 @@ import com.muscu.carnetMusculation.SQLConfig;
 import com.muscu.carnetMusculation.entities.Entrainement;
 import com.muscu.carnetMusculation.entities.Programme;
 import com.muscu.carnetMusculation.utils.EntrainementType;
-import com.muscu.carnetMusculation.utils.ObjectBuilder;
+import com.muscu.carnetMusculation.utils.EntityBuilder;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @Transactional
@@ -59,11 +59,11 @@ public class EntrainementRepositoryTest {
 	
 	@Test
 	public void testSave() {
-		Programme programme = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "test");
+		Programme programme = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "test");
 		this.entityManager.persist(programme);
 		
 		String nom = "EntrainementSaved";
-		Entrainement entrainement = ObjectBuilder.entrainementBuilder(LocalDate.now(), LocalDate.now(), nom, EntrainementType.FULL_BODY);
+		Entrainement entrainement = EntityBuilder.entrainementBuilder(LocalDate.now(), LocalDate.now(), nom, EntrainementType.FULL_BODY);
 		entrainement.setProgramme(programme);
 		this.entityManager.persist(entrainement);
 		Entrainement result = this.entrainementRepository.findByNom(nom);
@@ -80,11 +80,11 @@ public class EntrainementRepositoryTest {
 	
 	@Test
 	public void deleteById() {
-		Programme programme = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "test");
+		Programme programme = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "test");
 		this.entityManager.persist(programme);
 		
 		String nom = "EntrainementSaved";
-		Entrainement entrainement = ObjectBuilder.entrainementBuilder(LocalDate.now(), LocalDate.now(), nom, EntrainementType.FULL_BODY);
+		Entrainement entrainement = EntityBuilder.entrainementBuilder(LocalDate.now(), LocalDate.now(), nom, EntrainementType.FULL_BODY);
 		entrainement.setProgramme(programme);
 		this.entityManager.persist(entrainement);
 		

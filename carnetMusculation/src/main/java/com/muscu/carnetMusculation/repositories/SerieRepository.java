@@ -47,7 +47,7 @@ public interface SerieRepository extends PagingAndSortingRepository<Serie, Long>
 		+ " WHERE s.entrainement.id = :entrainementId"
 		+ " AND s.seance.id = :seanceId"
 		+ " AND s.exercice.id in :exerciceIds")
-	void deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(
+	int deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(
 			@Param("entrainementId") long entrainementId,
 			@Param("seanceId") Long seanceId,
 			@Param("exerciceIds") List<Long> exerciceIds);
@@ -58,7 +58,7 @@ public interface SerieRepository extends PagingAndSortingRepository<Serie, Long>
 	@Query("DELETE"
 		+ " FROM Serie s"
 		+ " WHERE s.id in :ids")
-	void deleteByIdIn(@Param("ids") List<Long> ids);
+	int deleteByIdIn(@Param("ids") List<Long> ids);
 	
 	@Query("SELECT new java.lang.Boolean(count(s) > 0)"
 			+ " FROM Serie s"
