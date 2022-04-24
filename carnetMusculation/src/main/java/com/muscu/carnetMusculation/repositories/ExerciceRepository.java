@@ -2,6 +2,7 @@ package com.muscu.carnetMusculation.repositories;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -19,6 +20,7 @@ public interface ExerciceRepository extends PagingAndSortingRepository<Exercice,
 		+ " WHERE e.id = :id")
 	Exercice findById(@Param("id") long id);
 	
+	@Modifying
 	@Query("DELETE"
 		+ " FROM Exercice e"
 		+ " WHERE e.id = :id")

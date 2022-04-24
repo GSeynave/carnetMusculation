@@ -20,6 +20,7 @@ import com.muscu.carnetMusculation.SQLConfig;
 import com.muscu.carnetMusculation.entities.Entrainement;
 import com.muscu.carnetMusculation.entities.Programme;
 import com.muscu.carnetMusculation.utils.EntrainementType;
+import com.muscu.carnetMusculation.utils.ObjectBuilder;
 
 @TestInstance(Lifecycle.PER_CLASS)
 @Transactional
@@ -58,11 +59,11 @@ public class EntrainementRepositoryTest {
 	
 	@Test
 	public void testSave() {
-		Programme programme = this.programmeBuilder(LocalDate.now(), LocalDate.now(), "test");
+		Programme programme = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "test");
 		this.entityManager.persist(programme);
 		
 		String nom = "EntrainementSaved";
-		Entrainement entrainement = this.entrainementBuilder(LocalDate.now(), LocalDate.now(), nom, EntrainementType.FULL_BODY);
+		Entrainement entrainement = ObjectBuilder.entrainementBuilder(LocalDate.now(), LocalDate.now(), nom, EntrainementType.FULL_BODY);
 		entrainement.setProgramme(programme);
 		this.entityManager.persist(entrainement);
 		Entrainement result = this.entrainementRepository.findByNom(nom);
@@ -79,35 +80,20 @@ public class EntrainementRepositoryTest {
 	
 	@Test
 	public void deleteById() {
-		Programme programme = this.programmeBuilder(LocalDate.now(), LocalDate.now(), "test");
+		Programme programme = ObjectBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), "test");
 		this.entityManager.persist(programme);
 		
 		String nom = "EntrainementSaved";
-		Entrainement entrainement = this.entrainementBuilder(LocalDate.now(), LocalDate.now(), nom, EntrainementType.FULL_BODY);
+		Entrainement entrainement = ObjectBuilder.entrainementBuilder(LocalDate.now(), LocalDate.now(), nom, EntrainementType.FULL_BODY);
 		entrainement.setProgramme(programme);
 		this.entityManager.persist(entrainement);
 		
 		Entrainement result = this.entrainementRepository.findByNom(nom);
 		Assertions.assertNotNull(result);
 		
-		this.entrainementRepository.deleteById(entrainement.getId());
+		long deletedRows = this.entrainementRepository.deleteById(entrainement.getId());
+		Assertions.assertEquals(1, deletedRows);
 		Optional<Entrainement> resultAfterDelete = this.entrainementRepository.findById(entrainement.getId());
 		Assertions.assertFalse(resultAfterDelete.isPresent());
-	}
-	
-	public Entrainement entrainementBuilder(LocalDate dateCreation, LocalDate dateModification, String nom, EntrainementType entrainementType) {
-		Entrainement entrainement = new Entrainement();
-		entrainement.setDateCreation(dateCreation);
-		entrainement.setDateModification(dateModification);
-		entrainement.setNom(nom);
-		return entrainement;
-	}
-	
-	public Programme programmeBuilder(LocalDate dateCreation, LocalDate dateModification, String nom) {
-		Programme programme = new Programme ();
-		programme.setDateCreation(dateCreation);
-		programme.setDateModification(dateModification);
-		programme.setNom(nom);
-		return programme;
 	}
 }

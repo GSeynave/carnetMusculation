@@ -1,6 +1,6 @@
 package com.muscu.carnetMusculation.entities;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.muscu.carnetMusculation.utils.SeanceState;
 
@@ -27,8 +25,7 @@ public class Seance {
 	private Long id;
 
 	@Column(name = "date_entrainement")
-	@Temporal(TemporalType.DATE)
-	private Date dateEntrainement;
+	private LocalDate dateEntrainement;
 
 	@Column(name = "seance_state")
 	private SeanceState state;
@@ -48,11 +45,11 @@ public class Seance {
 		this.id = id;
 	}
 
-	public Date getDateEntrainement() {
+	public LocalDate getDateEntrainement() {
 		return dateEntrainement;
 	}
 
-	public void setDateEntrainement(Date dateEntrainement) {
+	public void setDateEntrainement(LocalDate dateEntrainement) {
 		this.dateEntrainement = dateEntrainement;
 	}
 

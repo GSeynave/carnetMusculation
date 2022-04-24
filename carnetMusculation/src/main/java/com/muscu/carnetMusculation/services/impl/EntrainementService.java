@@ -2,6 +2,7 @@ package com.muscu.carnetMusculation.services.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,8 +54,6 @@ public class EntrainementService {
 	}
 
 
-	private final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-mm-DD");
-
 	@Transactional
 	public Entrainement findById(Long id) {
 		Optional<Entrainement> entrainement = this.entrainementRepository.findById(id);
@@ -88,8 +87,8 @@ public class EntrainementService {
 		}
 		
 		// Entrainement
-		entrainement.setDateCreation(DATE_FORMATTER.parse(entrainementCreerApi.getCreationDate()));
-		entrainement.setDateModification(DATE_FORMATTER.parse(entrainementCreerApi.getModificationDate()));
+		entrainement.setDateCreation(LocalDate.parse(entrainementCreerApi.getCreationDate()));
+		entrainement.setDateModification(LocalDate.parse(entrainementCreerApi.getModificationDate()));
 		entrainement.setNom(entrainementCreerApi.getNom());
 		entrainement.setType(entrainementCreerApi.getType().getValue());
 		entrainement.setProgramme(programme);

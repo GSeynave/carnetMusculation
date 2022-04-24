@@ -11,7 +11,7 @@ public interface SeanceRepository extends PagingAndSortingRepository<Seance, Lon
 	
 	@Query("SELECT s"
 		+ " FROM Seance s"
-		+ " WHERE s.entrainement = :entrainementId"
+		+ " WHERE s.entrainement.id = :entrainementId"
 		+ " AND s.state = :state")
 	Seance findByEntrainementIdAndState(
 			@Param("entrainementId") Long entrainementId,
@@ -21,7 +21,7 @@ public interface SeanceRepository extends PagingAndSortingRepository<Seance, Lon
 
 	@Query("SELECT new java.lang.Boolean(count(s) > 0)"
 		+ " FROM Seance s"
-		+ " WHERE s.entrainement = :entrainementId"
+		+ " WHERE s.entrainement.id = :entrainementId"
 		+ " AND s.state = :state")
 	boolean existsByEntrainementIdAndState(
 			@Param("entrainementId") long entrainementId,

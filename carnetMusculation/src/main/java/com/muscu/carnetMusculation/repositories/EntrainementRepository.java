@@ -43,5 +43,5 @@ public interface EntrainementRepository extends PagingAndSortingRepository<Entra
 	@Query("DELETE"
 		+ " FROM Entrainement e"
 		+ " WHERE e.id = :id")
-	void deleteById(@Param("id") long id);
+	int deleteById(@Param("id") long id);
 }

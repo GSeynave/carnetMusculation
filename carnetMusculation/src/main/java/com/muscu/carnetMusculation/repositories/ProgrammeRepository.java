@@ -3,9 +3,11 @@ package com.muscu.carnetMusculation.repositories;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -27,7 +29,7 @@ public interface ProgrammeRepository extends PagingAndSortingRepository<Programm
 	@Query("SELECT p"
 		+ " FROM Programme p"
 		+ " WHERE p.id = :id")
-	Programme findById(@Param("id") long id);
+	Optional<Programme> findById(@Param("id") long id);
 	
 	@Query("SELECT count(p)"
 		+ " FROM Programme p")
@@ -35,8 +37,9 @@ public interface ProgrammeRepository extends PagingAndSortingRepository<Programm
 	
 	Programme save(Programme programme);
 	
+	@Modifying
 	@Query("DELETE"
 		+ " FROM Programme p"
 		+ " WHERE p.id = :id")
-	void deleteById(long id);
+	int deleteById(long id);
 }

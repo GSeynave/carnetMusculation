@@ -2,6 +2,7 @@ package com.muscu.carnetMusculation.repositories;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -12,8 +13,8 @@ public interface EntrainementExerciceRepository extends PagingAndSortingReposito
 
 	@Query("SELECT e"
 		+ " FROM EntrainementExercice e"
-		+ " WHERE e.entrainement = :entrainementId"
-		+ " AND e.exercice = :exerciceId")
+		+ " WHERE e.entrainement.id = :entrainementId"
+		+ " AND e.exercice.id = :exerciceId")
 	
 	EntrainementExercice findByEntrainementIdAndExerciceId(
 			@Param("entrainementId") Long entrainementId,
@@ -21,13 +22,14 @@ public interface EntrainementExerciceRepository extends PagingAndSortingReposito
 
 	@Query("SELECT e"
 		+ " FROM EntrainementExercice e"
-		+ " WHERE e.entrainement = :entrainementId")
+		+ " WHERE e.entrainement.id = :entrainementId")
 	List<EntrainementExercice> findAllByEntrainementId(@Param("entrainementId") Long entrainementId);
 
+	@Modifying
 	@Query("DELETE"
 		+ " FROM EntrainementExercice e"
-		+ " WHERE e.entrainement = :entrainementId"
-		+ " AND e.exercice in :exerciceIdList")
+		+ " WHERE e.entrainement.id = :entrainementId"
+		+ " AND e.exercice.id in :exerciceIdList")
 	void deleteByEntrainementIdAndExerciceIdIn(@Param("entrainementId") long id, @Param("exerciceIdList") List<Long> exerciceIdList);
 
 	@Query("DELETE"
@@ -36,6 +38,9 @@ public interface EntrainementExerciceRepository extends PagingAndSortingReposito
 	void deleteAllByIdIn(@Param("ids") List<Long> ids);
 
 	EntrainementExercice save(EntrainementExercice entrainementExercice);
-
-	boolean existsByEntrainementId(long entrainementId);
+	
+	@Query("SELECT new java.lang.Boolean(count(e) > 0)"
+		+ " FROM EntrainementExercice e"
+		+ " WHERE e.entrainement.id = :entrainementId")
+	boolean existsByEntrainementId(@Param("entrainementId") long entrainementId);
 }
