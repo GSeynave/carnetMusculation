@@ -98,18 +98,17 @@ export class ProgrammeListComponent implements OnChanges {
     this.nomUpdated = '';
   }
 
-  onDelete(idProgramme: number) {
-    this.musculationService.deleteProgramme(idProgramme).subscribe(() => {
-      this.musculationService
-        .getProgrammesPage(
-          this.pageEvent.pageIndex,
-          this.pageEvent.pageSize,
-          this.pagination.sort
-        )
-        .subscribe((response) => {
-          this.dataSource = new MatTableDataSource(response);
-          this.pagination.itemCount = response.length;
-        });
+  onDelete(programmeId: number) {
+    this.musculationService.deleteProgramme(programmeId).subscribe(() => {
+      this.musculationService.getProgrammesPage(
+        this.pageEvent.pageIndex,
+        this.pageEvent.pageSize,
+        this.pagination.sort
+      )
+      .subscribe((response) => {
+        this.dataSource = new MatTableDataSource(response);
+        this.pagination.itemCount = response.length;
+      });
     });
   }
 

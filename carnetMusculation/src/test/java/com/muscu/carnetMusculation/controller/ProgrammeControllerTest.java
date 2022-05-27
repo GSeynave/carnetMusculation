@@ -1,6 +1,12 @@
 package com.muscu.carnetMusculation.controller;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,8 +20,12 @@ import com.muscu.carnetMusculation.controllers.ProgrammeController;
 import com.muscu.carnetMusculation.dto.ProgrammeAPI;
 import com.muscu.carnetMusculation.entities.Programme;
 
+@Transactional
 @SpringBootTest(classes = { CarnetMusculationApplication.class, SQLConfig.class })
 public class ProgrammeControllerTest {
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	@Autowired
 	private ProgrammeController programmeController;
 
@@ -31,26 +41,27 @@ public class ProgrammeControllerTest {
 		Assertions.assertEquals(id, programmeApi.getId());
 	}
 
-//	@Test
-//	public void deleteByIdTest() {
-//		Long id = 10l;
-//		Programme programme = programmeBuilder();
-//		programme.setId(id);
-//		programmeService.save(programme);
-//
-//		programmeController.deleteById(id);
-//
-//		ResponseEntity<List<ProgrammeAPI>> responseEntityApi = programmeController.findAll();
-//		List<ProgrammeAPI> programmesApi = responseEntityApi.getBody();
-//
-//		Assertions.assertFalse(
-//				programmesApi.stream().map(ProgrammeAPI::getId).filter(id::equals).findFirst().isPresent());
-//	}
+	@Test
+	public void deleteByIdTest() {
+		LocalDate now = LocalDate.now();
+		String nom = "Test";
+		Programme programme = programmeBuilder(nom, now, now);
+		entityManager.persist(programme);
+		TypedQuery<Programme> query = entityManager.createQuery("SELECT p FROM Programme p where p.nom = :nom", Programme.class);
+		query.setParameter("nom", nom);
+		List<Programme> result = query.getResultList();
+		Assertions.assertEquals(1, result.size());
 
-	public Programme programmeBuilder() {
+		programmeController.deleteById(programme.getId());
+		result = query.getResultList();
+		Assertions.assertEquals(0, result.size());
+	}
+
+	public Programme programmeBuilder(String nom, LocalDate creationDate, LocalDate modificationDate) {
 		Programme programme = new Programme();
-		programme.setNom("programme" + (int) Math.floor(Math.random() * (100 - 1 + 1) + 1));
-		programme.setDateCreation(new Date(System.currentTimeMillis()));
+		programme.setNom(nom);
+		programme.setDateCreation(creationDate);
+		programme.setDateModification(modificationDate);
 		return programme;
 	}
 }
