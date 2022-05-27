@@ -85,13 +85,34 @@ public class ProgrammeRepositoryTest {
 	@Test
 	public void testSave() {
 		String nom = "test";
-		Programme programme = EntityBuilder.programmeBuilder(LocalDate.now(), LocalDate.now(), nom);
+		LocalDate now = LocalDate.now();
+		Programme programme = EntityBuilder.programmeBuilder(now, now, nom);
 		entityManager.persist(programme);
 		
 		TypedQuery<Programme> query = entityManager.createQuery("SELECT p FROM Programme p WHERE p.nom = :nom", Programme.class);
 		query.setParameter("nom", nom);
 		Programme result = query.getSingleResult();
 		Assertions.assertEquals(nom, result.getNom());
+		Assertions.assertEquals(now, result.getDateCreation());
+		Assertions.assertEquals(now, result.getDateModification());
+	}
+	
+	@Test
+	public void testUpdate() {
+		String nom = "test";
+		LocalDate now = LocalDate.now();
+		Programme programme = EntityBuilder.programmeBuilder(now, now, nom);
+		entityManager.persist(programme);
+		
+		LocalDate dateModified = now.plusDays(1);
+		programme.setDateModification(dateModified);
+		entityManager.persist(programme);
+		
+		TypedQuery<Programme> query = entityManager.createQuery("SELECT p FROM Programme p WHERE p.nom = :nom", Programme.class);
+		query.setParameter("nom", nom);
+		Programme result = query.getSingleResult();
+		Assertions.assertEquals(dateModified, result.getDateModification());
+		
 	}
 	
 	@Test

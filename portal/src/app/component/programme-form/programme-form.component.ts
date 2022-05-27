@@ -29,17 +29,9 @@ export class ProgrammeFormComponent implements OnInit {
 
   onSubmit(): void {
     var programme: Programme = new Programme();
-    if (this.programmeFormGroup.value.id) {
-      programme.id = this.programmeFormGroup.value.id;
-    }
+
     programme.nom = this.programmeFormGroup.value.nom;
-    if (this.programmeFormGroup.value.dateCreation) {
-      programme.dateCreation = this.programmeFormGroup.value.dateCreation;
-    }
-    else {
-      programme.dateCreation = new Date().toISOString().substring(0, 10);
-    }
-    programme.dateModification = new Date().toISOString().substring(0, 10);
+    programme.dateCreation = new Date().toISOString().substring(0, 10);
     this.programmeOnSubmit.emit(programme);
   }
 

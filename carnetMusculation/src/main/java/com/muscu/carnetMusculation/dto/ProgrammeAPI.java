@@ -1,13 +1,14 @@
 package com.muscu.carnetMusculation.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ProgrammeAPI {
 
 	private Long id;
 	private String nom;
-	private String dateCreation;
-	private String dateModification;
+	private LocalDate dateCreation;
+	private LocalDate dateModification;
 	private List<Long> entrainementsIds;
 	
 	public Long getId() {
@@ -22,16 +23,16 @@ public class ProgrammeAPI {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	public String getDateCreation() {
+	public LocalDate getDateCreation() {
 		return dateCreation;
 	}
-	public String getDateModification() {
+	public LocalDate getDateModification() {
 		return dateModification;
 	}
-	public void setDateModification(String dateModification) {
+	public void setDateModification(LocalDate dateModification) {
 		this.dateModification = dateModification;
 	}
-	public void setDateCreation(String dateCreation) {
+	public void setDateCreation(LocalDate dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 	public List<Long> getEntrainementsIds() {
