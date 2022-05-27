@@ -91,7 +91,7 @@ public class ProgrammeController {
 	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<Long> deleteById(@PathVariable Long id) {
 		try {
-			if (ObjectUtils.isEmpty(this.programmeService.findById(id))) {
+			if (!ObjectUtils.isEmpty(this.programmeService.findById(id))) {
 				programmeService.deleteById(id);
 				return new ResponseEntity<Long>(id, HttpStatus.OK);
 			} else {
