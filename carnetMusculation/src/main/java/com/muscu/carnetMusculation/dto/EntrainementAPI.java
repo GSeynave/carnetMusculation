@@ -1,5 +1,6 @@
 package com.muscu.carnetMusculation.dto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.muscu.carnetMusculation.utils.EntrainementType;
@@ -7,7 +8,7 @@ import com.muscu.carnetMusculation.utils.EntrainementType;
 public class EntrainementAPI {
 	
 	private Long id;
-	private String dateCreation;
+	private LocalDate dateCreation;
 	private Enum<EntrainementType> type;
 	private String nom;
 	private Long programmeId;
@@ -21,10 +22,10 @@ public class EntrainementAPI {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getDateCreation() {
+	public LocalDate getDateCreation() {
 		return dateCreation;
 	}
-	public void setDateCreation(String dateCreation) {
+	public void setDateCreation(LocalDate dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 	public Enum<EntrainementType> getType() {

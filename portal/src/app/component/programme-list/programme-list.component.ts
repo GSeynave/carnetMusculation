@@ -85,9 +85,10 @@ export class ProgrammeListComponent implements OnChanges {
   }
 
   onUpdate() {
-    console.log('child update event', this.nomUpdated);
     this.programmeToUpdate.nom = this.nomUpdated;
+    this.programmeToUpdate.dateModification = new Date().toISOString().substring(0, 10);
     this.programmeOnUpdate.emit(this.programmeToUpdate);
+    console.log('child update event', this.programmeToUpdate);
     this.programmeToUpdate = new Programme();
     this.nomUpdated = '';
   }
