@@ -9,7 +9,7 @@
 
   <section class="programme-page-content">
     <ng-container>
-      <app-programme-form *ngIf="isCreerDisplay" (programmeOnSubmit)="onSubmit($event)">
+      <app-programme-form *ngIf="isCreerDisplay" (hideCreateForm)="displayListe()" (programmeOnSubmit)="onSubmit($event)">
       </app-programme-form>
     </ng-container>
 
