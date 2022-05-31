@@ -51,6 +51,7 @@ public class EntrainementController {
 		try {
 			LOGGER.debug("Recherche d'entrainement avec l'id {}", entrainementId);
 			Entrainement entrainement = entrainementService.findById(entrainementId);
+			System.out.println("type ent: " +entrainement.getType());
 			return new ResponseEntity<EntrainementAPI>(mapperApi.convertToDto(entrainement), HttpStatus.OK);
 		} catch (
 

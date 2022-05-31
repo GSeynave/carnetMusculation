@@ -71,7 +71,6 @@ export class EntrainementFormComponent implements OnInit {
   }
 
   public addDetailToUpdateFormGroupe(detailExercices: DetailExercice[]): void {
-    console.log(detailExercices)
     if(detailExercices){
       detailExercices.forEach(details => {
         let exercice: Exercice = new Exercice();
@@ -95,8 +94,7 @@ export class EntrainementFormComponent implements OnInit {
   }
 
   public fillFormWithEntrainementToUpdate(entrainementToUpdate: EntrainementCreer): void {
-    console.log("eca", entrainementToUpdate);
-
+    console.log("ent : ", entrainementToUpdate);
     this.entrainementForm.patchValue({
       entrainementId: entrainementToUpdate.entrainementId,
       programmeId: entrainementToUpdate.programmeId,
