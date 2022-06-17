@@ -77,7 +77,6 @@ public class EntrainementService {
 	@Transactional
 	public EntrainementCreerAPI creationEntrainement(EntrainementCreerAPI entrainementCreerApi) throws ParseException {
 		EntrainementCreerAPI entrainementCreer = new EntrainementCreerAPI();
-
 		// Programme
 		Programme programme = this.programmeService.findById(entrainementCreerApi.getProgrammeId());
 		entrainementCreerApi.setProgrammeId(programme.getId());
@@ -87,8 +86,8 @@ public class EntrainementService {
 		}
 		
 		// Entrainement
-		entrainement.setDateCreation(LocalDate.parse(entrainementCreerApi.getCreationDate()));
-		entrainement.setDateModification(LocalDate.parse(entrainementCreerApi.getModificationDate()));
+		entrainement.setDateCreation(entrainementCreerApi.getCreationDate());
+		entrainement.setDateModification((entrainementCreerApi.getModificationDate()));
 		entrainement.setNom(entrainementCreerApi.getNom());
 		entrainement.setType(entrainementCreerApi.getType().getValue());
 		entrainement.setProgramme(programme);
@@ -172,6 +171,61 @@ public class EntrainementService {
 		return entrainementCreer;
 	}
 
+	public EntrainementCreerAPI modificationEntrainement(EntrainementCreerAPI entrainementCreerApi) {
+		controleEntrainementCreerApi(entrainementCreerApi);
+		Entrainement entrainement = entrainementRepository.findById(entrainementCreerApi.getEntrainementId()).get();
+		entrainement.setId(entrainementCreerApi.getEntrainementId());
+		entrainement.setDateCreation(entrainementCreerApi.getCreationDate());
+		entrainement.setDateModification(entrainementCreerApi.getModificationDate());
+		entrainement.setNom(entrainementCreerApi.getNom());
+//		entrainement.setType(entrainementCreerApi.getType().getValue());
+		Programme programme = programmeService.findById(entrainementCreerApi.getProgrammeId());
+		entrainement.setProgramme(programme);
+		Seance seance = seanceService.findByEntrainementIdAndState(entrainement.getId(), SeanceState.INIT);
+		for(Details detail: entrainementCreerApi.getDetails()){
+			EntrainementExercice entrainementExercice = new EntrainementExercice();
+			if (exerciceService.existsByExerciceIdAndEntrainementId(detail.getExerciceId(), entrainement.getId())) {
+				entrainementExercice = exerciceService.findByEntrainementIdAndExerciceId(entrainement.getId(), detail.getExerciceId());
+			} else {
+				entrainementExercice.setEntrainement(entrainement);
+				entrainementExercice.setExercice(exerciceService.findById(detail.getExerciceId()));
+			}
+			entrainementExercice.setNbSerie(detail.getNbSerie());
+			detailsRepository.save(entrainementExercice);
+
+			Serie serie = new Serie();
+			if (serieService.existsBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(seance.getId(), "0", entrainementExercice.getExercice().getId(), entrainement.getId())) {
+				serie = serieService.findBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(seance.getId(), "0", entrainement.getId(), entrainement.getId());
+			} else {
+				serie.setNumeroSerie("0");
+				serie.setExercice(entrainementExercice.getExercice());
+				serie.setEntrainement(entrainement);
+				serie.setSeance(seance);
+			}
+			serie.setRep(detail.getNbRep());
+			serie.setRecup(detail.getRecup());
+			serieService.save(serie);
+		}
+		
+		List<Long> exercicesPrecedent = detailsRepository.findAllByEntrainementId(entrainement.getId()).stream().map(EntrainementExercice::getExercice).map(Exercice::getId).collect(Collectors.toList());
+		List<Long> exercicesActuels = entrainementCreerApi.getDetails().stream().map(Details::getExerciceId).collect(Collectors.toList());
+		List<Long> exercicestoDelete = new ArrayList<Long>();
+		exercicesPrecedent.forEach(exerciceId -> {
+			if (!exercicesActuels.contains(exerciceId)) {
+				exercicestoDelete.add(exerciceId);
+			}
+		});
+		if (exercicestoDelete.size() > 0) {
+			serieService.deleteByEntrainementIdAndSeanceIdAndExerciceIdIn(entrainement.getId(), seance.getId(), exercicestoDelete);
+			exerciceService.deleteByEntrainementIdAndExerciceIdIn(entrainement.getId(), exercicestoDelete);
+		}
+		return entrainementCreerApi;
+	}
+
+	private boolean controleEntrainementCreerApi(EntrainementCreerAPI entrainementCreerApi) {
+		return true;
+	}
+	
 	private Entrainement getEntrainementByNom(String nom) {
 		Entrainement entrainement = this.entrainementRepository.findByNom(nom);
 		return ObjectUtils.isEmpty(entrainement) ? null : entrainement;
@@ -189,8 +243,8 @@ public class EntrainementService {
 	private EntrainementCreerAPI setEntrainementCreerApi(Entrainement entrainement) {
 		EntrainementCreerAPI entrainementCreer = new EntrainementCreerAPI();
 		entrainementCreer.setEntrainementId(entrainement.getId());
-		entrainementCreer.setCreationDate(entrainement.getDateCreation().toString());
-		entrainementCreer.setModificationDate(entrainement.getDateModification().toString());
+		entrainementCreer.setCreationDate(entrainement.getDateCreation());
+		entrainementCreer.setModificationDate(entrainement.getDateModification());
 		entrainementCreer.setNom(entrainement.getNom());
 		entrainementCreer.setType(EntrainementType.valueOf(entrainement.getType()));
 		return entrainementCreer;
@@ -230,8 +284,8 @@ public class EntrainementService {
 		entrainementCreerApi.setEntrainementId(entrainement.getId());
 		entrainementCreerApi.setNom(entrainement.getNom());
 		entrainementCreerApi.setType(EntrainementType.valueOf(entrainement.getType()));
-		entrainementCreerApi.setCreationDate(entrainement.getDateCreation().toString());
-		entrainementCreerApi.setModificationDate(entrainement.getDateModification().toString());
+		entrainementCreerApi.setCreationDate(entrainement.getDateCreation());
+		entrainementCreerApi.setModificationDate(entrainement.getDateModification());
 
 		Seance seance = this.seanceService.findByEntrainementIdAndState(entrainementId, SeanceState.INIT);
 		List<EntrainementExercice> detailsExercices = this.findDetailsByEntrainementId(entrainementId);

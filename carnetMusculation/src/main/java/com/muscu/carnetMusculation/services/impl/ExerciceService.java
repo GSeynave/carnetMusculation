@@ -74,4 +74,9 @@ public class ExerciceService {
 	public boolean existsByEntrainementId(long entrainementId) {
 		return this.detailsRepository.existsByEntrainementId(entrainementId);
 	}
+	
+	@Transactional
+	public boolean existsByExerciceIdAndEntrainementId(long exerciceId, long entrainementId) {
+		return this.detailsRepository.existsByExerciceIdAndEntrainementId(exerciceId, entrainementId);
+	}
 }

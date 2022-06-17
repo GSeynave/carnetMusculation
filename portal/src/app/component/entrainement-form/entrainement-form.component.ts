@@ -50,7 +50,11 @@ export class EntrainementFormComponent implements OnInit {
     }
     this.entrainementForm.value.modificationDate = new Date().toISOString().substring(0, 10);
     let entrainementCreer: EntrainementCreer = this.entrainementForm.value;
-    this.musculationService.setEntrainement(entrainementCreer).subscribe();
+    if (entrainementCreer.entrainementId != null) {
+      this.musculationService.updateEntrainement(entrainementCreer).subscribe();
+    } else {
+      this.musculationService.setEntrainement(entrainementCreer).subscribe();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
