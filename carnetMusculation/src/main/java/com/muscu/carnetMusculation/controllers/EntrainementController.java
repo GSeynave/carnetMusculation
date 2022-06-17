@@ -14,6 +14,7 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -51,6 +52,7 @@ public class EntrainementController {
 		try {
 			LOGGER.debug("Recherche d'entrainement avec l'id {}", entrainementId);
 			Entrainement entrainement = entrainementService.findById(entrainementId);
+			System.out.println("type ent: " +entrainement.getType());
 			return new ResponseEntity<EntrainementAPI>(mapperApi.convertToDto(entrainement), HttpStatus.OK);
 		} catch (
 
@@ -107,9 +109,7 @@ public class EntrainementController {
 	@PostMapping()
 	public @ResponseBody ResponseEntity<EntrainementCreerAPI> save(
 			@RequestBody EntrainementCreerAPI entrainementCreerApi) throws ParseException {
-		LOGGER.debug("Post de l'entrainement : {}", entrainementCreerApi);
 		try {
-			System.out.println(entrainementCreerApi.toString());
 			return new ResponseEntity<EntrainementCreerAPI>(
 					entrainementService.creationEntrainement(entrainementCreerApi), HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -117,6 +117,17 @@ public class EntrainementController {
 		}
 	}
 
+	@PatchMapping
+	public @ResponseBody ResponseEntity<EntrainementCreerAPI> update(
+			@RequestBody EntrainementCreerAPI entrainementCreerApi) throws ParseException {
+		try {
+			return new ResponseEntity<EntrainementCreerAPI>(
+					entrainementService.modificationEntrainement(entrainementCreerApi), HttpStatus.CREATED);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_MODIFIED, "Erreur la sauvegarde de l'entrainement", e);
+		}
+			
+	}
 	@DeleteMapping("/{id}")
 	public @ResponseBody ResponseEntity<Long> delete(@PathVariable Long id) {
 		try {

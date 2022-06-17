@@ -5,6 +5,7 @@ import { EntrainementCreer } from 'src/app/class/entrainement-creer';
 import { Exercice } from 'src/app/class/exercice';
 import { Programme } from 'src/app/class/programme';
 import { SeanceInformationInit } from 'src/app/class/seance-information-init';
+import { State } from 'src/app/class/state';
 import { MusculationService } from 'src/app/service/musculation.service';
 
 @Component({
@@ -93,8 +94,18 @@ export class EntrainementComponent implements OnInit {
   }
 
   onModificationEntrainement(entrainementId: number): void {
-    this.getEntrainementsByProgrammeId(entrainementId);
-      this.isModification = true;
+    this.musculationService.getEntrainementById(entrainementId).subscribe( (data) => {
+      this.entrainementToUpdate.nom = data.nom;
+      this.entrainementToUpdate.type = data.type;
+      this.entrainementToUpdate.creationDate = data.dateCreation;
+      this.entrainementToUpdate.entrainementId = data.id;
+      this.entrainementToUpdate.modificationDate = data.dateModification;
+      this.musculationService.getDetailExercice(entrainementId, State.INIT).subscribe( (data) => {
+        this.entrainementToUpdate.programmeId = data.programmeId;
+        this.entrainementToUpdate.details = data.detailsExercice;
+        this.isModification = true;
+      })
+    });
   }
   annulerModification(): void {
     this.isModification = false;

@@ -150,6 +150,16 @@ export class MusculationService implements ErrorHandler {
       );
   }
 
+  updateEntrainement(entrainementCreer: EntrainementCreer): Observable<EntrainementCreer> {
+    return this.http.patch<EntrainementCreer>(this.url + "entrainements", entrainementCreer)
+      .pipe(
+        catchError(err => {
+          console.error('Error while saving entrainement', err);
+          return throwError(err);
+        })
+      );
+  }
+
   deleteEntrainement(idEntrainement: number): Observable<number> {
     const headers = new HttpHeaders({
       'content-type': 'application/json',

@@ -50,7 +50,11 @@ export class EntrainementFormComponent implements OnInit {
     }
     this.entrainementForm.value.modificationDate = new Date().toISOString().substring(0, 10);
     let entrainementCreer: EntrainementCreer = this.entrainementForm.value;
-    this.musculationService.setEntrainement(entrainementCreer).subscribe();
+    if (entrainementCreer.entrainementId != null) {
+      this.musculationService.updateEntrainement(entrainementCreer).subscribe();
+    } else {
+      this.musculationService.setEntrainement(entrainementCreer).subscribe();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -71,7 +75,6 @@ export class EntrainementFormComponent implements OnInit {
   }
 
   public addDetailToUpdateFormGroupe(detailExercices: DetailExercice[]): void {
-    console.log(detailExercices)
     if(detailExercices){
       detailExercices.forEach(details => {
         let exercice: Exercice = new Exercice();
@@ -95,8 +98,7 @@ export class EntrainementFormComponent implements OnInit {
   }
 
   public fillFormWithEntrainementToUpdate(entrainementToUpdate: EntrainementCreer): void {
-    console.log("eca", entrainementToUpdate);
-
+    console.log("ent : ", entrainementToUpdate);
     this.entrainementForm.patchValue({
       entrainementId: entrainementToUpdate.entrainementId,
       programmeId: entrainementToUpdate.programmeId,

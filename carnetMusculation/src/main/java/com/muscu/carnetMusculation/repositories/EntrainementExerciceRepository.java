@@ -43,4 +43,10 @@ public interface EntrainementExerciceRepository extends PagingAndSortingReposito
 		+ " FROM EntrainementExercice e"
 		+ " WHERE e.entrainement.id = :entrainementId")
 	boolean existsByEntrainementId(@Param("entrainementId") long entrainementId);
+    
+	@Query("SELECT new java.lang.Boolean(count(e) > 0)"
+		+ " FROM EntrainementExercice e"
+		+ " WHERE e.entrainement.id = :entrainementId"
+		+ " AND e.exercice.id = :exerciceId")
+	boolean existsByExerciceIdAndEntrainementId(long exerciceId, long entrainementId);
 }
