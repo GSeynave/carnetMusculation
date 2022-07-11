@@ -1,15 +1,34 @@
 .form-container{
+  padding-left: 35px;
   width: 100%;
-  background-color: rgb(80, 80, 80);
-  display: flex;
-  flex-direction: row;
 }
 
-.form{
-  width: 80%;
+table{
+  width: 100%;
+}
+
+.inputLine{
   display: flex;
-  align-items: center;
-  justify-content: space-around;
   flex-direction: row;
-  align-content: center;
+  align-items: center;
+}
+
+.itemNom{
+  flex-grow: 6;
+}
+
+.itemCreate{
+  flex-grow: 1;
+}
+.itemCancel{
+  flex-grow: 1;
+}
+
+.createButton:hover{
+  background-color: rgb(80, 80, 80);
+  color: rgb(245, 170, 55);
+}
+
+h3{
+  color: white;
 }

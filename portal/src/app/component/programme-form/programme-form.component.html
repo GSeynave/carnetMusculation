@@ -1,75 +1,34 @@
 <div class="form-container">
   <form [formGroup]="programmeFormGroup" (ngSubmit)="onSubmit()" class="form">
-    <table class="tableForm">
-      <tr>
-        <th class="header">programme</th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <td>
-          <div>
-            <mat-form-field appearance="fill">
-              <mat-label>Nom </mat-label>
-              <input matInput id="name" type="text" formControlName="nom" [(ngModel)]="programme.nom" required />
-            </mat-form-field>
-          </div>
-        </td>
-        <td>
-          <div>
-            <button mat-raised-button type="submit" [disabled]="!this.programmeFormGroup.valid"
-              class="createButton">
-              Ajouter
-            </button>
-          </div>
-        </td>
-        <td>
-          <div>
-            <button mat-raised-button type="button" (click)="onHideCreateForm()">
-              Annuler
-            </button>
-          </div>
-        </td>
-      </tr>
-
-    </table>
-
-
-<!--
 
     <div hidden>
       <mat-form-field appearance="fill">
         <input matInput id="id" type="text" formControlName="id" [(ngModel)]="programme.id" />
       </mat-form-field>
     </div>
-    <div>
-      <mat-form-field appearance="fill">
-        <mat-label>Nom </mat-label>
-        <input matInput id="name" type="text" formControlName="nom" [(ngModel)]="programme.nom" required />
-      </mat-form-field>
-    </div>
-    <div hidden>
-      <mat-form-field appearance="fill">
-        <input matInput id="dateCreation" type="text" formControlName="dateCreation"
-          [(ngModel)]="programme.dateCreation" />
-      </mat-form-field>
-    </div>
-    <div hidden>
-      <mat-form-field appearance="fill">
-        <input matInput id="dateModification" type="text" formControlName="dateModification"
-          [(ngModel)]="programme.dateModification" />
-      </mat-form-field>
-    </div>
-    <div>
-      <button mat-raised-button type="submit" [disabled]="!this.programmeFormGroup.valid"
-        class="createButton">
-        Ajouter
-      </button>
-    </div>
-    <div>
-      <button mat-raised-button type="button" (click)="onHideCreateForm()">
-        Annuler
-      </button>
-    </div> -->
+
+    <table>
+        <h3>Programme</h3>
+        <div class="inputLine">
+          <div class="itemNom">
+            <mat-form-field appearance="fill">
+              <mat-label class="labelNom">Nom </mat-label>
+              <input matInput id="name" type="text" formControlName="nom" [(ngModel)]="programme.nom" required />
+            </mat-form-field>
+          </div>
+          <div class="itemCreate">
+            <button mat-raised-button type="submit" [disabled]="!this.programmeFormGroup.valid"
+              class="createButton">
+              Ajouter
+            </button>
+          </div>
+          <div class="itemCancel">
+            <button mat-raised-button type="button" (click)="onHideCreateForm()">
+              Annuler
+            </button>
+          </div>
+        </div>
+
+    </table>
   </form>
 </div>

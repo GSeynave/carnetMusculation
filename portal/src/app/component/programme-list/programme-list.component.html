@@ -50,8 +50,8 @@
 </div>
 
 <div class="table-footer">
+  <app-programme-form *ngIf="isCreerDisplay" (programmeOnSubmit)="onSubmit($event)" (hideCreateForm)="displayListe()"></app-programme-form>
   <div class="creerProgrammeBouton">
-    <app-programme-form *ngIf="isCreerDisplay" (programmeOnSubmit)="onSubmit($event)" (hideCreateForm)="displayListe()"></app-programme-form>
     <button mat-stroked-button (click)="creerProgramme()" *ngIf="!isCreerDisplay" class="boutonCreer">+</button>
   </div>
 
