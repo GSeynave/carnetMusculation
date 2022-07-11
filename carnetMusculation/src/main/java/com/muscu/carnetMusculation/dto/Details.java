@@ -3,6 +3,7 @@ package com.muscu.carnetMusculation.dto;
 public class Details {
 
 	Long exerciceId;
+	String nom;
 	String nbRep;
 	long nbSerie;
 	String recup;
@@ -13,6 +14,12 @@ public class Details {
 	}
 	public void setExerciceId(Long exerciceId) {
 		this.exerciceId = exerciceId;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 	public String getNbRep() {
 		return nbRep;

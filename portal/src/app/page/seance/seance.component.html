@@ -7,7 +7,8 @@
 
   <app-seance-start *ngIf="isSeanceDisplay" [entrainementListe]="entrainementListe" [programmeListe]="programmeListe"
     [programmeId]="programmeId" [entrainementId]="entrainementId" (selectedProgrammeIdEvent)="onProgrammeSelect($event)"
-    (selectedEntrainementIdEvent)="onEntrainementSelect($event)" [seanceInformationInit]="seanceInformationInit">
+    (selectedEntrainementIdEvent)="onEntrainementSelect($event)" [seanceInformationInit]="seanceInformationInit"
+    [seanceId]="seanceId">
   </app-seance-start>
   <app-seance-historique *ngIf="isHistoriqueDisplay"></app-seance-historique>
 

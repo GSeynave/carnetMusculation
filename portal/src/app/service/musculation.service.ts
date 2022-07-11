@@ -10,6 +10,7 @@ import { DetailExercice } from '../class/detail-exercice';
 import { SeanceInformationInit } from '../class/seance-information-init';
 import { State } from '../class/state';
 import { EntrainementCreer } from '../class/entrainement-creer';
+import { Serie } from '../class/serie';
 
 @Injectable({
   providedIn: 'root'
@@ -185,6 +186,35 @@ export class MusculationService implements ErrorHandler {
           return throwError(err);
         })
       )
+  }
+  createSeance(entrainementId: number, status: State) : Observable<Seance> {
+    console.log("createSeance", status);
+    return this.http.post<Seance>(this.url + `seances/entrainement/${entrainementId}/status/${status}`, null)
+      .pipe(
+        catchError(err => {
+          console.error('Error while saving seance', err);
+          return throwError(err);
+        })
+      );
+  }
+
+  setSeanceStatus(seanceId: number, status: State) : Observable<Seance> {
+    return this.http.post<Seance>(this.url + `seances/${seanceId}`, status)
+    .pipe(
+      catchError(err => {
+        console.error('Error while saving seance status', err);
+        return throwError(err);
+      })
+    );
+  }
+  setSerie(serie: Serie, seanceId: number) : Observable<Serie> {
+    return this.http.post<Serie>(this.url + `series/seance/${seanceId}`, serie)
+    .pipe(
+      catchError(err => {
+        console.error('Error while saving serie', err);
+        return throwError(err);
+      })
+    );
   }
 
 }

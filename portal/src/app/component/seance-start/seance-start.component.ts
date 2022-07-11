@@ -3,6 +3,10 @@ import { Entrainement } from 'src/app/class/entrainement';
 import { Programme } from 'src/app/class/programme';
 import { SeanceInformationInit } from 'src/app/class/seance-information-init';
 import { SeanceInformationSubmit } from 'src/app/class/seance-information-submit';
+import { MusculationService } from 'src/app/service/musculation.service';
+import { State } from 'src/app/class/state';
+import { Exercice } from 'src/app/class/exercice';
+import { Seance } from 'src/app/class/seance';
 
 @Component({
   selector: 'app-seance-start',
@@ -12,8 +16,9 @@ import { SeanceInformationSubmit } from 'src/app/class/seance-information-submit
 export class SeanceStartComponent implements OnInit {
 
 
-
   isSeanceSelected: boolean = false;
+  exerciceList: Exercice[] = [];
+  @Input() seanceId: number = -1;
   @Input() programmeId: number = -1;
   @Input() entrainementId: number = -1;
 
@@ -25,13 +30,12 @@ export class SeanceStartComponent implements OnInit {
 
   @Input() seanceInformationInit: SeanceInformationInit = new SeanceInformationInit();
   @Output() seanceInformationSubmitEvent = new EventEmitter<SeanceInformationSubmit>();
-  constructor() { }
+  constructor(private musculationService: MusculationService) { }
 
   ngOnInit(): void {
     if(this.programmeId > 0 && this.entrainementId > 0){
       this.isSeanceSelected = true;
     }
-
   }
 
   onProgrammeSelect(programmeId: number): void {
@@ -42,9 +46,14 @@ export class SeanceStartComponent implements OnInit {
   }
 
   onEntrainementSelect(entrainementId: number): void {
-    this.selectedEntrainementIdEvent.emit(entrainementId);
-    this.seanceInformationInit = new SeanceInformationInit();
+    this.musculationService.getDetailExercice(entrainementId, State.INIT).subscribe( (data) => {
+      this.seanceInformationInit = data;
+    });
     this.isSeanceSelected = true;
   }
 
+
+  onSeanceOver() : void {
+    this.musculationService.setSeanceStatus(this.seanceId, State.FINISHED).subscribe();
+  }
 }

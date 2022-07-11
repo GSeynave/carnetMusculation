@@ -2,6 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 import { MatTableDataSource } from '@angular/material/table';
 import { Entrainement } from 'src/app/class/entrainement';
 import { Programme } from 'src/app/class/programme';
+import { Seance } from 'src/app/class/seance';
+import { State } from 'src/app/class/state';
+import { MusculationService } from 'src/app/service/musculation.service';
 
 @Component({
   selector: 'app-entrainement-liste',
@@ -32,7 +35,7 @@ export class EntrainementListeComponent implements OnInit {
 
   @Output('onModificationEntrainement') entrainementIdToUpdateEvent: EventEmitter<number> = new EventEmitter<number>();
 
-  constructor() { }
+  constructor(private musculationService: MusculationService) { }
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.entrainementListe);

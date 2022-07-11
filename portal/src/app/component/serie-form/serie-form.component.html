@@ -1,23 +1,40 @@
 <mat-card class="serieContainer">
+  <form [formGroup]="serieFormGroup" (ngSubmit)="onSubmit()">
+    <div hidden class="serieItem">
+      <mat-form-field appearance="fill">
+        <input matInput id="id" type="text" formControlName="numero" [(ngModel)]="numeroSerie" />
+      </mat-form-field>
+    </div>
+    <div class="serieItem">
+      <mat-form-field appearance="fill">
+        <mat-label>Rep </mat-label>
+        <input matInput id="id" type="text" formControlName="nbRep" [(ngModel)]="nbRep" />
+      </mat-form-field>
+    </div>
+    <div class="serieItem">
+      <mat-form-field appearance="fill">
+        <mat-label>Poids </mat-label>
+        <input matInput id="id" type="text" formControlName="poids" [(ngModel)]="poids" />
+      </mat-form-field>
+    </div>
+    <div hidden class="serieItem">
+      <mat-form-field appearance="fill">
+        <input matInput id="id" type="text" formControlName="recup" [(ngModel)]="recup" />
+      </mat-form-field>
+    </div>
   <div class="serieItem">
     <label>
-      Rep :
-      <input type="text" [(ngModel)]="nbRep">
-    </label>
-  </div>
-  <div class="serieItem">
-    <label>
-      Poids :
-      <input type="text" [(ngModel)]="poids">
-    </label>
-  </div>
-  <div class="serieItem">
-    <label>
-      Recup : {{ recup }}
+      <mat-label>Recup : {{ recup }} </mat-label>
       <!-- Ajouter une icone chrono pour lancer automatiquement un chrono avec la recup -->
     </label>
   </div>
-  <div class="serieItem">
-    séance précédente ..
+  <div *ngIf="isValidate === false">
+    <button mat-raised-button color="warn" type="button" (click)="onSubmit()">
+      Valider la série
+    </button>
   </div>
+  <div *ngIf="isValidate === true">
+      <span>Série validée</span>
+  </div>
+  </form>
 </mat-card>

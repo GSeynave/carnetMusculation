@@ -3,8 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ExerciceFormComponent } from './component/exercice-form/exercice-form.component';
-import { ExerciceListComponent } from './component/exercice-list/exercice-list.component';
 import { NavigationBarComponent } from './component/navigation-bar/navigation-bar.component';
 import { ProgrammeFormComponent } from './component/programme-form/programme-form.component';
 import { ProgrammeListComponent } from './component/programme-list/programme-list.component';
@@ -39,8 +37,6 @@ import { SeanceHistoriqueComponent } from './component/seance-historique/seance-
 @NgModule({
   declarations: [
     AppComponent,
-    ExerciceFormComponent,
-    ExerciceListComponent,
     NavigationBarComponent,
     ProgrammeFormComponent,
     ProgrammeListComponent,

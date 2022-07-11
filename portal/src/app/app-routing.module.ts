@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'entrainements', component: EntrainementComponent },
   { path: 'entrainements/programme/:programmeId', component: EntrainementComponent },
   { path: 'seances', component: SeanceComponent },
-  { path: 'seances/programme/:programmeId/entrainement/:entrainementId', component: SeanceComponent },
+  { path: 'seances/programme/:programmeId/entrainement/:entrainementId/seance/:seanceId', component: SeanceComponent },
   { path: '**', component: HomeComponent },  // Wildcard route for a 404 page
 ];
 

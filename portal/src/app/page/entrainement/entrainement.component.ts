@@ -4,6 +4,7 @@ import { Entrainement } from 'src/app/class/entrainement';
 import { EntrainementCreer } from 'src/app/class/entrainement-creer';
 import { Exercice } from 'src/app/class/exercice';
 import { Programme } from 'src/app/class/programme';
+import { Seance } from 'src/app/class/seance';
 import { SeanceInformationInit } from 'src/app/class/seance-information-init';
 import { State } from 'src/app/class/state';
 import { MusculationService } from 'src/app/service/musculation.service';
@@ -24,7 +25,9 @@ export class EntrainementComponent implements OnInit {
   public programmeSelected: Programme = new Programme();
   public isModification: boolean = false;
   public entrainementToUpdate: EntrainementCreer = new EntrainementCreer();
+  public seance: Seance = new Seance();
   private programmeId: number = -1;
+
 
   constructor(private musculationService: MusculationService, private route: ActivatedRoute, private router: Router) { }
 
@@ -64,7 +67,11 @@ export class EntrainementComponent implements OnInit {
         this.entrainementSelected = data;
       });
 
-      this.router.navigate([`/seances/programme/${this.programmeId}/entrainement/${entrainementId}`,]);
+      this.musculationService.createSeance(entrainementId, State.STARTED).subscribe( (data) => {
+        this.seance = data;
+        console.log("entrianement seance id:", this.seance.id);
+        this.router.navigate([`/seances/programme/${this.programmeId}/entrainement/${entrainementId}/seance/${this.seance.id}`,]);
+      });
     }
   }
 

@@ -1,16 +1,19 @@
 package com.muscu.carnetMusculation.services.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import com.muscu.carnetMusculation.dto.Details;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.dto.SeanceAPI;
 import com.muscu.carnetMusculation.dto.SeanceInformationInit;
+import com.muscu.carnetMusculation.entities.Entrainement;
 import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.entities.Serie;
@@ -24,12 +27,15 @@ public class SeanceService {
 	private final SeanceRepository seanceRepository;
 	private final SerieService serieService;
 	private final EntrainementExerciceRepository detailsExerciceRepository;
+	private final EntrainementService entrainementService;
 	private final MapperAPI mapperApi;
 	
-	public SeanceService(SeanceRepository seanceRepository, SerieService serieService,
-			EntrainementExerciceRepository detailsExerciceRepository, MapperAPI mapperApi) {
+	public SeanceService(@Lazy EntrainementService entrainementService, SeanceRepository seanceRepository,
+			SerieService serieService, EntrainementExerciceRepository detailsExerciceRepository,
+			MapperAPI mapperApi) {
 		super();
 		this.seanceRepository = seanceRepository;
+		this.entrainementService = entrainementService;
 		this.serieService = serieService;
 		this.detailsExerciceRepository = detailsExerciceRepository;
 		this.mapperApi = mapperApi;
@@ -38,6 +44,11 @@ public class SeanceService {
 	@Transactional
 	public Seance save(Seance seance) {
 		return this.seanceRepository.save(seance);
+	}
+	
+	@Transactional
+	public Seance findById(Long seanceId) {
+		return this.seanceRepository.findById(seanceId).get();
 	}
 	
 	@Transactional
@@ -60,6 +71,7 @@ public class SeanceService {
 		for (Serie serie : series) {
 			Details details = new Details();
 			details.setExerciceId(mapperApi.convertToDto(serie.getExercice()).getId());
+			details.setNom(serie.getExercice().getNom());
 			details.setNbRep(serie.getRep());
 			EntrainementExercice detailsExercice =  this.detailsExerciceRepository.findByEntrainementIdAndExerciceId(serie.getEntrainement().getId(), serie.getExercice().getId());
 			details.setNbSerie(detailsExercice.getNbSerie());
@@ -78,5 +90,15 @@ public class SeanceService {
 	@Transactional
 	public boolean existsByEntrainementIdAndState(long entrainementId, SeanceState state) {
 		return this.seanceRepository.existsByEntrainementIdAndState(entrainementId, state);
+	}
+
+	public Seance createSeance(long entrainementId, SeanceState state) {
+		Seance seance = new Seance();
+		seance.setDateEntrainement(LocalDate.now());
+		seance.setState(state);
+		
+		Entrainement entrainement = entrainementService.findById(entrainementId);
+		seance.setEntrainement(entrainement);
+		return save(seance);
 	}
 }

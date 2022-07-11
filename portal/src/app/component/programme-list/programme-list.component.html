@@ -4,9 +4,9 @@
 
   <!-- Date de création -->
   <ng-container matColumnDef="dateCreation">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date création</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader" >Date création</th>
     <td mat-cell *matCellDef="let programme">
-      {{ programme.dateCreation | date }}
+      {{ programme.dateCreation | date:'shortDate' }}
     </td>
   </ng-container>
 

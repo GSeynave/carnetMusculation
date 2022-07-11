@@ -1,8 +1,6 @@
 package com.muscu.carnetMusculation.services.impl;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -309,7 +307,7 @@ public class EntrainementService {
 	}
 
 	@Transactional
-	private List<EntrainementExercice> findDetailsByEntrainementId(Long entrainementId) {
+	public List<EntrainementExercice> findDetailsByEntrainementId(Long entrainementId) {
 		return this.detailsRepository.findAllByEntrainementId(entrainementId);
 	}
 

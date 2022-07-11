@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
+import com.muscu.carnetMusculation.dto.SeanceInformationInit;
 import com.muscu.carnetMusculation.entities.Seance;
 import com.muscu.carnetMusculation.utils.SeanceState;
 

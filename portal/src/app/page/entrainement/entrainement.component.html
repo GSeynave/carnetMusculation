@@ -24,7 +24,7 @@
     <button mat-button (click)="retour()">
       <span mat-icon class="material-icons">arrow_back</span>
     </button>
-    <app-entrainement-start [entrainementSelected]="entrainementSelected"></app-entrainement-start>
+    <app-entrainement-start [entrainementSelected]="entrainementSelected" (seance)="seance"></app-entrainement-start>
   </section>
 
 

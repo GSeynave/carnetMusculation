@@ -3,6 +3,7 @@ package com.muscu.carnetMusculation.dto;
 
 public class DetailsExerciceAPI {
 	private Long id;
+	private String nom;
 	private Long entrainementId;
 	private ExerciceAPI exercice;
 	private String nbSerie;
@@ -11,6 +12,12 @@ public class DetailsExerciceAPI {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public String getNom() {
+		return nom;
+	}
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 	public Long getEntrainementId() {
 		return entrainementId;

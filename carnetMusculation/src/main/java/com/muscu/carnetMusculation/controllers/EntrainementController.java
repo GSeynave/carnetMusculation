@@ -50,7 +50,7 @@ public class EntrainementController {
 
 	public @ResponseBody ResponseEntity<EntrainementAPI> finbById(@PathVariable(name = "id") Long entrainementId) {
 		try {
-			LOGGER.debug("Recherche d'entrainement avec l'id {}", entrainementId);
+			LOGGER.info("Recherche d'entrainement avec l'id {}", entrainementId);
 			Entrainement entrainement = entrainementService.findById(entrainementId);
 			System.out.println("type ent: " +entrainement.getType());
 			return new ResponseEntity<EntrainementAPI>(mapperApi.convertToDto(entrainement), HttpStatus.OK);
@@ -67,7 +67,7 @@ public class EntrainementController {
 		try {
 
 			List<Entrainement> entrainements = entrainementService.findByProgrammeId(programmeId);
-			LOGGER.debug("nb program returned {}", entrainements.size());
+			LOGGER.info("nb program returned {}", entrainements.size());
 			if(!CollectionUtils.isEmpty(entrainements)) {
 				return new ResponseEntity<List<EntrainementAPI>>(
 						entrainements.stream().map(mapperApi::convertToDto).collect(Collectors.toList()), HttpStatus.OK);
@@ -84,7 +84,7 @@ public class EntrainementController {
 			@PathVariable(name = "entrainementId") Long entrainementId,
 			@PathVariable(name = "exerciceId") Long exerciceId) {
 		try {
-			LOGGER.debug("Recherche details exercice id {} et entrainement id {}", entrainementId, exerciceId);
+			LOGGER.info("Recherche details exercice id {} et entrainement id {}", entrainementId, exerciceId);
 			EntrainementExercice details = entrainementService.findDetailsByEntrainementIdAndExerciceId(entrainementId,
 					exerciceId);
 			return new ResponseEntity<DetailsExerciceAPI>(mapperApi.convertToDto(details), HttpStatus.OK);
@@ -98,7 +98,7 @@ public class EntrainementController {
 			@PathVariable(name = "entrainementId") Long entrainementId) {
 		try {
 
-			LOGGER.debug("Recherche seance information init avec entrainement id {}", entrainementId);
+			LOGGER.info("Recherche seance information init avec entrainement id {}", entrainementId);
 			return new ResponseEntity<EntrainementCreerAPI>(
 					entrainementService.findSeanceInformationInitByEntrainementId(entrainementId), HttpStatus.OK);
 		} catch (Exception e) {

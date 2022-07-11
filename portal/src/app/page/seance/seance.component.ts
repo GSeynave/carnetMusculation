@@ -19,11 +19,14 @@ export class SeanceComponent implements OnInit {
   seanceInformationInit: SeanceInformationInit = new SeanceInformationInit();
   entrainementId: number = -1;
   programmeId: number = -1;
+  seanceId: number = -1;
 
   constructor(private musculationService: MusculationService, private route: ActivatedRoute) {
+    console.log("init seanceComponent.");
     this.route.paramMap.subscribe(paramMap => {
       this.programmeId = Number(paramMap.get('programmeId'));
       this.entrainementId = Number(paramMap.get('entrainementId'));
+      this.seanceId = Number(paramMap.get('seanceId'));
 
       if(this.programmeId > 0) {
         this.musculationService.getEntrainementsByProgrammeId(this.programmeId).subscribe( (data) => {
@@ -33,7 +36,8 @@ export class SeanceComponent implements OnInit {
           }
         })
       }
-
+      console.log("entrainementId", this.entrainementId);
+      console.log("programmeId", this.programmeId);
     });
   }
 
