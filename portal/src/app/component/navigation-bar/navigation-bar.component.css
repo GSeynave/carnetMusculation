@@ -1,0 +1,22 @@
+.navBar-container{
+  height: 3rem;
+  background-color: rgba(30, 30, 30);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.itemHome{
+  padding-left: 25px;
+  color: rgb(245, 170, 55);
+  flex-grow: 8;
+}
+.itemProgrammes{
+  color: rgb(255, 255, 255);
+  flex-grow: 1;
+}
+.itemHistorique{
+  color: rgb(255, 255, 255);
+  flex-grow: 1;
+}
