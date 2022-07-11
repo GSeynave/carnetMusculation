@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: 50px;
-  background-color: rgb(80, 80, 80);
+  background-image: url("src/assets/background.jpg");
 }
 mat-card-title{
   color: rgb(245, 170, 55);
@@ -24,4 +24,11 @@ mat-card-title{
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.entrainement-container{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 50px;
 }

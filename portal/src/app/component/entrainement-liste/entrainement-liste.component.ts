@@ -2,8 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@
 import { MatTableDataSource } from '@angular/material/table';
 import { Entrainement } from 'src/app/class/entrainement';
 import { Programme } from 'src/app/class/programme';
-import { Seance } from 'src/app/class/seance';
-import { State } from 'src/app/class/state';
 import { MusculationService } from 'src/app/service/musculation.service';
 
 @Component({
@@ -21,7 +19,6 @@ export class EntrainementListeComponent implements OnInit {
 
   @Output() selectedProgrammeIdEvent = new EventEmitter<number>();
   @Input() entrainementListe: Entrainement[] = [];
-  @Input() programmeListe: Programme[] = [];
   @Input() programmeSelected: Programme = new Programme();
 
   @Output('onEntrainementSelect') entrainementSelected: EventEmitter<number> =
@@ -38,7 +35,9 @@ export class EntrainementListeComponent implements OnInit {
   constructor(private musculationService: MusculationService) { }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.entrainementListe);
+    this.musculationService.getEntrainementsByProgrammeId(this.programmeSelected.id).subscribe( data => {
+      this.dataSource = new MatTableDataSource(data);
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void {

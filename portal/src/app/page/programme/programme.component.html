@@ -9,6 +9,10 @@
         (programmeGetPage)="getPage($event)" [(pagination)]="pagination" [programmes]="programmes"
         (onProgrammeSelect)="onProgrammeSelect($event)">
       </app-programme-list>
+
+      <div *ngIf="isEntrainementDisplay" class="entrainement-container">
+          <app-entrainement  [programmeSelected]="programmeSelected" ></app-entrainement>
+      </div>
     </ng-container>
   </section>
 </mat-card>

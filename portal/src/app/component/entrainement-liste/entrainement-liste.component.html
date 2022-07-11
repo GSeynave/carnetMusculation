@@ -1,12 +1,4 @@
-<mat-form-field>
-  <mat-label> Programme : </mat-label>
-  <mat-select [(ngModel)]="programmeSelected.id" (ngModelChange)="onProgrammeSelect($event)">
-    <mat-option *ngFor="let programme of programmeListe" [value]="programme.id">
-      {{ programme.nom }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-
+<mat-card class="card-container">
 <div *ngIf="dataSource.data.length <= 0" class="warning">Il n'y a actuellement pas d'entrainement pour ce programme.
 </div>
 
@@ -82,3 +74,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </mat-table>
+</mat-card>

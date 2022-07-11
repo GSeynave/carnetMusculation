@@ -1,4 +1,4 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Entrainement } from 'src/app/class/entrainement';
 import { EntrainementCreer } from 'src/app/class/entrainement-creer';
@@ -16,13 +16,13 @@ import { MusculationService } from 'src/app/service/musculation.service';
 })
 export class EntrainementComponent implements OnInit {
 
+  @Input() programmeSelected: Programme = new Programme();
   public programmeListe: Programme[] = [];
   public exerciceListe: Exercice[] = [];
   public entrainementSelected: Entrainement = new Entrainement();
   public entrainementListe: Entrainement[] = [];
   public isCreerDisplay: boolean = false;
   public isListDisplay: boolean = true;
-  public programmeSelected: Programme = new Programme();
   public isModification: boolean = false;
   public entrainementToUpdate: EntrainementCreer = new EntrainementCreer();
   public seance: Seance = new Seance();

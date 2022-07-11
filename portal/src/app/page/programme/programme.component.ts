@@ -11,8 +11,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./programme.component.css'],
 })
 export class ProgrammeComponent implements OnInit {
-  programmes: Programme[] = [];
-  pagination: Pagination = new Pagination(0, 10, [5, 10, 20], 0, 'nom');
+  public programmes: Programme[] = [];
+  public pagination: Pagination = new Pagination(0, 10, [5, 10, 20], 0, 'nom');
+  public isEntrainementDisplay: boolean = false;
+  public programmeSelected: Programme = new Programme();
   public isCreerDisplay: boolean = false;
   public isListDisplay: boolean = true;
 
@@ -44,7 +46,11 @@ export class ProgrammeComponent implements OnInit {
   }
 
   onProgrammeSelect(programmeId: number): void {
-    this.router.navigate(['/entrainements/programme/', programmeId ]);
+    this.musculationService.getProgrammeById(programmeId).subscribe( data => {
+      this.programmeSelected = data;
+      this.isEntrainementDisplay = true;
+    })
+    // this.router.navigate(['/entrainements/programme/', programmeId ]);
   }
 
   onSubmit(programme: Programme) {

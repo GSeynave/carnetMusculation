@@ -1,3 +1,11 @@
+.card-container{
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
+.entrainements{
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
 .mat-column-dateCreation{
   width: 10rem;
 }
