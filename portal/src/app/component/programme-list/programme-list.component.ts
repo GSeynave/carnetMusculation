@@ -18,11 +18,12 @@ import { Pagination } from 'src/app/class/pagination';
   styleUrls: ['./programme-list.component.css'],
 })
 export class ProgrammeListComponent implements OnChanges {
-  displayedColumns: string[] = ['dateCreation', 'nom', 'update', 'deletion'];
+  displayedColumns: string[] = ['nom', 'update', 'deletion'];
   dataSource: MatTableDataSource<Programme> = new MatTableDataSource();
   indexToUpdate: number = 0;
   programmeToUpdate: Programme = new Programme();
   nomUpdated: string = '';
+  isCreerDisplay: boolean = false;
 
   // MatPaginator Inputs
   @Input() pagination: Pagination = new Pagination(0, 0, [], 0, '');
@@ -127,5 +128,25 @@ export class ProgrammeListComponent implements OnChanges {
 
   onProgrammeSelect(programmeId: number): void {
     this.programmeSelect.emit(programmeId);
+  }
+
+  creerProgramme(){
+    this.isCreerDisplay = !this.isCreerDisplay;
+  }
+
+  displayListe(): void{
+    this.isCreerDisplay = false;
+  }
+
+  onSubmit(programme: Programme) {
+    this.musculationService.setProgramme(programme).subscribe(() => {
+      this.musculationService
+        .getProgrammesPage(0, 10, this.pagination.sort)
+        .subscribe((response) => {
+          this.programmes = response;
+          this.programmes = Object.assign([], this.programmes);
+        });
+        this.displayListe();
+    });
   }
 }

@@ -1,7 +1,60 @@
-.mat-column-dateCreation{
-  width: 10rem;
+.table{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
 }
 
+mat-table{
+  width: 50%;
+  background-color: rgb(80, 80, 80);
+}
+
+mat-paginator{
+  padding-right: 25%;
+  background-color: rgb(80, 80, 80);
+}
+
+.table-footer{
+  background-color: rgb(80, 80, 80);
+  width: 50%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+
 .mat-column-nom{
-  width: fit-content;
+  color: white;
+  width: 50%;
+}
+.mat-column-update{
+  color: white;
+  width: 10%;
+}
+.mat-column-deletion{
+  color: white;
+  width: 10%;
+}
+
+.tableHeader{
+  color: rgb(245, 170, 55);
+}
+
+
+.menuItem{
+  display: flex;
+  justify-content: center;
+}
+
+.boutonCreer{
+  color: rgb(255, 255, 255);
+  background-color: rgb(30, 30, 30);
+}
+.boutonCreer:hover{
+  color: rgb(245, 170, 55);
+  background-color: rgb(60, 60, 60);
 }

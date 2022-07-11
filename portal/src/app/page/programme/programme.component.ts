@@ -37,10 +37,6 @@ export class ProgrammeComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  displayListe(): void{
-    this.isListDisplay = true;
-    this.isCreerDisplay = false;
-  }
 
   displayCreer(): void{
     this.isListDisplay = false;
@@ -58,7 +54,6 @@ export class ProgrammeComponent implements OnInit {
         .subscribe((response) => {
           this.programmes = response;
           this.programmes = Object.assign([], this.programmes);
-          this.displayListe();
         });
     });
   }

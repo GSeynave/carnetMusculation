@@ -1,61 +1,62 @@
-<mat-table *ngIf="dataSource" [dataSource]="dataSource" mat-sort>
-  <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
+<div class="table">
+  <mat-table *ngIf="dataSource" [dataSource]="dataSource" mat-sort>
 
-  <!-- Date de création -->
-  <ng-container matColumnDef="dateCreation">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader" >Date création</th>
-    <td mat-cell *matCellDef="let programme">
-      {{ programme.dateCreation | date:'shortDate' }}
-    </td>
-  </ng-container>
+    <!-- Nom -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader">Nom</th>
+      <td mat-cell *matCellDef="let programme">
+        <div *ngIf="programmeToUpdate.id != programme.id">
+          <button mat-button (click)="onProgrammeSelect(programme.id)">
+            {{ programme.nom }}
+          </button>
+        </div>
+        <div *ngIf="programmeToUpdate.id === programme.id">
+          <input id="nom" name="nom" value="nomUpdated" [(ngModel)]="nomUpdated" />
+          <button mat-button>
+            <span mat-icon class="material-icons" (click)="onUpdate()">check_circle_outline</span>
+          </button>
+          <button mat-button>
+            <span mat-icon class="material-icons" (click)="cancelUpdate()">highlight_off</span>
+          </button>
+        </div>
+      </td>
+    </ng-container>
 
-  <!-- Nom -->
-  <ng-container matColumnDef="nom">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
-    <td mat-cell *matCellDef="let programme">
-      <div *ngIf="programmeToUpdate.id != programme.id">
-        <button mat-button (click)="onProgrammeSelect(programme.id)">
-          {{ programme.nom }}
-        </button>
-      </div>
-      <div *ngIf="programmeToUpdate.id === programme.id">
-        <input id="nom" name="nom" value="nomUpdated" [(ngModel)]="nomUpdated" />
+    <!-- Mettre a jour -->
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Modifier</th>
+      <td mat-cell *matCellDef="let programme">
         <button mat-button>
-          <span mat-icon class="material-icons" (click)="onUpdate()">check_circle_outline</span>
+          <span mat-icon *ngIf="programmeToUpdate.id != programme.id" class="material-icons"
+            (click)="setToUpdate(programme)">create</span>
         </button>
+      </td>
+    </ng-container>
+
+    <!-- Supprimer -->
+    <ng-container matColumnDef="deletion">
+      <th mat-header-cell *matHeaderCellDef class="tableHeader">Supprimer</th>
+      <td mat-cell *matCellDef="let programme">
         <button mat-button>
-          <span mat-icon class="material-icons" (click)="cancelUpdate()">highlight_off</span>
+          <span mat-icon type="button" class="material-icons" (click)="onDelete(programme.id)">delete</span>
         </button>
-      </div>
-    </td>
-  </ng-container>
+      </td>
+    </ng-container>
 
-  <!-- Mettre a jour -->
-  <ng-container matColumnDef="update">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let programme">
-      <button mat-button>
-        <span mat-icon *ngIf="programmeToUpdate.id != programme.id" class="material-icons"
-          (click)="setToUpdate(programme)">create</span>
-      </button>
-    </td>
-  </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </mat-table>
 
-  <!-- Supprimer -->
-  <ng-container matColumnDef="deletion">
-    <th mat-header-cell *matHeaderCellDef></th>
-    <td mat-cell *matCellDef="let programme">
-      <button mat-button>
-        <span mat-icon type="button" class="material-icons" (click)="onDelete(programme.id)">delete</span>
-      </button>
-    </td>
-  </ng-container>
+</div>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</mat-table>
+<div class="table-footer">
+  <div class="creerProgrammeBouton">
+    <app-programme-form *ngIf="isCreerDisplay" (programmeOnSubmit)="onSubmit($event)" (hideCreateForm)="displayListe()"></app-programme-form>
+    <button mat-stroked-button (click)="creerProgramme()" *ngIf="!isCreerDisplay" class="boutonCreer">+</button>
+  </div>
 
-<mat-paginator [length]="pagination.itemCount" [pageSize]="pagination.pageSize"
+  <mat-paginator [length]="pagination.itemCount" [pageSize]="pagination.pageSize"
   [pageSizeOptions]="pagination.pageSizeOptions" (page)="getPage($event)" aria-label="Select page">
-</mat-paginator>
+  </mat-paginator>
+
+</div>

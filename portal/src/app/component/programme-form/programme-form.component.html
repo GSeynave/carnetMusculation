@@ -1,6 +1,42 @@
-<mat-card class="cardForm">
-  <mat-card-title>Créer un programme</mat-card-title>
-  <form [formGroup]="programmeFormGroup" (ngSubmit)="onSubmit()">
+<div class="form-container">
+  <form [formGroup]="programmeFormGroup" (ngSubmit)="onSubmit()" class="form">
+    <table class="tableForm">
+      <tr>
+        <th class="header">programme</th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Nom </mat-label>
+              <input matInput id="name" type="text" formControlName="nom" [(ngModel)]="programme.nom" required />
+            </mat-form-field>
+          </div>
+        </td>
+        <td>
+          <div>
+            <button mat-raised-button type="submit" [disabled]="!this.programmeFormGroup.valid"
+              class="createButton">
+              Ajouter
+            </button>
+          </div>
+        </td>
+        <td>
+          <div>
+            <button mat-raised-button type="button" (click)="onHideCreateForm()">
+              Annuler
+            </button>
+          </div>
+        </td>
+      </tr>
+
+    </table>
+
+
+<!--
+
     <div hidden>
       <mat-form-field appearance="fill">
         <input matInput id="id" type="text" formControlName="id" [(ngModel)]="programme.id" />
@@ -25,15 +61,15 @@
       </mat-form-field>
     </div>
     <div>
-      <button mat-raised-button color="warn" type="submit" [disabled]="!this.programmeFormGroup.valid"
+      <button mat-raised-button type="submit" [disabled]="!this.programmeFormGroup.valid"
         class="createButton">
-        Créer
+        Ajouter
       </button>
     </div>
     <div>
-      <button mat-raised-button color="warn" type="button" (click)="onHideCreateForm()">
+      <button mat-raised-button type="button" (click)="onHideCreateForm()">
         Annuler
       </button>
-    </div>
+    </div> -->
   </form>
-</mat-card>
+</div>

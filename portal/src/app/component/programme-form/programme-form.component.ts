@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Programme } from 'src/app/class/programme';
-import { Seance } from 'src/app/class/seance';
 
 @Component({
   selector: 'app-programme-form',
@@ -13,7 +12,6 @@ export class ProgrammeFormComponent implements OnInit {
   @Output("programmeOnSubmit") programmeOnSubmit: EventEmitter<Programme> = new EventEmitter();
   @Output("hideCreateForm") hideCreateForm: EventEmitter<any> = new EventEmitter();
 
-  seancesList: Seance[] = [];
   programme: Programme = new Programme();
 
   programmeFormGroup: FormGroup = new FormGroup({
@@ -26,14 +24,16 @@ export class ProgrammeFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void { }
-
-  onSubmit(): void {
+  onSubmit() {
     var programme: Programme = new Programme();
 
     programme.nom = this.programmeFormGroup.value.nom;
     programme.dateCreation = new Date().toISOString().substring(0, 10);
+    programme.dateModification = new Date().toISOString().substring(0, 10);
+
     this.programmeOnSubmit.emit(programme);
   }
+
 
   onUpdate(programme: Programme): void {
     this.programme.id = programme.id;
