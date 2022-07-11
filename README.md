@@ -5,7 +5,7 @@
 Application de gestion d'un carnet de musculation.
 Créer un programme, enregistréer sa séance, consulter ses précédents entrainements, voici ce que propose cette application.
 
-** Ceci est toujours un WIP. **
+**Ceci est toujours un WIP**
 
 
 ## Instalation
