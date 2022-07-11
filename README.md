@@ -8,7 +8,7 @@ Créer un programme, enregistréer sa séance, consulter ses précédents entrai
 **Ceci est toujours un WIP**
 
 
-## Instalation
+## Installation
 
 Clone du projet sur votre poste.
 
