@@ -1,5 +1,14 @@
+.seance-container{
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
+mat-expansion-panel{
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
 mat-panel-title{
   font-size: 20px;
+  color: rgb(245, 170, 55);
 }
 
 .serieContainer{
@@ -7,3 +16,22 @@ mat-panel-title{
   justify-content: start;
 }
 
+.serieHead{
+  color: white;
+}
+
+.boutonSubmit{
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.finSeanceBouton{
+  color: rgb(255, 255, 255);
+  background-color: rgb(40, 40, 40);
+  border-color: rgb(245, 170, 55);
+}
+.finSeanceBouton:hover{
+  color: rgb(245, 170, 55);
+  background-color: rgb(60, 60, 60);
+}

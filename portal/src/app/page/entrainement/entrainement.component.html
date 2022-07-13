@@ -1,22 +1,22 @@
-<h2 style="text-align: center;">Entrainements du programme <b>{{ programmeSelected.nom }}</b></h2>
-<mat-card class="programme-page-container">
+<mat-card class="entrainement-page-container">
+  <mat-card-title>Entrainements du programme <b>{{ programmeSelected.nom }}</b></mat-card-title>
+
   <nav aria-label="entrainement-nav" class="menu">
-    <button mat-stroked-button (click)="displayListe()">Vos entrainements</button>
-    <button mat-stroked-button (click)="displayCreer()">Creer un
+    <button mat-stroked-button (click)="displayListe()" class="menuItemBouton">Vos entrainements</button>
+    <button mat-stroked-button (click)="displayCreer()" class="menuItemBouton">Creer un
       entrainement</button>
 
-    </nav>
+  </nav>
 
   <!-- Création d'un entrainement -->
-  <app-entrainement-form *ngIf="isCreerDisplay" [programmeListe]="programmeListe" [exerciceListe]="exerciceListe">
-  </app-entrainement-form>
+  <app-entrainement-form *ngIf="isCreerDisplay" [programmeListe]="programmeListe" [exerciceListe]="exerciceListe"
+    class="entrainementForm"></app-entrainement-form>
 
   <!-- Liste des entrainements lié à un programme -->
   <app-entrainement-liste *ngIf="isListDisplay" [entrainementListe]="entrainementListe"
-    [programmeSelected]="programmeSelected"
-    (selectedProgrammeIdEvent)="onProgrammeSelect($event)" (onEntrainementSelect)="onEntrainementSelect($event)"
-    (onDeleteEntrainementIdEvent)="onEntrainementDelete($event)"
-    (onModificationEntrainement)="onModificationEntrainement($event)">
+    [programmeSelected]="programmeSelected" (selectedProgrammeIdEvent)="onProgrammeSelect($event)"
+    (onEntrainementSelect)="onEntrainementSelect($event)" (onDeleteEntrainementIdEvent)="onEntrainementDelete($event)"
+    (onModificationEntrainement)="onModificationEntrainement($event)" class="entrainementListe">
   </app-entrainement-liste>
 
   <!-- Démarrer un entrainement -->

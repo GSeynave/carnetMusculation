@@ -1,77 +1,68 @@
 <mat-card class="card-container">
-<div *ngIf="dataSource.data.length <= 0" class="warning">Il n'y a actuellement pas d'entrainement pour ce programme.
-</div>
+  <div *ngIf="dataSource.data.length <= 0" class="warning">Il n'y a actuellement pas d'entrainement pour ce programme.
+  </div>
 
-<mat-table *ngIf="dataSource.data.length > 0" [dataSource]="dataSource" mat-sort class="entrainements">
-  <!--- Note that these columns can be defined in any order.
+  <mat-table *ngIf="dataSource.data.length > 0" [dataSource]="dataSource" mat-sort class="entrainements">
+    <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- Date de création -->
-  <ng-container matColumnDef="dateCreation">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Date création</th>
-    <td mat-cell *matCellDef="let entrainement">
-      {{ entrainement.dateCreation | date:'shortDate' }}
-    </td>
-  </ng-container>
+    <!-- Nom -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader">Nom</th>
+      <td mat-cell *matCellDef="let entrainement">
+        <div>
+          {{ entrainement.nom }}
+        </div>
+        <!-- TO FIX, find a way to update entrainement proprement -->
+        <div *ngIf="entrainementToUpdate.id === entrainement.id">
+          <button mat-button>
+            <span mat-icon class="material-icons" (click)="onUpdate()">check_circle_outline</span>
+          </button>
+          <button mat-button>
+            <span mat-icon class="material-icons" (click)="cancelUpdate()">highlight_off</span>
+          </button>
+        </div>
+      </td>
+    </ng-container>
 
-  <!-- Nom -->
-  <ng-container matColumnDef="nom">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom</th>
-    <td mat-cell *matCellDef="let entrainement">
-      <div>
-        {{ entrainement.nom }}
-      </div>
-      <!-- TO FIX, find a way to update entrainement proprement -->
-      <div *ngIf="entrainementToUpdate.id === entrainement.id">
-        <button mat-button>
-          <span mat-icon class="material-icons" (click)="onUpdate()">check_circle_outline</span>
+    <!-- Type -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader">Type</th>
+      <td mat-cell *matCellDef="let entrainement">
+        {{ entrainement.type }}
+      </td>
+    </ng-container>
+
+    <!-- Mettre a jour -->
+    <ng-container matColumnDef="update">
+      <th mat-header-cell *matHeaderCellDef class="tableHeader"></th>
+      <td mat-cell *matCellDef="let entrainement">
+        <button mat-button (click)="onModificationEntrainement(entrainement.id)">
+          <span mat-icon *ngIf="entrainementToUpdate.id != entrainement.id" class="material-icons">create</span>
         </button>
-        <button mat-button>
-          <span mat-icon class="material-icons" (click)="cancelUpdate()">highlight_off</span>
+      </td>
+    </ng-container>
+
+    <!-- Supprimer -->
+    <ng-container matColumnDef="deletion">
+      <th mat-header-cell *matHeaderCellDef class="tableHeader"></th>
+      <td mat-cell *matCellDef="let programme">
+        <button mat-button (click)="onDelete(programme.id)">
+          <span mat-icon type="button" class="material-icons">delete</span>
         </button>
-      </div>
-    </td>
-  </ng-container>
+      </td>
+    </ng-container>
 
-  <!-- Type -->
-  <ng-container matColumnDef="type">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-    <td mat-cell *matCellDef="let entrainement">
-      {{ entrainement.type }}
-    </td>
-  </ng-container>
-
- <!-- Mettre a jour -->
- <ng-container matColumnDef="update">
-  <th mat-header-cell *matHeaderCellDef></th>
-  <td mat-cell *matCellDef="let entrainement">
-    <button mat-button (click)="onModificationEntrainement(entrainement.id)">
-      <span mat-icon *ngIf="entrainementToUpdate.id != entrainement.id" class="material-icons">create</span>
-    </button>
-  </td>
-</ng-container>
-
-<!-- Supprimer -->
-<ng-container matColumnDef="deletion">
-  <th mat-header-cell *matHeaderCellDef></th>
-  <td mat-cell *matCellDef="let programme">
-    <button mat-button (click)="onDelete(programme.id)">
-      <span mat-icon type="button" class="material-icons">delete</span>
-    </button>
-  </td>
-</ng-container>
-
-  <!-- Start -->
-  <ng-container matColumnDef="start">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-    </th>
-    <td mat-cell *matCellDef="let entrainement">
-      <button mat-button (click)="onEntrainementSelect(entrainement.id)">
-        <span mat-icon class="material-icons">play_arrow</span>
-      </button>
-    </td>
-  </ng-container>
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</mat-table>
+    <!-- Start -->
+    <ng-container matColumnDef="start">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="tableHeader"></th>
+      <td mat-cell *matCellDef="let entrainement">
+        <button mat-button (click)="onEntrainementSelect(entrainement.id)">
+          <span mat-icon class="material-icons">play_arrow</span>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </mat-table>
 </mat-card>

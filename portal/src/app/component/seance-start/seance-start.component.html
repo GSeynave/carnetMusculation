@@ -1,4 +1,4 @@
-<div *ngIf="!isSeanceSelected">
+<div *ngIf="!isSeanceSelected" class="seance-container">
 
   <mat-form-field>
     <mat-label> Programme : </mat-label>
@@ -26,7 +26,7 @@
 
 <div *ngIf="seanceInformationInit.detailsExercice.length > 0">
   <div *ngFor="let detail of seanceInformationInit.detailsExercice">
-    <mat-accordion>
+    <mat-accordion class="serie-panel-container">
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title> {{ detail.nom }} </mat-panel-title>
@@ -51,5 +51,7 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <button mat-button (click)="onSeanceOver()">Terminer ma séance</button>
+  <div class="boutonSubmit">
+    <button mat-button (click)="onSeanceOver()" class="finSeanceBouton">Terminer ma séance</button>
+  </div>
 </div>

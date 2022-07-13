@@ -1,0 +1,20 @@
+.formCard{
+  width: 100%;
+  background-color: rgba(80, 80, 80, 0.7);
+  color: white;
+}
+
+.creerEntrainementBouton{
+  color: rgb(255, 255, 255);
+  background-color: rgb(40, 40, 40);
+  border-color: rgb(245, 170, 55);
+}
+.creerEntrainementBouton:hover{
+  color: rgb(245, 170, 55);
+  background-color: rgb(60, 60, 60);
+}
+
+.exerciceBoutonContainer{
+  display: flex;
+  justify-content: center;
+}

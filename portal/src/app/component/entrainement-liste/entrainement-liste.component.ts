@@ -11,7 +11,7 @@ import { MusculationService } from 'src/app/service/musculation.service';
 })
 export class EntrainementListeComponent implements OnInit {
 
-  displayedColumns: string[] = ['dateCreation', 'nom', "type", "update", "deletion", "start"];
+  displayedColumns: string[] = ['nom', "type", "update", "deletion", "start"];
   dataSource: MatTableDataSource<Entrainement> = new MatTableDataSource();
   indexToUpdate: number = 0;
   entrainementToUpdate: Entrainement = new Entrainement();

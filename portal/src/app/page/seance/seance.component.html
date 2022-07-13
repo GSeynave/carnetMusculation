@@ -1,9 +1,4 @@
-<mat-card class="programme-page-container">
-
-  <nav aria-label="seance-nav" class="menu">
-    <button mat-stroked-button (click)="displayHistorique()">Historique de vos séances</button>
-    <button mat-stroked-button (click)="displaySeance()">Démarrer une séance</button>
-  </nav>
+<mat-card class="seance-page-container">
 
   <app-seance-start *ngIf="isSeanceDisplay" [entrainementListe]="entrainementListe" [programmeListe]="programmeListe"
     [programmeId]="programmeId" [entrainementId]="entrainementId" (selectedProgrammeIdEvent)="onProgrammeSelect($event)"

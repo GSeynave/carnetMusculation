@@ -1,4 +1,4 @@
-<mat-card class="serieContainer">
+<mat-card class="serie-container">
   <form [formGroup]="serieFormGroup" (ngSubmit)="onSubmit()">
     <div hidden class="serieItem">
       <mat-form-field appearance="fill">
@@ -29,7 +29,7 @@
     </label>
   </div>
   <div *ngIf="isValidate === false">
-    <button mat-raised-button color="warn" type="button" (click)="onSubmit()">
+    <button mat-stroked-button (click)="onSubmit()" class="finSerieBouton">
       Valider la série
     </button>
   </div>

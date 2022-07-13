@@ -1,7 +1,34 @@
-.programme-page-container{
-  background-color: rgba(80, 80, 80, 0.7);
+.entrainement-page-container{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+}
+
+mat-card-title{
+  color: rgb(245, 170, 55);
 }
 
 h2{
   color: rgb(245, 170, 55);
 }
+
+.menuItemBouton{
+  color: rgb(255, 255, 255);
+  background-color: rgb(40, 40, 40);
+  border-color: rgb(245, 170, 55);
+}
+.menuItemBouton:hover{
+  color: rgb(245, 170, 55);
+  background-color: rgb(60, 60, 60);
+}
+
+.entrainementForm{
+  margin-top: 30px;
+}
+
+.entrainementListe{
+  margin-top: 30px;
+}
+

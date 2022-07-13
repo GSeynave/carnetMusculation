@@ -50,6 +50,7 @@ mat-paginator{
 
 .tableHeader{
   color: rgb(245, 170, 55);
+  padding-top: 15px;
 }
 
 

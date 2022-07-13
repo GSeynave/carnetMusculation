@@ -7,14 +7,25 @@
 }
 
 .mat-column-dateCreation{
+  color: white;
   width: 10rem;
 }
 
 .mat-column-nom{
+  color: white;
   width: 15rem;
 }
 
 .mat-column-type{
+  color: white;
   width: 5rem;
 }
 
+.tableHeader{
+  color: rgb(245, 170, 55);
+  padding-top: 15px;
+}
+
+.material-icons{
+  color: white;
+}
