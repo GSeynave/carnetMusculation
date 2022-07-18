@@ -24,3 +24,12 @@ mat-card-title{
   color: rgb(245, 170, 55);
   padding-top: 15px;
 }
+
+mat-label{
+  color: white;
+}
+
+mat-form-field{
+  color: white;
+}
+
