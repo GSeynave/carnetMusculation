@@ -53,12 +53,6 @@ mat-paginator{
   padding-top: 15px;
 }
 
-
-.menuItem{
-  display: flex;
-  justify-content: center;
-}
-
 .boutonCreer{
   color: rgb(255, 255, 255);
   background-color: rgb(40, 40, 40);

@@ -33,6 +33,7 @@ import { SeanceComponent } from './page/seance/seance.component';
 import { EntrainementComponent } from './page/entrainement/entrainement.component';
 import { SeanceStartComponent } from './component/seance-start/seance-start.component';
 import { SeanceHistoriqueComponent } from './component/seance-historique/seance-historique.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { SeanceHistoriqueComponent } from './component/seance-historique/seance-
     MatExpansionModule,
     MatCheckboxModule,
     MatPaginatorModule,
-    FormsModule
+    FormsModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

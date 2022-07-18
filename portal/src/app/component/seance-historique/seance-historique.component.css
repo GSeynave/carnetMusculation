@@ -1,0 +1,26 @@
+.historique-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  background-image: url("src/assets/background.jpg");
+}
+
+.programme-card{
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
+.entrainement-card{
+  margin-top: 15px;
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
+.seance-card{
+  margin-top: 15px;
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
+mat-card-title{
+  color: rgb(245, 170, 55);
+  padding-top: 15px;
+}

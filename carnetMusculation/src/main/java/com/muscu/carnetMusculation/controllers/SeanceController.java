@@ -37,13 +37,27 @@ public class SeanceController {
 	}
 
 
-	@GetMapping("/entrainement/{entrainementId}/{state}")
+	@GetMapping("/entrainement/{entrainementId}/state/{state}")
 	public @ResponseBody ResponseEntity<SeanceInformationInit> findByEntrainementIdAndState(
 			@PathVariable(name = "entrainementId") Long entrainementId, @PathVariable(name = "state") int state) {
 		try {
 			LOGGER.info("Recherche des séance pour l'entrainement avec l'id {} et l'état {}", entrainementId, state);
 			SeanceInformationInit sii = seanceService.findSIIByEntrainementIdAndState(entrainementId,
 					SeanceState.getSeanceStateByCode(state));
+			return new ResponseEntity<SeanceInformationInit>(sii, HttpStatus.OK);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Erreur pendant la récupération de la seance", e);
+		}
+	}
+	
+	@GetMapping("/programme/{programmeId}/entrainement/{entrainementId}/state/{state}")
+	public @ResponseBody ResponseEntity<SeanceInformationInit> findByProgrammeIdAndEntrainementIdAndState(
+			@PathVariable(name = "programmeId") Long programmeId,
+			@PathVariable(name = "entrainementId") Long entrainementId,
+			@PathVariable(name = "state") int state) {
+		try {
+			LOGGER.info("Recherche des séance pour l'entrainement avec l'id {} et l'état {}", entrainementId, state);
+			SeanceInformationInit sii = seanceService.findSIIByProgrammeIdAndEntrainementIdAndState(programmeId, entrainementId, SeanceState.getSeanceStateByCode(state));
 			return new ResponseEntity<SeanceInformationInit>(sii, HttpStatus.OK);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Erreur pendant la récupération de la seance", e);

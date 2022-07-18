@@ -27,4 +27,12 @@ public interface SeanceRepository extends PagingAndSortingRepository<Seance, Lon
 	boolean existsByEntrainementIdAndState(
 			@Param("entrainementId") long entrainementId,
 			@Param("state") SeanceState state);
+	
+	
+	@Query("SELECT s"
+		+ " FROM Seance s"
+		+ " WHERE s.entrainement.programme.id = :programmeId"
+		+ " AND s.entrainement.id = :entrainementId"
+		+ " AND s.state = :state")
+	Seance findByProgrammeIdAndEntrainementIdAndState(Long programmeId, Long entrainementId, SeanceState state);
 }

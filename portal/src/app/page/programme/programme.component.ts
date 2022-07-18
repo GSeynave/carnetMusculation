@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Pagination } from 'src/app/class/pagination';
 import { Programme } from 'src/app/class/programme';
 import { ProgrammeFormComponent } from 'src/app/component/programme-form/programme-form.component';
@@ -15,8 +15,6 @@ export class ProgrammeComponent implements OnInit {
   public pagination: Pagination = new Pagination(0, 10, [5, 10, 20], 0, 'nom');
   public isEntrainementDisplay: boolean = false;
   public programmeSelected: Programme = new Programme();
-  public isCreerDisplay: boolean = false;
-  public isListDisplay: boolean = true;
 
   @ViewChild(ProgrammeFormComponent) programmeForm: ProgrammeFormComponent =
     new ProgrammeFormComponent();
@@ -39,11 +37,6 @@ export class ProgrammeComponent implements OnInit {
 
   ngOnInit(): void { }
 
-
-  displayCreer(): void{
-    this.isListDisplay = false;
-    this.isCreerDisplay = true;
-  }
 
   onProgrammeSelect(programmeId: number): void {
     this.musculationService.getProgrammeById(programmeId).subscribe( data => {

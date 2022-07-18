@@ -1,1 +1,48 @@
-<p>seance-historique works!</p>
+<mat-card class="historique-container">
+
+  <mat-card class="programme-card">
+    <mat-card-title>Vos programmes</mat-card-title>
+
+    <form>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Programme</mat-label>
+        <input type="text" placeholder="Programme" matInput [formControl]="programmeForm" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="isProgrammeOk()">
+          <mat-option *ngFor="let programmeOption of programmeFilteredOptions | async" [value]="programmeOption">
+            {{programmeOption}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </mat-card>
+
+  <div *ngIf="programmeSelectedOk">
+
+    <mat-card class="entrainement-card">
+
+      <mat-card-title>Vos entrainements</mat-card-title>
+
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>Entrainements</mat-label>
+          <input type="text" placeholder="Entrainement" matInput [formControl]="entrainementForm"
+            [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="isEntrainementOk()">
+            <mat-option *ngFor="let entrainementOption of entrainementFilteredOptions | async"
+              [value]="entrainementOption">
+              {{entrainementOption}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </mat-card>
+  </div>
+
+  <div *ngIf="entrainementSelectedOk">
+
+    <mat-card class="seance-card">
+
+      <mat-card-title>Historique de vos séances</mat-card-title>
+    </mat-card>
+  </div>
+</mat-card>

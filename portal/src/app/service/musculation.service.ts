@@ -179,13 +179,23 @@ export class MusculationService implements ErrorHandler {
   }
 
   getDetailExercice(entrainementId: number, state: State): Observable<SeanceInformationInit> {
-    return this.http.get<SeanceInformationInit>(this.url + `seances/entrainement/${entrainementId}/${state}`)
+    return this.http.get<SeanceInformationInit>(this.url + `seances/entrainement/${entrainementId}/state/${state}`)
       .pipe(
         catchError(err => {
-          console.error('Error while retrieving the list of programmes');
+          console.error('Error while retrieving the list of seance');
           return throwError(err);
         })
       )
+  }
+
+  getDetailExerciceByProgrammeIdAndEntrainementIdAndState(programmeId: number, entrainementId: number, state:State): Observable<SeanceInformationInit[]> {
+    return this.http.get<SeanceInformationInit[]>(this.url + `seances/programme/${programmeId}/entrainement/${entrainementId}/state/${state}`)
+    .pipe(
+      catchError(err => {
+        console.error('Error while retrieving the list of seance');
+        return throwError(err);
+      })
+    )
   }
   createSeance(entrainementId: number, status: State) : Observable<Seance> {
     console.log("createSeance", status);

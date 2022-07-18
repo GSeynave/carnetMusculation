@@ -5,7 +5,6 @@ import { EntrainementCreer } from 'src/app/class/entrainement-creer';
 import { Exercice } from 'src/app/class/exercice';
 import { Programme } from 'src/app/class/programme';
 import { Seance } from 'src/app/class/seance';
-import { SeanceInformationInit } from 'src/app/class/seance-information-init';
 import { State } from 'src/app/class/state';
 import { MusculationService } from 'src/app/service/musculation.service';
 
@@ -43,7 +42,6 @@ export class EntrainementComponent implements OnInit {
         })
       }
     });
-
 
     this.musculationService.getProgrammes().subscribe((data) => {
       this.programmeListe = data;

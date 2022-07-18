@@ -24,6 +24,7 @@ export class ProgrammeListComponent implements OnChanges {
   programmeToUpdate: Programme = new Programme();
   nomUpdated: string = '';
   isCreerDisplay: boolean = false;
+  pageEvent: PageEvent = new PageEvent();
 
   // MatPaginator Inputs
   @Input() pagination: Pagination = new Pagination(0, 0, [], 0, '');
@@ -37,9 +38,6 @@ export class ProgrammeListComponent implements OnChanges {
     new EventEmitter();
   @Output('onProgrammeSelect') programmeSelect: EventEmitter<number> =
     new EventEmitter();
-
-  // MatPaginator Output
-  pageEvent: PageEvent = new PageEvent();
 
   constructor(private musculationService: MusculationService) { }
 
@@ -106,10 +104,10 @@ export class ProgrammeListComponent implements OnChanges {
         this.pageEvent.pageSize,
         this.pagination.sort
       )
-      .subscribe((response) => {
-        this.dataSource = new MatTableDataSource(response);
-        this.pagination.itemCount = response.length;
-      });
+        .subscribe((response) => {
+          this.dataSource = new MatTableDataSource(response);
+          this.pagination.itemCount = response.length;
+        });
     });
   }
 
@@ -130,11 +128,11 @@ export class ProgrammeListComponent implements OnChanges {
     this.programmeSelect.emit(programmeId);
   }
 
-  creerProgramme(){
+  creerProgramme() {
     this.isCreerDisplay = !this.isCreerDisplay;
   }
 
-  displayListe(): void{
+  hideForm(): void {
     this.isCreerDisplay = false;
   }
 
@@ -146,7 +144,7 @@ export class ProgrammeListComponent implements OnChanges {
           this.programmes = response;
           this.programmes = Object.assign([], this.programmes);
         });
-        this.displayListe();
+      this.hideForm();
     });
   }
 }

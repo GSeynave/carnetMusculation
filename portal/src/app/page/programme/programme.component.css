@@ -10,15 +10,6 @@ mat-card-title{
   color: rgb(245, 170, 55);
 }
 
-.menu{
-  display: flex;
-  width: 50%;;
-}
-
-.menuItem{
-  width: 50%;
-}
-
 .programme-page-content{
   padding-top: 15px;
   width: 100%;

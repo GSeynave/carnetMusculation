@@ -5,6 +5,7 @@ import { SeanceComponent } from './page/seance/seance.component';
 import { EntrainementComponent } from './page/entrainement/entrainement.component';
 import { HomeComponent } from './page/home/home.component';
 import { ProgrammeComponent } from './page/programme/programme.component';
+import { SeanceHistoriqueComponent } from './component/seance-historique/seance-historique.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'entrainements/programme/:programmeId', component: EntrainementComponent },
   { path: 'seances', component: SeanceComponent },
   { path: 'seances/programme/:programmeId/entrainement/:entrainementId/seance/:seanceId', component: SeanceComponent },
+  { path: 'historique', component: SeanceHistoriqueComponent },
   { path: '**', component: HomeComponent },  // Wildcard route for a 404 page
 ];
 
