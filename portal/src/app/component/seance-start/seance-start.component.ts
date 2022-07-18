@@ -16,41 +16,23 @@ import { Seance } from 'src/app/class/seance';
 export class SeanceStartComponent implements OnInit {
 
 
-  isSeanceSelected: boolean = false;
   exerciceList: Exercice[] = [];
+
   @Input() seanceId: number = -1;
   @Input() programmeId: number = -1;
   @Input() entrainementId: number = -1;
-
-  @Input() programmeListe: Programme[] = [];
-  @Output() selectedProgrammeIdEvent = new EventEmitter<number>();
-
-  @Input() entrainementListe: Entrainement[] = [];
-  @Output() selectedEntrainementIdEvent = new EventEmitter<number>();
 
   @Input() seanceInformationInit: SeanceInformationInit = new SeanceInformationInit();
   @Output() seanceInformationSubmitEvent = new EventEmitter<SeanceInformationSubmit>();
   constructor(private musculationService: MusculationService) { }
 
   ngOnInit(): void {
-    if(this.programmeId > 0 && this.entrainementId > 0){
-      this.isSeanceSelected = true;
-    }
-  }
-
-  onProgrammeSelect(programmeId: number): void {
-    this.selectedProgrammeIdEvent.emit(programmeId);
-    this.entrainementListe = [];
-    this.seanceInformationInit = new SeanceInformationInit();
-    this.entrainementId = -1;
-  }
-
-  onEntrainementSelect(entrainementId: number): void {
-    this.musculationService.getDetailExercice(entrainementId, State.INIT).subscribe( (data) => {
+    console.log("seanceInformationInit", this.seanceInformationInit);
+    this.musculationService.getDetailExercice(this.entrainementId, State.INIT).subscribe( (data) => {
       this.seanceInformationInit = data;
     });
-    this.isSeanceSelected = true;
   }
+
 
 
   onSeanceOver() : void {

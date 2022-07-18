@@ -1,10 +1,7 @@
 <mat-card class="seance-page-container">
 
-  <app-seance-start *ngIf="isSeanceDisplay" [entrainementListe]="entrainementListe" [programmeListe]="programmeListe"
-    [programmeId]="programmeId" [entrainementId]="entrainementId" (selectedProgrammeIdEvent)="onProgrammeSelect($event)"
-    (selectedEntrainementIdEvent)="onEntrainementSelect($event)" [seanceInformationInit]="seanceInformationInit"
+  <app-seance-start [programmeId]="programmeId" [entrainementId]="entrainementId"
     [seanceId]="seanceId">
   </app-seance-start>
-  <app-seance-historique *ngIf="isHistoriqueDisplay"></app-seance-historique>
 
 </mat-card>

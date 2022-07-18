@@ -1,29 +1,3 @@
-<div *ngIf="!isSeanceSelected" class="seance-container">
-
-  <mat-form-field>
-    <mat-label> Programme : </mat-label>
-    <mat-select [ngModel]="selectedProgrammeIdEvent" (ngModelChange)="onProgrammeSelect($event)" name="programme">
-      <mat-option *ngFor="let programme of programmeListe" [value]="programme.id">
-        {{ programme.nom }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
-<div *ngIf="entrainementListe.length <= 0" class="warning">Il n'y a actuellement pas d'entrainement pour ce programme.</div>
-
-<div *ngIf="entrainementListe.length > 0 && !isSeanceSelected">
-  <mat-form-field>
-    <mat-label> Entrainement : </mat-label>
-    <mat-select [ngModel]="selectedEntrainementIdEvent" (ngModelChange)="onEntrainementSelect($event)"
-      name="entrainement">
-      <mat-option *ngFor="let entrainement of entrainementListe" [value]="entrainement.id">
-        {{ entrainement.nom }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
 <div *ngIf="seanceInformationInit.detailsExercice.length > 0">
   <div *ngFor="let detail of seanceInformationInit.detailsExercice">
     <mat-accordion class="serie-panel-container">
