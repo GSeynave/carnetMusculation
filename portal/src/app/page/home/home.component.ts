@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MusculationService } from 'src/app/service/musculation.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  title ='Demo';
+  greeting = {};
+
+  constructor(private musculationService: MusculationService, private http: HttpClient) {
+    http.get('http://localhost:8080').subscribe(data => this.greeting = data);
+   }
 
   ngOnInit(): void {
   }

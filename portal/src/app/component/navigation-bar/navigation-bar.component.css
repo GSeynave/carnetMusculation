@@ -8,15 +8,27 @@
 }
 
 .itemHome{
-  padding-left: 25px;
+  padding-left: 30px;
   color: rgb(245, 170, 55);
-  flex-grow: 8;
+  flex-grow: 15;
 }
 .itemProgrammes{
   color: rgb(255, 255, 255);
   flex-grow: 1;
 }
 .itemHistorique{
+  color: rgb(255, 255, 255);
+  flex-grow: 1;
+}
+.itemLogin{
+  color: rgb(255, 255, 255);
+  flex-grow: 1;
+}
+.itemLogout{
+  color: rgb(255, 255, 255);
+  flex-grow: 1;
+}
+.itemAccount{
   color: rgb(255, 255, 255);
   flex-grow: 1;
 }

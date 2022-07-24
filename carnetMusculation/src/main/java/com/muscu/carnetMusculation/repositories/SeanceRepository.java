@@ -1,5 +1,7 @@
 package com.muscu.carnetMusculation.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
@@ -34,5 +36,5 @@ public interface SeanceRepository extends PagingAndSortingRepository<Seance, Lon
 		+ " WHERE s.entrainement.programme.id = :programmeId"
 		+ " AND s.entrainement.id = :entrainementId"
 		+ " AND s.state = :state")
-	Seance findByProgrammeIdAndEntrainementIdAndState(Long programmeId, Long entrainementId, SeanceState state);
+	List<Seance> findByProgrammeIdAndEntrainementIdAndState(Long programmeId, Long entrainementId, SeanceState state);
 }

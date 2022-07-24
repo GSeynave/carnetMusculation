@@ -4,4 +4,5 @@ export class DetailExercice {
   nbSerie: number = -1;
   nbRep: number = -1;
   recup: string = '';
+  poid: number = -1;
 }

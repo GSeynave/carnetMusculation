@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.muscu.carnetMusculation.dto.DetailsExerciceAPI;
 import com.muscu.carnetMusculation.dto.ExerciceAPI;
+import com.muscu.carnetMusculation.dto.ExercicePerformance;
 import com.muscu.carnetMusculation.dto.MapperAPI;
 import com.muscu.carnetMusculation.entities.EntrainementExercice;
 import com.muscu.carnetMusculation.entities.Exercice;
@@ -46,6 +47,19 @@ public class ExerciceController {
 
 			return new ResponseEntity<List<DetailsExerciceAPI>>(
 					details.stream().map(mapperApi::convertToDto).collect(Collectors.toList()), HttpStatus.OK);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+					"Erreur pendant la récupératino de la liste des exercices", e);
+		}
+	}
+	
+	@GetMapping("/seance/{seanceId}")
+	public @ResponseBody ResponseEntity<List<ExercicePerformance>> findBySeanceId(
+			@PathVariable(name = "seanceId") Long seanceId) {
+		try {
+			List<ExercicePerformance> exercicePerformances = this.exerciceService.findBySeanceId(seanceId);
+
+			return new ResponseEntity<List<ExercicePerformance>>(exercicePerformances, HttpStatus.OK);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,
 					"Erreur pendant la récupératino de la liste des exercices", e);

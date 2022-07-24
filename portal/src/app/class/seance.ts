@@ -1,9 +1,10 @@
+import { State } from "./state";
+
 export class Seance {
 
     id: number = 0;
-    nom: string = "";
-    dateCreation: string = "";
-    muscleCible: string = "";
-    programId: number = 0;
-    exerciceIds: number[] = [];
+    dateEntrainement: string = "";
+    state!: State;
+    entrainement: number = 0;
+    series: number[] = [];
 }

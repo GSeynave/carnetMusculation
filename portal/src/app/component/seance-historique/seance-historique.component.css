@@ -33,3 +33,11 @@ mat-form-field{
   color: white;
 }
 
+mat-expansion-panel{
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
+mat-panel-title{
+  color: rgb(245, 170, 55);
+}
+

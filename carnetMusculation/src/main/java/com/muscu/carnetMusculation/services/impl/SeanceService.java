@@ -103,33 +103,7 @@ public class SeanceService {
 	}
 
 	@Transactional
-	public SeanceInformationInit findSIIByProgrammeIdAndEntrainementIdAndState(Long programmeId, Long entrainementId, SeanceState seanceStateByCode) {
-		Seance seance = this.findByProgrammeIdAndEntrainementIdAndState(programmeId, entrainementId, seanceStateByCode);
-		SeanceInformationInit sii = new SeanceInformationInit();
-		
-		sii.setEntrainementId(seance.getEntrainement().getId());
-		sii.setEntrainementNom(seance.getEntrainement().getNom());
-		sii.setProgrammeId(seance.getEntrainement().getProgramme().getId());
-		List<Serie> series = this.serieService.findBySeanceIdAndNumeroSerie(seance.getId(), "0");
-		
-		List<Details> detailsList = new ArrayList<>();
-		
-		for (Serie serie : series) {
-			Details details = new Details();
-			details.setExerciceId(mapperApi.convertToDto(serie.getExercice()).getId());
-			details.setNom(serie.getExercice().getNom());
-			details.setNbRep(serie.getRep());
-			EntrainementExercice detailsExercice =  this.detailsExerciceRepository.findByEntrainementIdAndExerciceId(serie.getEntrainement().getId(), serie.getExercice().getId());
-			details.setNbSerie(detailsExercice.getNbSerie());
-			details.setRecup(serie.getRep());
-			detailsList.add(details);
-		}
-		sii.setDetailsExercice(detailsList);
-		return sii;
-	}
-	
-	@Transactional
-	public Seance findByProgrammeIdAndEntrainementIdAndState(Long programmeId, Long entrainementId, SeanceState state) {
+	public List<Seance> findByProgrammeIdAndEntrainementIdAndState(Long programmeId, Long entrainementId, SeanceState state) {
 		return this.seanceRepository.findByProgrammeIdAndEntrainementIdAndState(programmeId, entrainementId, state);
 	}
 }

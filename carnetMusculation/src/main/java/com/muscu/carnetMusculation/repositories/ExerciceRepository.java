@@ -15,6 +15,11 @@ public interface ExerciceRepository extends CrudRepository<Exercice, Long>{
 	@Query("SELECT e"
 		+ " FROM Exercice e")
 	List<Exercice> findAll();
+
+	@Query("SELECT e"
+		+ " FROM Exercice e"
+		+ " where e.id in (:ids)")
+	List<Exercice> findAllByIds(List<Long> ids);
 	
 	@Query("SELECT e"
 		+ " FROM Exercice e"

@@ -1,5 +1,7 @@
 package com.muscu.carnetMusculation.controllers;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -51,14 +53,14 @@ public class SeanceController {
 	}
 	
 	@GetMapping("/programme/{programmeId}/entrainement/{entrainementId}/state/{state}")
-	public @ResponseBody ResponseEntity<SeanceInformationInit> findByProgrammeIdAndEntrainementIdAndState(
+	public @ResponseBody ResponseEntity<List<Seance>> findByProgrammeIdAndEntrainementIdAndState(
 			@PathVariable(name = "programmeId") Long programmeId,
 			@PathVariable(name = "entrainementId") Long entrainementId,
 			@PathVariable(name = "state") int state) {
 		try {
-			LOGGER.info("Recherche des séance pour l'entrainement avec l'id {} et l'état {}", entrainementId, state);
-			SeanceInformationInit sii = seanceService.findSIIByProgrammeIdAndEntrainementIdAndState(programmeId, entrainementId, SeanceState.getSeanceStateByCode(state));
-			return new ResponseEntity<SeanceInformationInit>(sii, HttpStatus.OK);
+			LOGGER.info("Recherche des séance pour le programme id {} l'entrainement avec l'id {} et l'état {}", programmeId, entrainementId, state);
+			List<Seance> seances = seanceService.findByProgrammeIdAndEntrainementIdAndState(programmeId, entrainementId, SeanceState.getSeanceStateByCode(state));
+			return new ResponseEntity<List<Seance>>(seances, HttpStatus.OK);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Erreur pendant la récupération de la seance", e);
 		}

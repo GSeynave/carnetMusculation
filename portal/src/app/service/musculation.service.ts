@@ -11,6 +11,7 @@ import { SeanceInformationInit } from '../class/seance-information-init';
 import { State } from '../class/state';
 import { EntrainementCreer } from '../class/entrainement-creer';
 import { Serie } from '../class/serie';
+import { ExercicePerformance } from '../class/exercice-performance';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,15 @@ export class MusculationService implements ErrorHandler {
     return this.http.get<DetailExercice[]>(this.url + `exercices/entrainement/${entrainementId}`).pipe(
       catchError(err => {
         console.error('Error while retrieving the list of exercices');
+        return throwError(err);
+      })
+    )
+  }
+
+  getDetailExercicesBySeanceId(seanceId: number): Observable<ExercicePerformance[]> {
+    return this.http.get<ExercicePerformance[]>(this.url + `exercices/seance/${seanceId}`).pipe(
+      catchError(err => {
+        console.error('Error while retrieving the list of exercices details');
         return throwError(err);
       })
     )
@@ -188,8 +198,8 @@ export class MusculationService implements ErrorHandler {
       )
   }
 
-  getDetailExerciceByProgrammeIdAndEntrainementIdAndState(programmeId: number, entrainementId: number, state:State): Observable<SeanceInformationInit[]> {
-    return this.http.get<SeanceInformationInit[]>(this.url + `seances/programme/${programmeId}/entrainement/${entrainementId}/state/${state}`)
+  getSeanceByProgrammeIdAndEntrainementIdAndState(programmeId: number, entrainementId: number, state:State): Observable<Seance[]> {
+    return this.http.get<Seance[]>(this.url + `seances/programme/${programmeId}/entrainement/${entrainementId}/state/${state}`)
     .pipe(
       catchError(err => {
         console.error('Error while retrieving the list of seance');

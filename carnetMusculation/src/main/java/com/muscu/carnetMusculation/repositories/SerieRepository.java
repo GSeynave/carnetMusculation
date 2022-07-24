@@ -71,4 +71,13 @@ public interface SerieRepository extends PagingAndSortingRepository<Serie, Long>
 			@Param("numeroSerie") String numeroSerie,
 			@Param("exerciceId") long exerciceId,
 			@Param("entrainementId") long entrainementId);
+
+
+	@Query("SELECT s"
+		+ " FROM Serie s"
+		+ " WHERE s.seance.id = :seanceId"
+		+ " AND s.exercice.id = :exerciceId")
+	List<Serie> findBySeanceIdAndExericeId(
+			@Param("seanceId") Long seanceId,
+			@Param("exerciceId") Long exerciceId);
 }

@@ -56,4 +56,8 @@ public class SerieService {
 			long exerciceId, Long entrainementId) {
 		return this.serieRepository.existsBySeanceIdAndNumeroSerieAndExerciceIdAndEntrainementId(seanceId, numeroSerie, exerciceId, entrainementId);
 	}
+
+	public List<Serie> findBySeanceIdAndExerciceId(Long seanceId, Long exerciceId) {
+		return this.serieRepository.findBySeanceIdAndExericeId(seanceId, exerciceId);
+	}
 }

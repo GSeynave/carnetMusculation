@@ -43,6 +43,17 @@
     <mat-card class="seance-card">
 
       <mat-card-title>Historique de vos séances</mat-card-title>
+      <mat-accordion>
+        <mat-expansion-panel hideToggle *ngFor="let seance of seances">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ seance.dateEntrainement | date :'fullDate' }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-seance-detail [seance]="seance">
+          </app-seance-detail>
+        </mat-expansion-panel>
+      </mat-accordion>
     </mat-card>
   </div>
 </mat-card>

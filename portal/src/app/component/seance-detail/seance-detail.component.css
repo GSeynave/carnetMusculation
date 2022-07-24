@@ -1,0 +1,23 @@
+.detail-seance-container{
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
+mat-card{
+  background-color: rgba(80, 80, 80, 0.8);
+}
+
+mat-card-title{
+  color: rgb(245, 170, 55);
+  padding-top: 15px;
+}
+
+.exercice-container{
+  margin: 5px;
+}
+
+.detail-exercice{
+  color: white;
+}
+

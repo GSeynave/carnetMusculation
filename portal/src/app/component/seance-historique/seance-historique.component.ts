@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
 import { Entrainement } from 'src/app/class/entrainement';
 import { Programme } from 'src/app/class/programme';
-import { SeanceInformationInit } from 'src/app/class/seance-information-init';
+import { Seance } from 'src/app/class/seance';
 import { State } from 'src/app/class/state';
 import { MusculationService } from 'src/app/service/musculation.service';
 
@@ -29,7 +29,7 @@ export class SeanceHistoriqueComponent implements OnInit {
   entrainementFilteredOptions!: Observable<string[]>;
   entrainementSelectedId: number = -1;
 
-  seancesInformationInit: SeanceInformationInit[] = [];
+  seances: Seance[] = [];
 
   constructor(private musculationService: MusculationService) { }
 
@@ -108,9 +108,10 @@ export class SeanceHistoriqueComponent implements OnInit {
   }
 
   getSeances(): void {
-    this.musculationService.getDetailExerciceByProgrammeIdAndEntrainementIdAndState(this.programmeSelectedId, this.entrainementSelectedId, State.FINISHED).subscribe(data => {
-      this.seancesInformationInit = data;
+    this.musculationService.getSeanceByProgrammeIdAndEntrainementIdAndState(this.programmeSelectedId, this.entrainementSelectedId, State.FINISHED).subscribe(data => {
+      this.seances = data;
       this.entrainementSelectedOk = true;
+      console.log(this.seances);
     })
   }
 }

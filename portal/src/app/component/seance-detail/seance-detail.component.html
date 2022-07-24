@@ -1,0 +1,11 @@
+<div class="detail-seance-container">
+  <mat-card class="exercice-container" *ngFor="let detail of exercicePerformances">
+    <mat-card-title class="exercice-name">
+      {{ detail.exercice }}
+    </mat-card-title>
+
+    <div class="detail-exercice" *ngFor="let perf of detail.performance">
+      poids : {{ perf.poids}} | rep : {{ perf.rep}}
+    </div>
+  </mat-card>
+</div>
