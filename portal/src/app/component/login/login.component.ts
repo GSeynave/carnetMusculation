@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
           'token',
           btoa(user.username + ':' + user.password)
         );
+        sessionStorage.setItem('username',user.username);
         this.router.navigate(['/programmes']);
       } else {
         alert("Authentication failed.")

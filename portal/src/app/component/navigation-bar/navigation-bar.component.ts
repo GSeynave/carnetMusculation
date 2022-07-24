@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
 
+  username: string = '';
   constructor() { }
 
   ngOnInit(): void {
@@ -14,9 +15,11 @@ export class NavigationBarComponent implements OnInit {
 
   logout(){
     sessionStorage.setItem('token', '');
+    sessionStorage.removeItem('username');
   }
 
   isLogin(): boolean {
+    this.username = sessionStorage.getItem('username') as string;
     if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
       return true;
     }
