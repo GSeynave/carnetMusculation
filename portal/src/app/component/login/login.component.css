@@ -1,0 +1,40 @@
+
+.login-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  background-image: url("src/assets/background.jpg");
+}
+
+.card{
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(80, 80, 80, 0.7);
+  width: auto;
+}
+
+.login-bouton{
+  color: rgb(255, 255, 255);
+  background-color: rgb(40, 40, 40);
+  border-color: rgb(245, 170, 55);
+}
+
+.login-bouton:hover{
+  color: rgb(245, 170, 55);
+  background-color: rgb(60, 60, 60);
+}
+
+.labelUsername{
+  color: white;
+}
+
+.labelPassword{
+  color: white;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+}

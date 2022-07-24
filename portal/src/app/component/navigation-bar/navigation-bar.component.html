@@ -1,8 +1,8 @@
 <nav class="navBar-container">
   <a href="home" class="itemHome" aria-current="page">Carnet musculation</a>
-  <a href="programmes" class="itemProgrammes">Programme</a>
-  <a href="historique" class="itemHistorique">Historique</a>
-  <a href="login" class="itemLogin">Login</a>
-  <a href="logout" class="itemLogout">Logout</a>
-  <a href="account" class="itemAccount">AccountName~~</a>
+  <a href="programmes" class="itemProgrammes" [hidden]="!isLogin()">Programme</a>
+  <a href="historique" class="itemHistorique" [hidden]="!isLogin()">Historique</a>
+  <a href="login" class="itemLogin" [hidden]="isLogin()">Login</a>
+  <a href="" class="itemLogout" (click)="logout()" [hidden]="!isLogin()">Logout</a>
+  <a href="account" class="itemAccount" [hidden]="!isLogin()">AccountName~~</a>
 </nav>

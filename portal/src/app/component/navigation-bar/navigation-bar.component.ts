@@ -12,4 +12,14 @@ export class NavigationBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout(){
+    sessionStorage.setItem('token', '');
+  }
+
+  isLogin(): boolean {
+    if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
+      return true;
+    }
+    return false;
+  }
 }

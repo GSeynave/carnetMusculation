@@ -33,7 +33,7 @@ export class MusculationService implements ErrorHandler {
   login(user: User) : Observable<boolean>{
     return this.http.post<boolean>(this.url + "login", user).pipe(
       catchError(err => {
-        console.error('Error while retrieving the list of exercices');
+        console.error('Error while login');
         return throwError(err);
       })
     )

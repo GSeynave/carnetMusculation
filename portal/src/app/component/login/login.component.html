@@ -1,4 +1,23 @@
+<div *ngIf="!isLogin(); else elseBlock" class="login-container">
+  <mat-card class="card">
+    <form [formGroup]="loginFormGroup" (ngSubmit)="onSubmit()" class="form">
 
-  <div>
-      <button (click)="login()">Login</button>
-  </div>
+      <div class="itemUsername">
+        <mat-form-field appearance="fill">
+          <mat-label class="labelUsername">Nom </mat-label>
+          <input matInput id="username" type="text" formControlName="username" required />
+        </mat-form-field>
+      </div>
+      <div class="itemPassword">
+        <mat-form-field appearance="fill">
+          <mat-label class="labelPassword">Mot de passe </mat-label>
+          <input matInput id="password" type="password" formControlName="password" required />
+        </mat-form-field>
+      </div>
+      <button mat-raised-button class="login-bouton">Login</button>
+    </form>
+  </mat-card>
+</div>
+<ng-template #elseBlock>
+  <h1> you are logged in</h1>
+</ng-template>

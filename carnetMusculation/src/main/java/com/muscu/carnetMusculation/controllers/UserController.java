@@ -5,21 +5,26 @@ import java.util.Base64;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.muscu.carnetMusculation.entities.User;
+import com.muscu.carnetMusculation.services.impl.UserService;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = { "*" })
 public class UserController {
+	
+	@Autowired
+	private UserService userService;
 
 	
 	@RequestMapping("/login")
 	public boolean login(@RequestBody User user) {
-		return user.getUsername().equals("user") && user.getPassword().equals("password");
+		return userService.findByUsernameOrEmail(user);
 	}
 	
 	@RequestMapping("/user")

@@ -25,8 +25,8 @@ public class User {
 	@Column(name="password", length = 64)
 	private String password;
 
-	@Column(name = "email", unique = true, length = 115)
-	private String email;
+	@Column(name = "mail", unique = true, length = 115)
+	private String mail;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "role_id")
@@ -56,12 +56,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMail() {
+		return mail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	public Role getRole() {

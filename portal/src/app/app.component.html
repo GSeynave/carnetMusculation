@@ -1,5 +1,10 @@
 <div class="w-full">
     <app-navigation-bar></app-navigation-bar>
-    <router-outlet></router-outlet>
-    <!-- <footer></footer> -->
+    <div *ngIf="!isLogin(); else elseBlock">
+      <app-login></app-login>
+    </div>
+    <ng-template #elseBlock>
+      <router-outlet></router-outlet>
+    </ng-template>
+    <footer></footer>
 </div>

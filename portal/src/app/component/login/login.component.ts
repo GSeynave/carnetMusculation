@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { asLiteral } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/class/user';
 import { MusculationService } from 'src/app/service/musculation.service';
 
@@ -14,34 +11,43 @@ import { MusculationService } from 'src/app/service/musculation.service';
 })
 export class LoginComponent implements OnInit {
 
-  user: User = new User();
+
+  loginFormGroup: FormGroup = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });
+
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient,
     private musclationService: MusculationService
   ) { }
 
-  ngOnInit(): void {
-    sessionStorage.setItem('token', '');
-  }
+  ngOnInit(): void { }
 
-  login() {
-    console.log('loggin in...');
-    this.user.username = "user";
-    this.user.password = "password";
+  onSubmit() {
+    var  user: User = new User;
+    user.username = this.loginFormGroup.value.username;
+    user.password = this.loginFormGroup.value.password;
 
-    this.musclationService.login(this.user).subscribe(isValid => {
-        if (isValid) {
-            sessionStorage.setItem(
-              'token',
-              btoa(this.user.username + ':' + this.user.password)
-            );
-      this.router.navigate(['']);
-        } else {
-            alert("Authentication failed.")
-        }
+    this.musclationService.login(user).subscribe(isValid => {
+      if (isValid) {
+        sessionStorage.setItem(
+          'token',
+          btoa(user.username + ':' + user.password)
+        );
+        this.router.navigate(['/programmes']);
+      } else {
+        alert("Authentication failed.")
+      }
     });
   }
 
+  isLogin(): boolean {
+    if (sessionStorage.getItem('token') != null && sessionStorage.getItem('token') != '') {
+      console.log(sessionStorage.getItem('token'));
+      return true;
+    }
+    console.log(sessionStorage.getItem('token'));
+    return false;
+  }
 }
