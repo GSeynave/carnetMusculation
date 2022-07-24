@@ -1,1 +1,19 @@
-<p>home works!</p>
+<div class="img-container">
+  <div class="programmes">
+    <img src="..//src/assets/Creez-des-programmes.png"/>
+  </div>
+  <div class="entrainements">
+    <img src="..//src/assets/Personnalisez-vos-entrainements.png"/>
+  </div>
+  <div class="seances">
+    <img src="..//src/assets/Enregistrez-vos-seances.png"/>
+  </div>
+  <div class="historique">
+    <img src="..//src/assets/Consultez-un-historique.png"/>
+  </div>
+
+  <mat-card class="login" *ngIf="!isLogin()">
+    <mat-card-title class="login-text">Qu'attendez-vous, rejoignez-nous !</mat-card-title>
+    <button mat-flat-button class="login-bouton" (click)="login()">S'inscrire</button>
+  </mat-card>
+</div>
