@@ -35,7 +35,7 @@ import { SeanceStartComponent } from './component/seance-start/seance-start.comp
 import { SeanceHistoriqueComponent } from './component/seance-historique/seance-historique.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SeanceDetailComponent } from './component/seance-detail/seance-detail.component';
-import { LoggerComponent } from './component/logger/logger.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +57,7 @@ import { LoggerComponent } from './component/logger/logger.component';
     SeanceStartComponent,
     SeanceHistoriqueComponent,
     SeanceDetailComponent,
-    LoggerComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,

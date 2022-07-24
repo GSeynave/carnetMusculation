@@ -1,30 +1,32 @@
 package com.muscu.carnetMusculation.controllers;
 
-import java.util.UUID;
+import java.security.Principal;
+import java.util.Base64;
 
-import org.apache.logging.log4j.message.Message;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.muscu.carnetMusculation.entities.User;
+
 @RestController
-@RequestMapping("users")
-@CrossOrigin(origins="*", maxAge=3600)
+@CrossOrigin(origins = "*", allowedHeaders = { "*" })
 public class UserController {
-	@Autowired
-	private MyBasic
+
 	
-	@RequestMapping("")
-	public Message home() {
-		return new Message("Logged in");
+	@RequestMapping("/login")
+	public boolean login(@RequestBody User user) {
+		return user.getUsername().equals("user") && user.getPassword().equals("password");
 	}
 	
-	class Message {
-		  private String id = UUID.randomUUID().toString();
-		  private String content;
-		  public Message(String content) {
-		    this.content = content;
-		  }
+	@RequestMapping("/user")
+	public Principal user(HttpServletRequest request) {
+		String authToken = request.getHeader("Authorization")
+				.substring("Basic".length()).trim();
+		return () -> new String(Base64.getDecoder()
+				.decode(authToken)).split(":")[0];
 	}
 }

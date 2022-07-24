@@ -12,6 +12,7 @@ import { State } from '../class/state';
 import { EntrainementCreer } from '../class/entrainement-creer';
 import { Serie } from '../class/serie';
 import { ExercicePerformance } from '../class/exercice-performance';
+import { User } from '../class/user';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,15 @@ export class MusculationService implements ErrorHandler {
     throw new Error('Method not implemented.');
   }
 
+
+  login(user: User) : Observable<boolean>{
+    return this.http.post<boolean>(this.url + "login", user).pipe(
+      catchError(err => {
+        console.error('Error while retrieving the list of exercices');
+        return throwError(err);
+      })
+    )
+  }
   /**
    *
    * @returns Exercice's
